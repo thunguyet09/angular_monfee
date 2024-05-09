@@ -1,0 +1,174 @@
+<div class="main">
+  <router-outlet></router-outlet>
+  <div class="homePage">
+    <div id="home">
+      <div class="homeCol1">
+        <div class="carousel">
+          <ng-container *ngFor="let slide of slides; let index = index">
+            <div [class]="'slide' + ' ' + (index === currentIndex ? 'active' : '')">
+              <img [src]="slide.imageUrl" [alt]="slide.alt" />
+            </div>
+            <div [class]="'slide' + ' ' + 'bgTitle' + ' ' + (index === currentIndex ? 'active' : '')">
+              <h3 [class]="slide.h3_animate">{{ slide.h3 }}</h3>
+              <h1 [class]="slide.h1_animate">{{ slide.h1 }}</h1>
+              <h2 [class]="slide.h2_animate">{{ slide.h2 }}</h2>
+              <button [class]="slide.button_animate">{{ slide.button }}</button>
+            </div>
+          </ng-container>
+        </div>
+        <button class="prevBtn" (click)="handlePrevClick()">
+          <span class="material-symbols-outlined">
+            chevron_left
+          </span>
+        </button>
+        <button class="nextBtn" (click)="handleNextClick()">
+          <span class="material-symbols-outlined">
+            chevron_right
+          </span>
+        </button>
+      </div>
+      <div class="homeCol2">
+        <div class="category1">
+          <img src="./assets/img/category1.webp" />
+          <div class="categoryTitle">
+            <h1>Espresso Coffee</h1>
+            <button>SHOP NOW</button>
+          </div>
+        </div>
+        <div class="category2">
+          <img src="./assets/img/category2.webp" />
+          <div class="categoryTitle">
+            <h1>Collection New</h1>
+            <button>SHOP NOW</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="newProducts">
+        <h1>New Product</h1>
+        <div class="newProductBox">
+          <ng-container *ngFor="let item of data">
+            <div class="productItem" #productItem  (mouseenter)="handleNewProductEnter($event)" (mouseleave)="handleNewProductLeave($event)">
+              <div class="actionBtns">
+                <div class="heartBtn">
+                  <button>
+                    <span class="material-symbols-outlined">favorite</span>
+                  </button>
+                  <div class="tooltip">
+                    Add to Wishlist
+                  </div>
+                </div>
+
+                <div class="cartBtn">
+                  <button>
+                    <span class="material-symbols-outlined">local_mall</span>
+                  </button>
+                  <div class="tooltip">
+                    Add to Cart
+                  </div>
+                </div>
+
+                <div class="searchBtn">
+                  <button>
+                    <span class="material-symbols-outlined">search</span>
+                  </button>
+                  <div class="tooltip">
+                    Quick view
+                  </div>
+                </div>
+              </div>
+
+              <div class="imgBox">
+                <img src="./assets/img/{{ item.img_url[0] }}" width="388px"/>
+              </div>
+              <h3>{{item.name}}</h3>
+              <div *ngIf="item.promo_price; else elseBlock">
+                <div class="sale">
+                  <p>SALE</p>
+                </div>
+                <div class="priceBox">
+                  <h3>{{item.promo_price.toLocaleString()}}&#8363;</h3>
+                  <h4><del>{{item.price[0].toLocaleString()}}&#8363;</del></h4>
+                </div>
+              </div>
+
+              <ng-template #elseBlock>
+                <div class="priceBox">
+                  <h3>{{item.price[0].toLocaleString()}}&#8363;</h3>
+                </div>
+              </ng-template>
+
+              <div class="imgThumbnail">
+                <ng-container *ngFor="let val of item.img_url; let first = first">
+                  <img width="45px" src="./assets/img/{{val}}" [class.activeImg]="first"/>
+                </ng-container>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <div id="countDown">
+        <div class="count_down_v1">
+          <img src="./assets/img/count-down.webp" width="550px" height="682px" />
+        </div>
+        <div class="count_down_v2">
+          <img src="./assets/img/bgcount-downt.webp" height="682px" width="1400px" />
+          <div class="countDownContent">
+            <div class="countDownTitle">
+              <p>A NATURAL COFFEE</p>
+              <button>
+                Enjoy The Coffee
+              </button>
+            </div>
+            <div class="labelexpired">
+              <li class="days">
+                <span>00</span>
+                <h4>Days</h4>
+              </li>
+              <li class="hours">
+                <span>00</span>
+                <h4>Hours</h4>
+              </li>
+              <li class="mins">
+                <span>00</span>
+                <h4>Mins</h4>
+              </li>
+              <li class="sec">
+                <span>00</span>
+                <h4>Sec</h4>
+              </li>
+            </div>
+            <button class="countDownBtn">
+              <span>GET VOUCHER</span>
+            </button>
+            <div class="voucherExpired">
+              <p></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="products_sale_box">
+        <h2>Product Sale</h2>
+        <p>Discount every Monday</p>
+        <div class="products_sale"></div>
+        <div class="draggable">
+          <button id="slide_active">1</button>
+          <button>2</button>
+          <button>3</button>
+        </div>
+      </div>
+
+      <div class="news_box">
+        <div class="slider_container"></div>
+        <button class="slider_button prev_button"><span class="material-symbols-outlined">arrow_back_ios</span></button>
+        <button class="slider_button next_button"><span
+            class="material-symbols-outlined">arrow_forward_ios</span></button>
+      </div>
+    </div>
+    <app-footer></app-footer>
+
+  </div>
+
+</div>
