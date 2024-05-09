@@ -51,12 +51,16 @@ export class HomeComponent implements AfterViewInit {
 
   handleNewProductEnter(event: Event): void {
     const element = event.target as HTMLElement;
-    console.log(element)
+    if (element.childNodes[0] instanceof HTMLElement) {
+      element.childNodes[0].style.display = 'flex';
+    }
   }
 
   handleNewProductLeave(event: Event): void {
     const element = event.target as HTMLElement;
-    element.classList.remove('hovered');
+    if (element.childNodes[0] instanceof HTMLElement) {
+      element.childNodes[0].style.display = 'none';
+    }
   }
 
   handleMouseEnter(event: Event): void {

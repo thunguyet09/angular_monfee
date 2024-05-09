@@ -363,6 +363,8 @@
   font-size: 18px;
   margin-top: 20px;
   margin-bottom: 10px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 650;
 }
 
 .priceBox {
@@ -376,11 +378,15 @@
   font-size: 18px;
   color: #b8784e;
   margin: 0;
+  font-weight: 650;
+  font-family: "Nunito", sans-serif;
 }
 
 .priceBox>h4 {
   color: grey;
   margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-weight: 650;
 }
 
 .imgThumbnail {
