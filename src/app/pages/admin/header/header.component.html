@@ -1,0 +1,272 @@
+<div id="header">
+  <div>
+    <img src="./assets/img/monfee-logo.png" width="90%">
+  </div>
+
+  <div class="header_row2">
+    <div class="pallete">
+      <div (click)="pallete()">
+        <span class="material-symbols-outlined">
+          palette
+        </span>
+        <p>Chủ đề</p>
+      </div>
+
+      <div class="palleteBox">
+        <div>
+          <p class="yellow"></p>
+          <p class="pink"></p>
+          <p class="blue"></p>
+        </div>
+
+        <div>
+          <p class="green"></p>
+          <p class="purple"></p>
+          <p class="light-blue"></p>
+        </div>
+        <div>
+          <p class="nude"></p>
+          <p class="grey"></p>
+          <p class="violet"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bell">
+      <span class="material-symbols-outlined">
+        notifications_active
+      </span>
+    </div>
+
+    <div class="avatar">
+      <div class="avatarBox">
+        <img src="./assets/img/avatar.webp">
+        <div>
+          <h4>Emma Jason</h4>
+          <p class="admin_down">
+            <span class="admin_title">Admin</span>
+            <span id="downIcon" class="material-symbols-outlined">
+              stat_minus_1
+            </span>
+          </p>
+        </div>
+      </div>
+
+      <ul>
+        <li><a>
+            <i class="fa-regular fa-user"></i>
+            <p>Account</p>
+          </a></li>
+
+        <li><a>
+            <i class="fa-regular fa-envelope"></i>
+            <p>Inbox</p>
+          </a></li>
+
+        <li><a>
+            <span class="material-symbols-outlined">
+              logout
+            </span>
+            <p>Log Out</p>
+          </a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="sidebar">
+  <span id="sidebar_next" class="material-symbols-outlined" (click)="closeSideBar()">
+    menu_open
+  </span>
+  <ul class="sidebar-wrapper">
+    <h4>GENERAL</h4>
+    <li class="general" (click)="generalClick()">
+      <a id="activeLink">
+        <div class="menu-link">
+          <span class="material-symbols-outlined">
+            home
+          </span>
+          <p>Dashboard</p>
+        </div>
+        <div>
+          <span class="material-symbols-outlined">
+            keyboard_arrow_right
+          </span>
+        </div>
+      </a>
+
+      <ul class="general_submenu">
+        <li class="active"><a>Default</a></li>
+        <li><a>E-Commerce</a></li>
+      </ul>
+    </li>
+
+    <hr>
+    <h4>APPLICATIONS</h4>
+    <li class="apps">
+      <a>
+        <div class="menu-link">
+          <span class="material-symbols-outlined">
+            storefront
+          </span>
+          <p>Ecommerce</p>
+        </div>
+        <div>
+          <span class="material-symbols-outlined">
+            keyboard_arrow_right
+          </span>
+        </div>
+      </a>
+
+      <ul class="general_submenu">
+        <li><a routerLink="category">Category</a></li>
+        <li><a>Products</a></li>
+      </ul>
+    </li>
+
+    <li class="apps">
+      <a>
+        <div class="menu-link">
+          <span class="material-symbols-outlined">
+            manage_accounts
+          </span>
+          <p>Users</p>
+        </div>
+        <div>
+          <span class="material-symbols-outlined">
+            keyboard_arrow_right
+          </span>
+        </div>
+      </a>
+
+      <ul class="general_submenu">
+        <li><a>User Edit</a></li>
+      </ul>
+    </li>
+
+    <li class="apps">
+      <a>
+        <div class="menu-link">
+          <span class="material-symbols-outlined">
+            payments
+          </span>
+          <p>Transaction</p>
+        </div>
+        <div>
+          <span class="material-symbols-outlined">
+            keyboard_arrow_right
+          </span>
+        </div>
+      </a>
+
+      <ul class="general_submenu">
+        <li><a>Invoice</a></li>
+        <li><a>Sales</a></li>
+        <li><a>Return</a></li>
+      </ul>
+    </li>
+
+    <li class="apps">
+      <a>
+        <div class="menu-link">
+          <i class="fa-solid fa-square-poll-vertical"></i>
+          <p>Analysis</p>
+        </div>
+        <div>
+          <span class="material-symbols-outlined">
+            keyboard_arrow_right
+          </span>
+        </div>
+      </a>
+
+      <ul class="general_submenu">
+        <li><a>Products</a></li>
+        <li><a>Users</a></li>
+      </ul>
+    </li>
+
+    <li class="apps">
+      <a>
+        <div class="menu-link" id="comment">
+          <span class="material-symbols-outlined">
+            mark_unread_chat_alt
+          </span>
+          <p>Comments</p>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div class="mini_sidebar" (mouseenter)="miniSidebarMouseEnter($event)">
+  <span id="menu_icon" class="material-symbols-outlined">
+    menu
+  </span>
+  <ul class="mini_wrapper">
+    <li>
+      <a>
+        <span class="material-symbols-outlined">
+          home
+        </span>
+
+        <span class="material-symbols-outlined">
+          keyboard_arrow_right
+        </span>
+      </a>
+    </li>
+
+    <li>
+      <a>
+        <span class="material-symbols-outlined">
+          storefront
+        </span>
+
+        <span class="material-symbols-outlined">
+          keyboard_arrow_right
+        </span>
+      </a>
+    </li>
+
+    <li>
+      <a>
+        <span class="material-symbols-outlined">
+          manage_accounts
+        </span>
+
+        <span class="material-symbols-outlined">
+          keyboard_arrow_right
+        </span>
+      </a>
+    </li>
+
+    <li>
+      <a>
+        <span class="material-symbols-outlined">
+          payments
+        </span>
+
+        <span class="material-symbols-outlined">
+          keyboard_arrow_right
+        </span>
+      </a>
+    </li>
+
+    <li>
+      <a>
+        <i class="fa-solid fa-square-poll-vertical"></i>
+
+        <span class="material-symbols-outlined">
+          keyboard_arrow_right
+        </span>
+      </a>
+    </li>
+
+    <li>
+      <a>
+        <span class="material-symbols-outlined" style="font-size: 22px;">
+          mark_unread_chat_alt
+        </span>
+      </a>
+    </li>
+  </ul>
+</div>

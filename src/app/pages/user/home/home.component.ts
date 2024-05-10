@@ -136,4 +136,34 @@ export class HomeComponent implements AfterViewInit {
     }
   }
 
+  public colorIndex = 0;
+  activeColor(event: Event, colorArr:any, color:any){
+    const colorItems = document.querySelectorAll('.colorItems > button')
+    colorItems.forEach((item) => {
+      item.removeAttribute('id')
+    })
+    const target = event.target as HTMLElement
+    if (target instanceof HTMLElement) {
+      target.setAttribute('id', 'colorActive')
+      const index = colorArr.indexOf(color)
+      if(index !== 0){
+        this.colorIndex = index
+      }else{
+        this.colorIndex = 0
+      }
+    }
+  }
+
+  public quantity:number = 1;
+  increaseQuantity(){
+    this.quantity++;
+  }
+
+  decreaseQuantity(){
+    this.quantity--;
+  }
+
+  addToCart(){
+    console.log(this.quantity)
+  }
 }

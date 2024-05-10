@@ -177,7 +177,7 @@
     <div class="quickViewContent">
       <ng-container *ngFor="let item of detail">
         <div class="imgQuickView">
-          <img src="./assets/img/{{item.img_url[0]}}" width="420px"/>
+          <img src="./assets/img/{{item.img_url[colorIndex]}}" width="420px"/>
           <div class="carousel">
             <ng-container *ngFor="let val of imgCarousel">
               <img src="./assets/img/{{val}}" width="133px" />
@@ -208,6 +208,29 @@
                   <button [attr.id]="first ? 'activeSize' : null" (click)="activeSize($event, item.sizes)">{{val}}</button>
               </ng-container>
             </div>
+          </div>
+          <div class="colorBox" *ngIf="item.colors.length > 0">
+            <button class="colorBtn">COLOR</button>
+            <div class="colorItems">
+              <ng-container *ngFor="let val of item.colors; let first = first">
+                <button [style.background-color]="val" [attr.id]="first ? 'colorActive' : null" (click)="activeColor($event, item.colors, val)"></button>
+              </ng-container>
+            </div>
+          </div>
+
+          <div class="quickViewAction">
+            <div class="quantityBox">
+              <input class="quantity" value="{{quantity}}" [(ngModel)]="quantity">
+              <div class="quantityAction">
+                <span (click)="increaseQuantity()">
+                  <span class="material-symbols-outlined">add</span>
+                </span>
+                <span (click)="decreaseQuantity()">
+                  <span class="material-symbols-outlined">remove</span>
+                </span>
+              </div>
+            </div>
+            <button (click)="addToCart()">ADD TO CART</button>
           </div>
         </div>
       </ng-container>
