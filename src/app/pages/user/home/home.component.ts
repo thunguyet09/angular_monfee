@@ -115,4 +115,25 @@ export class HomeComponent implements AfterViewInit {
   }
 
   public sizeIndex = 0;
+  sizes: string[] = []
+
+  activeSize(event: Event, sizeArr:any){
+    const sizeItems = document.querySelectorAll('.sizeItems > button')
+    sizeItems.forEach((item) => {
+      item.removeAttribute('id')
+    })
+    const target = event.target
+    if (target instanceof HTMLElement || target instanceof Element) {
+      target.setAttribute('id', 'activeSize')
+      const text = target.textContent
+      const index = sizeArr.indexOf(text)
+
+      if(index !== 0){
+        this.sizeIndex = index
+      }else{
+        this.sizeIndex = 0
+      }
+    }
+  }
+
 }

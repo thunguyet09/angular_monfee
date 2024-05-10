@@ -6,6 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     UserComponent,
@@ -16,7 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     CommonModule,
     UserRoutingModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [UserComponent],

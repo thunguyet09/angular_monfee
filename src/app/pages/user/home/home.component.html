@@ -188,8 +188,8 @@
           <h2>{{item.name}}</h2>
 
           <div *ngIf="item.promo_price && sizeIndex == 0; else elseBlock">
-            <div class="quickViewPrice">
-              <h3>{{item.promo_price.toLocaleString()}}&#8363;</h3>
+            <div class="quickview_price">
+              <h2>{{item.promo_price.toLocaleString()}}&#8363;</h2>
               <h4><del>{{item.price[sizeIndex].toLocaleString()}}&#8363;</del></h4>
             </div>
           </div>
@@ -204,8 +204,8 @@
           <div class="sizeBox">
             <button class="sizeBtn">SIZE</button>
             <div class="sizeItems">
-              <ng-container *ngFor="let val of item.sizes">
-                  <button>{{val}}</button>
+              <ng-container *ngFor="let val of item.sizes; let first = first">
+                  <button [attr.id]="first ? 'activeSize' : null" (click)="activeSize($event, item.sizes)">{{val}}</button>
               </ng-container>
             </div>
           </div>
