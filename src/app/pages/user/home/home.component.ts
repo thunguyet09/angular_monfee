@@ -13,9 +13,7 @@ export class HomeComponent implements AfterViewInit {
     { imageUrl: './assets/img/carousel2.webp', alt: 'Image 2', h3: "NEED-IT-NOW", h3_animate: 'h3_animate2', h1: "Start A Day With Coffee", h1_animate: 'h1_animate2', h2: "Contemporary, minimal and beautifully iconic.", h2_animate: 'h2_animate2', button: "BUY NOW", button_animate: 'button_animate2' }
   ];
 
-  constructor(private api: API) {
-
-  }
+  constructor(private api: API) {}
 
   ngOnInit(): void {
     this.fetchData();
@@ -24,12 +22,12 @@ export class HomeComponent implements AfterViewInit {
   public products: Product[] = []
   async fetchData(): Promise<void> {
     this.api.getAllProducts().subscribe((data:any) => {
-      this.products = data
+      const newProducts = data.sort((a:any, b:any) => {
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      });
+      this.data = newProducts.slice(0, 8);
     })
-    const newProducts = this.products.sort((a:any, b:any) => {
-      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-    });
-    this.data = newProducts.slice(0, 8);
+
   }
 
   handlePrevClick(): void {
@@ -101,14 +99,20 @@ export class HomeComponent implements AfterViewInit {
   public imgCarousel: string[] = []
   async handleQuickView(id:any): Promise<void>{
     this.api.getDetail(id).subscribe((val:any) => {
-      this.data = val
+      const dataArray = [val]
+      this.detail = dataArray
+      dataArray.forEach((item) => {
+        this.imgCarousel = item.img_url.slice(0,3)
+      })
+      const quickViewModal = document.querySelector('.quickViewModal') as HTMLElement
+      quickViewModal.style.display = 'block'
     })
-    const dataArray = this.data
-    this.detail = dataArray
-    dataArray.forEach((item) => {
-      this.imgCarousel = item.img_url.slice(0,3)
-    })
-    const quickViewModal = document.querySelector('.quickViewModal') as HTMLElement
-    quickViewModal.style.display = 'block'
   }
+
+  closeQuickView(){
+    const quickViewModal = document.querySelector('.quickViewModal') as HTMLElement
+    quickViewModal.style.display = 'none'
+  }
+
+  public sizeIndex = 0;
 }

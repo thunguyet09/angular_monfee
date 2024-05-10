@@ -187,9 +187,31 @@
         <div class="quickViewInfo">
           <h2>{{item.name}}</h2>
 
+          <div *ngIf="item.promo_price && sizeIndex == 0; else elseBlock">
+            <div class="quickViewPrice">
+              <h3>{{item.promo_price.toLocaleString()}}&#8363;</h3>
+              <h4><del>{{item.price[sizeIndex].toLocaleString()}}&#8363;</del></h4>
+            </div>
+          </div>
+
+          <ng-template #elseBlock>
+            <div class="quickViewPrice">
+              <h3>{{item.price[sizeIndex].toLocaleString()}}&#8363;</h3>
+            </div>
+          </ng-template>
+
+          <p>{{item.mo_ta}}</p>
+          <div class="sizeBox">
+            <button class="sizeBtn">SIZE</button>
+            <div class="sizeItems">
+              <ng-container *ngFor="let val of item.sizes">
+                  <button>{{val}}</button>
+              </ng-container>
+            </div>
+          </div>
         </div>
       </ng-container>
-      <span class="close">&times;</span>
+      <span class="close" (click)="closeQuickView()">&times;</span>
     </div>
   </div>
 
