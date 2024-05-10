@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { getCarts } from 'src/app/api/api';
-import { MiniCart } from 'src/app/services/mini_cart';
+import { API } from 'src/app/api/api.service';
+import { MiniCart } from 'src/app/services/mini_cart.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +13,7 @@ export class HeaderComponent {
   isShop = false;
   isDetail = false;
   openMiniCart = false;
-  constructor(private router: Router, private minicart: MiniCart)
+  constructor(private router: Router, private minicart: MiniCart, private api: API)
   {}
 
   ngOnInit(){
@@ -189,11 +189,14 @@ export class HeaderComponent {
     }
   }
 
+  public carts = []
   async numsInCart() {
     const userId = localStorage.getItem('userId')
-    const carts = await getCarts()
+    this.api.getCarts().subscribe((val:any) => {
+      this.carts = val
+    })
     const numsInCart = document.querySelector('.numsInCart') as HTMLElement
-    const filteredCarts = carts.filter(((item:any) => item.user_id == userId))
+    const filteredCarts = this.carts.filter(((item:any) => item.user_id == userId))
     numsInCart.innerHTML = `${filteredCarts.length}`
   }
 }

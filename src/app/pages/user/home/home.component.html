@@ -48,7 +48,8 @@
         <h1>New Product</h1>
         <div class="newProductBox">
           <ng-container *ngFor="let item of data">
-            <div class="productItem" #productItem  (mouseenter)="handleNewProductEnter($event)" (mouseleave)="handleNewProductLeave($event)">
+            <div class="productItem" #productItem (mouseenter)="handleNewProductEnter($event)"
+              (mouseleave)="handleNewProductLeave($event)">
               <div class="actionBtns">
                 <div class="heartBtn">
                   <button>
@@ -69,7 +70,7 @@
                 </div>
 
                 <div class="searchBtn">
-                  <button>
+                  <button (click)="handleQuickView(item.id)">
                     <span class="material-symbols-outlined">search</span>
                   </button>
                   <div class="tooltip">
@@ -79,7 +80,7 @@
               </div>
 
               <div class="imgBox">
-                <img src="./assets/img/{{ item.img_url[0] }}" width="388px"/>
+                <img src="./assets/img/{{ item.img_url[0] }}" width="388px" />
               </div>
               <h3>{{item.name}}</h3>
               <div *ngIf="item.promo_price; else elseBlock">
@@ -100,7 +101,8 @@
 
               <div class="imgThumbnail">
                 <ng-container *ngFor="let val of item.img_url; let first = first">
-                  <img width="45px" src="./assets/img/{{val}}" [class.activeImg]="first"/>
+                  <img width="45px" src="./assets/img/{{val}}" [class.activeImg]="first"
+                    (click)="handleThumbnails($event)" />
                 </ng-container>
               </div>
             </div>
@@ -171,4 +173,37 @@
 
   </div>
 
+  <div id="quickView" class="quickViewModal">
+    <div class="quickViewContent">
+      <ng-container *ngFor="let item of detail">
+        <div class="imgQuickView">
+          <img src="./assets/img/{{item.img_url[0]}}" width="420px"/>
+          <div class="carousel">
+            <ng-container *ngFor="let val of imgCarousel">
+              <img src="./assets/img/{{val}}" width="133px" />
+            </ng-container>
+          </div>
+        </div>
+        <div class="quickViewInfo">
+          <h2>{{item.name}}</h2>
+
+        </div>
+      </ng-container>
+      <span class="close">&times;</span>
+    </div>
+  </div>
+
+  <div id="cartModal" class="cartModal">
+    <div class="cartContent">
+      <div class="cartCol1">
+        <div class="imgCart">
+        </div>
+        <div class="cartInfo">
+        </div>
+        <span class="closeCartModal">&times;</span>
+      </div>
+      <div class="cartCol2">
+      </div>
+    </div>
+  </div>
 </div>
