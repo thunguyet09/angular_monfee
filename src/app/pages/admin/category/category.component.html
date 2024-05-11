@@ -14,7 +14,103 @@
       </div>
     </div>
     <div class="container-fluid-col2">
-
+      <button class="add" (mouseenter)="hoverAddBtn($event)" (mouseleave)="leaveAddBtn($event)">
+        <span class="material-symbols-outlined">
+          add
+        </span>
+        <h4>Add category</h4>
+      </button>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-heading">
+      <div class="panel-title">
+        <i class="fa-solid fa-list"></i>
+        <h3>Category List</h3>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="category-actions">
+        <div class="actions-row1">
+          <button class="filterBtn" (click)="handleFilter()">
+            <i class="fa-solid fa-filter"></i>
+            <h4>FILTER</h4>
+            <i class="fa-solid fa-caret-down"></i>
+          </button>
+          <div class="searchBox">
+            <input class="search" placeholder="Search..." (input)="handleSearch($event)"/>
+            <span class="material-symbols-outlined">
+              search
+            </span>
+            <div class="search-container">
+              <ng-container *ngFor="let item of searchData">
+                <div class="searchItem">
+                  <div class="searchItem-col">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>{{item.name}}</span>
+                  </div>
+                  <span class="remove-search-item">
+                    <span class="material-symbols-outlined">
+                      close
+                    </span>
+                  </span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="actions-row2">
+          <div class="filter-container">
+            <div class="filterBox">
+              <div class="row">
+                <label>ID</label>
+                <input placeholder="ID" class="ID_filter" [(ngModel)]="ID" />
+              </div>
+              <div class="row">
+                <label>Category Name</label>
+                <input placeholder="Category Name" class="categoryName_filter" [(ngModel)]="category_name" />
+              </div>
+              <div class="row">
+                <label>Date</label>
+                <select [(ngModel)]="date_value" class="date_value">
+                  <option></option>
+                  <option>Today</option>
+                  <option>Yesterday</option>
+                  <option>Last week</option>
+                  <option>Last month</option>
+                  <option>Last year</option>
+                </select>
+              </div>
+              <div class="row">
+                <label>Top</label>
+                <select [(ngModel)]="top" class="top">
+                  <option></option>
+                  <option>Yes</option>
+                  <option>No</option>
+                </select>
+              </div>
+              <div class="row">
+                <label>Status</label>
+                <select [(ngModel)]="status" class="status">
+                  <option></option>
+                  <option>Enabled</option>
+                  <option>Disabled</option>
+                </select>
+              </div>
+            </div>
+            <div class="filter-actions">
+              <button class="clearBtn" (click)="handleClear()">
+                <i class="fa-solid fa-eraser"></i>
+                <h4>Clear</h4>
+              </button>
+              <button class="filter-btn2">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <h4>Filter</h4>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

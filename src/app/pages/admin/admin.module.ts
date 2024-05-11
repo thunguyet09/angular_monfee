@@ -6,7 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { CategoryComponent } from './category/category.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
    AdminComponent,
@@ -17,7 +17,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   ],
   imports: [
     AdminRoutingModule,
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   providers: [],
 })

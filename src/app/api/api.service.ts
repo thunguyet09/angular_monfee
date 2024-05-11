@@ -24,4 +24,8 @@ export class API{
   getThemes(){
     return this.http.get(this.url + '/theme')
   }
+
+  getAllCategories(){
+    return this.http.get(this.url + '/categories')
+  }
 }
