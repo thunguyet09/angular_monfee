@@ -52,7 +52,8 @@ body {
 .avatarBox>div>h4 {
   font-size: 15px;
   font-weight: 500;
-  margin-bottom: 7px;
+  margin: 0;
+  margin-bottom: 5px;
 }
 
 .admin_title {

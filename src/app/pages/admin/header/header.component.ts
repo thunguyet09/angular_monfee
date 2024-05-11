@@ -1,4 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { Theme } from 'src/app/interfaces/Theme';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -7,6 +9,17 @@ import { AfterViewInit, Component } from '@angular/core';
 })
 export class HeaderComponent implements AfterViewInit{
   public isToggled = false;
+  constructor(private themeService: ThemeService){}
+  public themes: Theme[] = []
+  ngOnInit(){
+    this.themeService.getTheme().subscribe((data) => {
+      this.themes = data
+      this.themes.forEach((item) => {
+        const header = document.getElementById('header') as HTMLElement
+        header.style.backgroundColor = item.color
+      })
+    })
+  }
   ngAfterViewInit(): void{
     const user_name = document.querySelector('.avatarBox > div > h4') as HTMLElement
     const full_name = localStorage.getItem('username')

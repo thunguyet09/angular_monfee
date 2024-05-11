@@ -20,4 +20,8 @@ export class API{
   getCarts(){
     return this.http.get(this.url + '/cart')
   }
+
+  getThemes(){
+    return this.http.get(this.url + '/theme')
+  }
 }

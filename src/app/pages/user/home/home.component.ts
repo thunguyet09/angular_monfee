@@ -19,6 +19,9 @@ export class HomeComponent implements AfterViewInit {
     this.fetchData();
   }
 
+  public data: Product[] = []
+  public detail: Product[] = []
+  public imgCarousel: string[] = []
   public products: Product[] = []
   async fetchData(): Promise<void> {
     this.api.getAllProducts().subscribe((data:any) => {
@@ -94,9 +97,6 @@ export class HomeComponent implements AfterViewInit {
     }
   }
 
-  public data: Product[] = []
-  public detail: Product[] = []
-  public imgCarousel: string[] = []
   async handleQuickView(id:any): Promise<void>{
     this.api.getDetail(id).subscribe((val:any) => {
       const dataArray = [val]
