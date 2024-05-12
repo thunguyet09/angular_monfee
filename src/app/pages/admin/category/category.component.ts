@@ -1,4 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { API } from 'src/app/api/api.service';
 import { Category } from 'src/app/interfaces/Category';
 import { Theme } from 'src/app/interfaces/Theme';
@@ -10,7 +11,7 @@ import { ThemeService } from 'src/app/services/theme.service';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements AfterViewInit{
-  constructor(private themeService: ThemeService, private api: API){}
+  constructor(private themeService: ThemeService, private api: API, private router: Router){}
   public themes: Theme[] = []
   public bgColor: string = ''
   public categories: Category[] = []
@@ -30,7 +31,6 @@ export class CategoryComponent implements AfterViewInit{
 
     this.api.getCategoryPagination('1', '3').subscribe((data:any) => {
       this.categories = data.categories
-      console.log(this.categories)
     })
   }
 
@@ -112,5 +112,9 @@ export class CategoryComponent implements AfterViewInit{
     if(target.value == ''){
       this.searchData = []
     }
+  }
+
+  handleView(id:number){
+    localStorage.setItem('categoryId', id.toString())
   }
 }

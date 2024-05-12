@@ -140,7 +140,7 @@
             <tr>
               <td><input type="checkbox" /></td>
               <td class="id-td">{{item.id}}</td>
-              <td>
+              <td class="img">
                 <img src="./assets/img/{{item.image}}" width="90px" />
               </td>
               <td class="category_name_td1">{{item.name}}</td>
@@ -152,7 +152,7 @@
               <td>{{item.status}}</td>
               <td>
                 <div class="btns">
-                  <button class="view">
+                  <button class="view"  routerLink="/admin/category-details" (click)="handleView(item.id)">
                     <span class="material-symbols-outlined">
                       visibility
                     </span>

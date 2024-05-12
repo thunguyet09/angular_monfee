@@ -66,7 +66,7 @@ export class HeaderComponent implements AfterViewInit{
 
     window.addEventListener('scroll', function(){
       const mini_sidebar = document.querySelector('.mini_sidebar') as HTMLElement
-      if(this.scrollY > 66){
+      if(this.scrollY > 60){
           mini_sidebar.style.top = '0';
       }else {
           mini_sidebar.style.top = '66px'
@@ -106,4 +106,17 @@ export class HeaderComponent implements AfterViewInit{
     mini_sidebar.style.left = '0px'
     sidebar.style.left = '-200px'
   }
+
+  public isLight = true;
+  darkAndLight(){
+    const target = document.querySelector('.dark-and-light') as HTMLElement
+    this.isLight = !this.isLight
+    if (this.isLight) {
+      target.innerHTML = '<i class="fa-regular fa-moon"></i>';
+      target.style.fontSize = '20px'
+    }else{
+      target.innerHTML = `<span class="material-symbols-outlined">light_mode</span>`
+    }
+  }
 }
+

@@ -1,0 +1,29 @@
+<router-outlet></router-outlet>
+<div id="category_details">
+  <div class="category_details">
+    <div class="category_details_heading">
+      <h2>CATEGORY DETAILS</h2>
+      <div class="bread-crumb">
+        <a>Category</a>
+        <i class="fa-solid fa-angle-right"></i>
+        <a>Category Details</a>
+      </div>
+    </div>
+    <div class="category_details_content" *ngFor="let item of categories">
+      <div class="imgBox">
+        <img src="./assets/img/{{item.image}}" width="600px"/>
+        <div class="change-img-box">
+          <div class="change-img">
+            <div id="myDropzone" class="dropzone"></div>
+            <i class="fa-regular fa-image"></i>
+          </div>
+        </div>
+      </div>
+      <div class="category-details-main">
+        <div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

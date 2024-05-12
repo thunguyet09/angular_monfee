@@ -7,13 +7,15 @@ import { FooterComponent } from './footer/footer.component';
 import { CategoryComponent } from './category/category.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
+import { CategoryDetailsComponent } from './category-details/category_details.component';
 @NgModule({
   declarations: [
    AdminComponent,
    HeaderComponent,
    FooterComponent,
    CategoryComponent,
-   DashboardComponent
+   DashboardComponent,
+   CategoryDetailsComponent
   ],
   imports: [
     AdminRoutingModule,

@@ -3,11 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { CategoryComponent } from './category/category.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CategoryDetailsComponent } from './category-details/category_details.component';
 
 const routes: Routes = [
   {
     path: 'category',
     component: CategoryComponent,
+    children: [
+      { path: '', component: AdminComponent }
+    ]
+  },
+  {
+    path: 'category-details',
+    component: CategoryDetailsComponent,
     children: [
       { path: '', component: AdminComponent }
     ]

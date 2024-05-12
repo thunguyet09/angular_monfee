@@ -567,3 +567,12 @@ table td {
 input[type="checkbox"] {
   cursor: pointer;
 }
+
+.img, .category_name_td1 {
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.category_name_td1:hover {
+  color:#ae602c;
+}

@@ -32,4 +32,8 @@ export class API{
   getCategoryPagination(page:any, limit:any){
     return this.http.get(this.url + '/categories/pagination/' + page + '/' + limit)
   }
+
+  getCategoryDetail(id:number){
+    return this.http.get(this.url + `/categories/${id}`)
+  }
 }
