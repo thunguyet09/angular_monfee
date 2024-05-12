@@ -28,4 +28,8 @@ export class API{
   getAllCategories(){
     return this.http.get(this.url + '/categories')
   }
+
+  getCategoryPagination(page:any, limit:any){
+    return this.http.get(this.url + '/categories/pagination/' + page + '/' + limit)
+  }
 }

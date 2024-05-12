@@ -81,6 +81,7 @@
 
 .add > span {
   font-size: 18px;
+  font-weight: bold;
 }
 
 .panel {
@@ -402,4 +403,167 @@
 .remove-search-item:hover {
   padding: 5px;
   background-color: rgb(219, 219, 219);
+}
+
+.panel-heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px 10px 0px;
+}
+
+.delete-btn {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  padding: 8px 15px;
+  color: rgb(49, 49, 49);
+  border-radius: 5px;
+  background-color: rgb(223, 223, 223);
+  border: none;
+  outline: none;
+}
+
+.delete-btn > h4 {
+  font-weight: 600;
+  margin: 0;
+  font-size: 17px;
+  font-family: "Nunito", sans-serif;
+  margin-top: 3px;
+}
+.delete-btn > i {
+  font-size: 16px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-family: "Nunito", sans-serif;
+}
+
+table th {
+  font-size: 15px;
+  color: rgb(40, 40, 40);
+}
+
+.category_name {
+  text-align: left;
+  color:#b8784e !important;
+}
+
+.category_name > i {
+  cursor: pointer;
+}
+
+.actions {
+  text-align: right;
+}
+
+.id, .date-added, .date-modified {
+  color:#b8784e !important;
+}
+
+input[type="checkbox"] {
+  width: 18px;
+  height: 15px;
+}
+
+table td {
+  text-align: center;
+}
+
+.category_name_td1 {
+  text-align: left !important;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.view > span {
+  font-size: 16px;
+  color: white;
+}
+
+.view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 14px;
+  background-color: #C7A17A;
+  outline: none;
+  border: 1px solid #b8784e;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 17px;
+  background-color: #b8784e;
+  outline: none;
+  border: 1px solid #ae602c;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.edit > i {
+  font-size: 12px;
+  color: white;
+}
+
+.edit:hover, .view:hover {
+  opacity: 0.8;
+}
+
+.id-td {
+  font-size: 16px;
+}
+
+.top-yes {
+  color: #ffffff;
+  background-color: #5bc0de;
+  border: none;
+  outline: none;
+  border:1px solid #39b3d7;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-weight: 600;
+  font-family: "Nunito", sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.top-no {
+  border: none;
+  outline: none;
+  background-color: white;
+  border: 1px solid rgb(213, 213, 213);
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-weight: 600;
+  font-family: "Nunito", sans-serif;
+  letter-spacing: 0.5px;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
 }

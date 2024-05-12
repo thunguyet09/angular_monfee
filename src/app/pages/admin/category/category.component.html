@@ -28,6 +28,12 @@
         <i class="fa-solid fa-list"></i>
         <h3>Category List</h3>
       </div>
+      <div class="panel-actions">
+        <button class="delete-btn">
+          <i class="fa-solid fa-trash-can"></i>
+          <h4>Delete</h4>
+        </button>
+      </div>
     </div>
     <div class="panel-body">
       <div class="category-actions">
@@ -110,6 +116,55 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th class="delete-all"><input type="checkbox" /></th>
+              <th class="id">ID</th>
+              <th>Image</th>
+              <th class="category_name">
+                Category Name
+                <i class="fa-solid fa-arrow-down-a-z"></i>
+              </th>
+              <th class="date-added">Date Added</th>
+              <th class="date-modified">Date Modified</th>
+              <th>Top</th>
+              <th>Status</th>
+              <th class="actions">Action</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of categories">
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td class="id-td">{{item.id}}</td>
+              <td>
+                <img src="./assets/img/{{item.image}}" width="90px" />
+              </td>
+              <td class="category_name_td1">{{item.name}}</td>
+              <td>{{item.date_added}}</td>
+              <td>{{item.date_modified ? item.date_modified : item.date_added}}</td>
+              <td>
+                <button [class]="item.top == 'Yes' ? 'top-yes' : 'top-no'">{{item.top}}</button>
+              </td>
+              <td>{{item.status}}</td>
+              <td>
+                <div class="btns">
+                  <button class="view">
+                    <span class="material-symbols-outlined">
+                      visibility
+                    </span>
+                  </button>
+                  <button class="edit">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

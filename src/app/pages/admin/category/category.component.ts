@@ -24,8 +24,13 @@ export class CategoryComponent implements AfterViewInit{
       })
     })
 
-    this.api.getAllCategories().subscribe((data:any) => {
-      this.categories = data
+    // this.api.getAllCategories().subscribe((data:any) => {
+    //   this.categories = data
+    // })
+
+    this.api.getCategoryPagination('1', '3').subscribe((data:any) => {
+      this.categories = data.categories
+      console.log(this.categories)
     })
   }
 
