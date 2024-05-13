@@ -40,6 +40,7 @@
   font-size: 15px;
   font-weight: 600;
   color: rgb(60, 60, 60);
+  text-decoration: none;
 }
 
 .bread-crumb > a:last-child {
@@ -69,18 +70,18 @@
   border: 2px dashed #ccc;
   background-color: #f9f9f9;
   transition: .3s ease;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
 }
 
 .change-img > i {
   position: absolute;
-  top: 18px;
-  left: 18px;
+  top: 23px;
+  left: 22px;
   z-index: 1;
   color: grey;
-  font-size: 18px;
+  font-size: 19px;
   transition: .3s ease;
 }
 
@@ -97,7 +98,7 @@
 .change-img-box {
   position: absolute;
   bottom: -5px;
-  right: -70px;
+  right: -60px;
 }
 
 .change-img-box {
@@ -128,7 +129,7 @@
 .form-group > input {
   border: 1px solid #ced4da;
   padding: 11px 10px;
-  width: 500px;
+  width: 550px;
   border-radius: 5px;
   font-family: "Nunito", sans-serif;
   outline: none;
@@ -140,7 +141,7 @@
 .form-control {
   border: 1px solid #ced4da;
   padding: 11px 10px;
-  width: 525px;
+  width: 572px;
   border-radius: 5px;
   font-family: "Nunito", sans-serif;
   outline: none;
@@ -194,17 +195,55 @@
 
 .group-control {
   position: relative;
+  margin-bottom: 15px;
 }
 
 .group-control > .tooltip {
   position: absolute;
-  top: -40px;
+  top: -60px;
   left: 0;
   background-color: black;
   color: white;
   width: 300px;
   border-radius: 5px;
-  padding: 8px 15px;
+  padding: 8px 10px;
   text-align: center;
-  font-size: 13px;
+  font-size: 12px;
+  display: none;
+}
+
+.group-control > select {
+  cursor: pointer;
+}
+
+.category-details-main {
+  width: 40%;
+}
+
+.imgBox {
+  width: 45%;
+}
+
+.edit-icon {
+  width: 15%;
+}
+
+.edit-btn > span {
+  font-size: 17px;
+}
+
+.edit-btn:hover {
+  background-color: #ced4da;
+}
+
+.edit-btn {
+  background-color: #f3f6f9;
+  cursor: pointer;
+  transition: .3s ease;
+  width: 50px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
 }

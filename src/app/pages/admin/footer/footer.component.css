@@ -1,0 +1,29 @@
+#footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 0px;
+  gap: 5px;
+}
+
+.footer-content > h4, .footer-content > p {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+}
+
+
+.footer-content > h4 {
+  color: #b8784e;
+}
+
+.footer-content > p {
+  font-size: 15px;
+  color: rgb(73, 73, 73);
+}

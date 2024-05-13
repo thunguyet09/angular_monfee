@@ -9,14 +9,15 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class CategoryDetailsComponent {
   categoryForm: FormGroup;
+  public isView:boolean = true;
   constructor(private api: API){
     this.categoryForm = new FormGroup({
-      'categoryName': new FormControl(''),
-      'date_added': new FormControl(''),
-      'date_modified': new FormControl(''),
-      'top': new FormControl(''),
-      'status': new FormControl(''),
-      'image': new FormControl('')
+      'categoryName': new FormControl({value: '', disabled: this.isView}),
+      'date_added': new FormControl({value: '', disabled: this.isView}),
+      'date_modified': new FormControl({value: '', disabled: this.isView}),
+      'top': new FormControl({value: '', disabled: this.isView}),
+      'status': new FormControl({value: '', disabled: this.isView}),
+      'image': new FormControl({value: '', disabled: this.isView})
     })
   }
 
@@ -54,4 +55,32 @@ export class CategoryDetailsComponent {
     }
   }
 
+  handleTooltip(event: Event){
+    const target = event.target as HTMLElement
+    const targetParent = target.parentNode
+    const targetParent2 = targetParent?.parentNode
+    const tooltip = targetParent2?.childNodes[0] as HTMLElement
+    tooltip.style.display = 'block'
+  }
+
+  leaveTooltip(event: Event){
+    const target = event.target as HTMLElement
+    const targetParent = target.parentNode
+    const targetParent2 = targetParent?.parentNode
+    const tooltip = targetParent2?.childNodes[0] as HTMLElement
+    tooltip.style.display = 'none'
+  }
+
+  editClick(){
+    this.isView = !this.isView;
+    if(this.isView == false){
+      Object.keys(this.categoryForm.controls).forEach(key => {
+        this.categoryForm.controls[key].enable();
+      });
+    }else{
+      Object.keys(this.categoryForm.controls).forEach(key => {
+        this.categoryForm.controls[key].disable();
+      });
+    }
+  }
 }

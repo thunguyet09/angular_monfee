@@ -2,7 +2,7 @@
 <div id="category_details">
   <div class="category_details">
     <div class="category_details_heading">
-      <h2>CATEGORY DETAILS</h2>
+      <h2>{{isView ? 'CATEGORY DETAILS' : 'EDIT CATEGORY'}}</h2>
       <div class="bread-crumb">
         <a routerLink="/admin/category">Category</a>
         <i class="fa-solid fa-angle-right"></i>
@@ -41,7 +41,7 @@
             </div>
             <div class="label">
                 <label>Top</label>
-                <span class="material-symbols-outlined">
+                <span class="material-symbols-outlined" (mouseenter)="handleTooltip($event)" (mouseleave)="leaveTooltip($event)">
                   help
                 </span>
             </div>
@@ -51,8 +51,27 @@
               <option>No</option>
             </select>
           </div>
+          <div class="group-control">
+            <div class="label">
+                <label>Status</label>
+            </div>
+            <select formControlName="'status'" class="form-control">
+              <option>{{item.status}}</option>
+              <option>Enabled</option>
+              <option>Disabled</option>
+            </select>
+          </div>
         </form>
+      </div>
+      <div class="edit-icon">
+        <div class="edit-btn" (click)="editClick()">
+          <span class="material-symbols-outlined">
+            edit
+          </span>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<app-footer></app-footer>
