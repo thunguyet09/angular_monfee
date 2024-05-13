@@ -149,7 +149,7 @@
               <td>
                 <button [class]="item.top == 'Yes' ? 'top-yes' : 'top-no'">{{item.top}}</button>
               </td>
-              <td>{{item.status}}</td>
+              <td><button [class]="item.status == 'Enabled' ? 'enabled' : 'disabled'">{{item.status}}</button></td>
               <td>
                 <div class="btns">
                   <button class="view"  routerLink="/admin/category-details" (click)="handleView(item.id)">

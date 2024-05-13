@@ -4,25 +4,54 @@
     <div class="category_details_heading">
       <h2>CATEGORY DETAILS</h2>
       <div class="bread-crumb">
-        <a>Category</a>
+        <a routerLink="/admin/category">Category</a>
         <i class="fa-solid fa-angle-right"></i>
         <a>Category Details</a>
       </div>
     </div>
     <div class="category_details_content" *ngFor="let item of categories">
       <div class="imgBox">
-        <img src="./assets/img/{{item.image}}" width="600px"/>
+        <img src="./assets/img/{{item.image}}" width="650px" height="500px"/>
         <div class="change-img-box">
-          <div class="change-img">
-            <div id="myDropzone" class="dropzone"></div>
+          <form class="change-img">
+            <div id="myDropzone" class="dropzone">
+              <input type="file" id="fileInput" (change)="chooseImg($event)"/>
+            </div>
             <i class="fa-regular fa-image"></i>
-          </div>
+          </form>
         </div>
       </div>
       <div class="category-details-main">
-        <div>
-
-        </div>
+        <form [formGroup]="categoryForm">
+          <div class="form-group">
+            <label>Category Name</label>
+            <input type="text" [formControlName]="'categoryName'" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>Published</label>
+            <input type="text" [formControlName]="'date_added'" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>Modified</label>
+            <input type="text" [formControlName]="'date_modified'" class="form-control" />
+          </div>
+          <div class="group-control">
+            <div class="tooltip">
+              Display in the top menu bar. Only works for the top parent categories.
+            </div>
+            <div class="label">
+                <label>Top</label>
+                <span class="material-symbols-outlined">
+                  help
+                </span>
+            </div>
+            <select formControlName="'top'" class="form-control">
+              <option>{{item.top}}</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+        </form>
       </div>
     </div>
   </div>

@@ -30,7 +30,7 @@
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/dropzone/dist/min/dropzone.min.js"
+
             ]
           },
           "configurations": {
