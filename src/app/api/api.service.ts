@@ -36,4 +36,8 @@ export class API{
   getCategoryDetail(id:number){
     return this.http.get(this.url + `/categories/${id}`)
   }
+
+  updateCategory(id:number, data:any){
+    return this.http.put(this.url + `/categories/${id}`, data)
+  }
 }

@@ -22,10 +22,10 @@
         </div>
       </div>
       <div class="category-details-main">
-        <form [formGroup]="categoryForm">
+        <form [formGroup]="categoryForm" (ngSubmit)="handleUpdate()">
           <div class="form-group">
             <label>Category Name</label>
-            <input type="text" [formControlName]="'categoryName'" class="form-control" />
+            <input type="text" [formControlName]="'name'" class="form-control" />
           </div>
           <div class="form-group">
             <label>Published</label>
@@ -45,7 +45,7 @@
                   help
                 </span>
             </div>
-            <select formControlName="'top'" class="form-control">
+            <select [formControlName]="'top'" class="form-control">
               <option>{{item.top}}</option>
               <option>Yes</option>
               <option>No</option>
@@ -55,11 +55,17 @@
             <div class="label">
                 <label>Status</label>
             </div>
-            <select formControlName="'status'" class="form-control">
+            <select [formControlName]="'status'" class="form-control">
               <option>{{item.status}}</option>
               <option>Enabled</option>
               <option>Disabled</option>
             </select>
+          </div>
+          <div class="update-btn" *ngIf="!isView">
+            <button type="submit">
+              <i class="fa-solid fa-pen-to-square"></i>
+              <h4>Cập nhật</h4>
+            </button>
           </div>
         </form>
       </div>
@@ -72,6 +78,11 @@
       </div>
     </div>
   </div>
+</div>
+
+<div id="dialog-content">
+  <span></span>
+  <p class="dialog-text"></p>
 </div>
 
 <app-footer></app-footer>

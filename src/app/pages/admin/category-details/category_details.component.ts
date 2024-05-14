@@ -12,9 +12,9 @@ export class CategoryDetailsComponent {
   public isView:boolean = true;
   constructor(private api: API){
     this.categoryForm = new FormGroup({
-      'categoryName': new FormControl({value: '', disabled: this.isView}),
-      'date_added': new FormControl({value: '', disabled: this.isView}),
-      'date_modified': new FormControl({value: '', disabled: this.isView}),
+      'name': new FormControl({value: '', disabled: this.isView}),
+      'date_added': new FormControl({value: '', disabled: true}),
+      'date_modified': new FormControl({value: '', disabled: true}),
       'top': new FormControl({value: '', disabled: this.isView}),
       'status': new FormControl({value: '', disabled: this.isView}),
       'image': new FormControl({value: '', disabled: this.isView})
@@ -25,16 +25,31 @@ export class CategoryDetailsComponent {
   public id: string | null = localStorage.getItem('categoryId');
 
   ngOnInit() {
+    const currentDate = new Date()
+    const year = currentDate.getFullYear()
+    const month = currentDate.getMonth() + 1
+    const day = currentDate.getDate()
+    const hour = currentDate.getHours()
+    const minute = currentDate.getMinutes()
+    let formatDate:string;
+    if(minute < 10 && hour < 10){
+        formatDate = year + '-' + month + '-' + day + " " + "0" + hour + ":" + "0" + minute
+    }else if(hour < 10){
+        formatDate = year + '-' + month + '-' + day + " " + "0"+ hour + ":" + minute
+    }else if(minute < 10){
+        formatDate = year + '-' + month + '-' + day  + " " + hour + ":" + "0" + minute
+    }else{
+        formatDate = year + "-" + month + "-" + day + " " + hour + ":" + minute
+    }
     if (this.id !== null) {
       this.api.getCategoryDetail(parseInt(this.id)).subscribe((data: any) => {
         this.categories = [data];
-        this.categoryForm.controls['categoryName'].patchValue(data.name);
+        this.categoryForm.controls['name'].patchValue(data.name);
         this.categoryForm.controls['date_added'].patchValue(data.date_added)
-        if(data.date_modified){
-          this.categoryForm.controls['date_modified'].patchValue(data.date_modified)
-        }else{
-          this.categoryForm.controls['date_modified'].patchValue(data.date_added)
-        }
+        this.categoryForm.controls['date_modified'].patchValue(formatDate)
+        this.categoryForm.controls['image'].patchValue(data.image)
+        this.categoryForm.controls['top'].patchValue(data.top)
+        this.categoryForm.controls['status'].patchValue(data.status)
       });
     }
   }
@@ -77,10 +92,32 @@ export class CategoryDetailsComponent {
       Object.keys(this.categoryForm.controls).forEach(key => {
         this.categoryForm.controls[key].enable();
       });
+
+      this.categoryForm.controls['date_added'].disable();
+      this.categoryForm.controls['date_modified'].disable();
     }else{
       Object.keys(this.categoryForm.controls).forEach(key => {
         this.categoryForm.controls[key].disable();
       });
+    }
+  }
+
+  handleUpdate(){
+    this.categoryForm.controls['date_added'].enable();
+    this.categoryForm.controls['date_modified'].enable();
+    const dialog_content = document.querySelector('#dialog-content') as HTMLElement
+    const dialog_icon = document.querySelector('#dialog-content > span') as HTMLElement
+    const dialog_text = document.querySelector('.dialog-text') as HTMLElement
+    if(this.id !== null){
+      this.api.updateCategory(parseInt(this.id), this.categoryForm.value).subscribe((res) => {
+        dialog_content.style.display = 'flex'
+        dialog_content.style.backgroundColor = '#ABC270'
+        dialog_icon.innerHTML = '<i class="fa-solid fa-check"></i>'
+        dialog_text.textContent = 'Danh mục đã cập nhật thành công'
+      })
+      setTimeout(() => {
+        document.location.href = '/admin/category'
+      }, 2000)
     }
   }
 }
