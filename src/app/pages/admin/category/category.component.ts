@@ -1,9 +1,12 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, NgZone } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { API } from 'src/app/api/api.service';
 import { Category } from 'src/app/interfaces/Category';
 import { Theme } from 'src/app/interfaces/Theme';
+import { CategoryService } from 'src/app/services/category.service';
 import { ThemeService } from 'src/app/services/theme.service';
+import { AddComponent } from './add/add.component';
 
 @Component({
   selector: 'app-category',
@@ -11,10 +14,16 @@ import { ThemeService } from 'src/app/services/theme.service';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements AfterViewInit{
-  constructor(private themeService: ThemeService, private api: API, private router: Router){}
+  constructor(private dialog: MatDialog,
+              private themeService: ThemeService,
+              private api: API,
+              private router: Router,
+              private CategoryService: CategoryService,
+              private ngZone: NgZone){}
   public themes: Theme[] = []
   public bgColor: string = ''
   public categories: Category[] = []
+
   ngOnInit(){
     this.themeService.getTheme().subscribe((data:any) => {
       this.themes = data
@@ -28,8 +37,11 @@ export class CategoryComponent implements AfterViewInit{
     // this.api.getAllCategories().subscribe((data:any) => {
     //   this.categories = data
     // })
+    this.getAPI()
+  }
 
-    this.api.getCategoryPagination('1', '3').subscribe((data:any) => {
+  getAPI(){
+    this.api.getCategoryPagination('1', '10').subscribe((data:any) => {
       this.categories = data.categories
     })
   }
@@ -116,5 +128,61 @@ export class CategoryComponent implements AfterViewInit{
 
   handleView(id:number){
     localStorage.setItem('categoryId', id.toString())
+    this.CategoryService.setView(true)
+  }
+
+  handleEdit(id:number){
+    localStorage.setItem('categoryId', id.toString())
+    this.CategoryService.setView(false)
+  }
+
+  handleAdd(){
+    const addDialog = this.dialog.open(AddComponent, {
+      exitAnimationDuration: '200ms',
+      enterAnimationDuration: '200ms'
+    });
+
+    addDialog.afterClosed().subscribe((result) => {
+      this.getAPI()
+    });
+
+  }
+
+  public removeItems:number[] = []
+  deleteAll(){}
+
+  checkedDelete(id: number, checked: boolean) {
+    if (checked) {
+      this.removeItems.push(id);
+    } else {
+      const index = this.removeItems.indexOf(id);
+      if (index !== -1) {
+        this.removeItems.splice(index, 1);
+      }
+    }
+
+    console.log(this.removeItems);
+  }
+
+  handleDelete(){
+    const dialog_content = document.querySelector('#dialog-content') as HTMLElement
+    const dialog_icon = document.querySelector('#dialog-content > span') as HTMLElement
+    const dialog_text = document.querySelector('.dialog-text') as HTMLElement
+    if(this.removeItems.length > 0){
+      this.removeItems.forEach((item) => {
+        this.api.deleteCategory(item).subscribe((res) => {
+          dialog_content.style.display = 'flex'
+          dialog_content.style.backgroundColor = '#FE7A36'
+          dialog_icon.innerHTML = '<i class="fa-solid fa-check"></i>'
+          dialog_text.textContent = 'Danh mục đã xóa thành công'
+
+          setTimeout(() => {
+            this.getAPI()
+            dialog_content.style.display = 'none'
+          }, 2000)
+        })
+      })
+    }
   }
 }
+

@@ -8,6 +8,8 @@ import { CategoryComponent } from './category/category.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoryDetailsComponent } from './category-details/category_details.component';
+import { AddComponent } from './category/add/add.component';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
    AdminComponent,
@@ -15,13 +17,15 @@ import { CategoryDetailsComponent } from './category-details/category_details.co
    FooterComponent,
    CategoryComponent,
    DashboardComponent,
-   CategoryDetailsComponent
+   CategoryDetailsComponent,
+   AddComponent
   ],
   imports: [
     AdminRoutingModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   providers: [],
 })

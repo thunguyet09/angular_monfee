@@ -1,0 +1,85 @@
+<div id="add-dialog">
+  <div class="add-heading">
+    <i class="fa fa-pencil"></i>
+    <h1>Add Category</h1>
+  </div>
+  <div class="add-container">
+    <form [formGroup]="addForm" (ngSubmit)="handleAdd()">
+      <div class="main-group">
+        <div class="form-group align-items">
+          <label><b>*</b>Category Name</label>
+          <input [formControlName]="'name'" type="text" placeholder="Category Name" />
+        </div>
+        <div *ngIf="addForm.get('name')?.invalid && (addForm.get('name')?.dirty || addForm.get('name')?.touched)" class="err-msg">
+          <div *ngIf="addForm.get('name')?.errors?.['required']">Name is required.</div>
+        </div>
+      </div>
+      <div class="form-group margin">
+        <label>Image</label>
+        <div class="imgBox">
+          <img src="./assets/img/img.jpg" width="150px"/>
+          <div class="change-img-box">
+            <form class="change-img">
+              <div id="myDropzone" class="dropzone">
+                <input type="file" id="fileInput" (change)="chooseImg($event)"/>
+              </div>
+              <i class="fa-regular fa-image"></i>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-group">
+        <div class="form-control">
+          <div class="tooltip">
+            Display in the top menu bar. Only works for the top parent categories.
+          </div>
+          <div class="label">
+              <label>Top</label>
+              <span class="material-symbols-outlined" (mouseenter)="handleTooltip($event)" (mouseleave)="leaveTooltip($event)">
+                help
+              </span>
+          </div>
+          <select [formControlName]="'top'" class="select">
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+        <div *ngIf="addForm.get('top')?.invalid && (addForm.get('top')?.dirty || addForm.get('top')?.touched)" class="err-msg">
+          <div *ngIf="addForm.get('top')?.errors?.['top']">Top is required.</div>
+        </div>
+      </div>
+
+      <div class="main-group">
+        <div class="form-control">
+          <div class="label">
+              <label>Status</label>
+          </div>
+          <select [formControlName]="'status'" class="select">
+            <option>Enabled</option>
+            <option>Disabled</option>
+          </select>
+        </div>
+        <div *ngIf="addForm.get('status')?.invalid && (addForm.get('status')?.dirty || addForm.get('status')?.touched)" class="err-msg">
+          <div *ngIf="addForm.get('status')?.errors?.['required']">Status is required.</div>
+        </div>
+      </div>
+
+      <div class="add-actions">
+        <button class="addBtn">
+          <i class="fa-solid fa-floppy-disk"></i>
+          <h4>Thêm</h4>
+        </button>
+        <button class="cancelBtn" (click)="closeModal()">
+          <i class="fa-solid fa-xmark"></i>
+          <h4>Hủy</h4>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="dialog-content">
+  <span></span>
+  <p class="dialog-text"></p>
+</div>

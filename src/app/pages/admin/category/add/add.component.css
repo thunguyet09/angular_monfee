@@ -1,0 +1,311 @@
+#add-dialog {
+  width: 800px;
+  height: 600px;
+  margin: 0;
+  padding: 0;
+}
+
+.add-heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 2px 0px;
+  padding: 10px 20px;
+  color: #595959;
+  background-color: #fcfcfc;
+}
+
+.add-heading > h1 {
+  font-family: "Nunito", sans-serif;
+  margin: 0;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.add-heading > i {
+  font-size: 17px;
+}
+
+.change-img > input[type="file"] {
+  color: transparent;
+  font-size: 0;
+}
+
+.change-img {
+  position: relative;
+}
+
+.dropzone {
+  border: 2px dashed #ccc;
+  background-color: #f9f9f9;
+  transition: .3s ease;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.change-img > i {
+  position: absolute;
+  top: 16px;
+  left: 15px;
+  z-index: 1;
+  color: grey;
+  font-size: 14px;
+  transition: .3s ease;
+}
+
+.imgBox {
+  position: relative;
+  width: 200px;
+}
+
+.change-img-box {
+  position: absolute;
+  bottom: -5px;
+  right: 30px;
+}
+
+.change-img-box {
+  cursor: pointer;
+}
+
+.change-img-box:hover > .change-img > .dropzone {
+  border: 2px dashed black;
+}
+
+.change-img-box:hover > .change-img > i {
+  color: black;
+}
+
+#fileInput {
+  position: absolute;
+  top: 10px;
+  left: 2px;
+  z-index: 2;
+  color: transparent;
+  text-indent: -9999px;
+  cursor: pointer;
+  width: 60px;
+}
+#fileInput::before {
+  content: "       ";
+  display: inline-block;
+  padding: 10px 12px;
+  background-color: rgba(0, 0, 0, 0);
+  color: #fff;
+  cursor: pointer;
+}
+
+#fileInput::-webkit-file-upload-button {
+  display: none;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.add-container {
+  padding: 20px;
+}
+
+.form-group > label {
+  font-family: "Nunito", sans-serif;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  font-size: 15px;
+  font-weight: 600;
+  width: 20%;
+}
+
+.form-group > label > b {
+  color: red;
+}
+
+.imgBox > img {
+  border: 1px solid rgb(223, 223, 223);
+  border-radius: 3px;
+}
+
+.form-group > input {
+  padding: 10px;
+  font-family: "Nunito", sans-serif;
+  font-size: 15px;
+  border-radius: 3px;
+  border: 1px solid rgb(221, 221, 221);
+  width: 80%;
+  outline: none;
+}
+
+
+.align-items {
+  align-items: center;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+
+.main-group {
+  margin-bottom: 35px;
+}
+
+.err-msg {
+  margin-left: 150px;
+  margin-top: 10px;
+  font-family: "Nunito", sans-serif;
+  color: red;
+  font-weight: 550;
+}
+
+.tooltip {
+  position: absolute;
+  top: -60px;
+  left: 0;
+  background-color: black;
+  color: white;
+  width: 300px;
+  border-radius: 5px;
+  padding: 8px 10px;
+  text-align: center;
+  font-size: 12px;
+  z-index: 9;
+  display: none;
+}
+
+.label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 5px;
+  width: 20%;
+}
+
+.label > label {
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 2px;
+}
+
+
+.label > span {
+  font-size: 16px;
+  color: #1E91CF;
+  cursor: pointer;
+}
+
+.select {
+  width: 80%;
+  padding: 10px;
+  font-family: "Nunito", sans-serif;
+  font-size: 15px;
+  border-radius: 3px;
+  border: 1px solid rgb(221, 221, 221);
+  outline: none;
+}
+
+.addBtn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 25px;
+  background-color: #b8784e;
+  color: white;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.addBtn > h4 {
+  margin: 0;
+  font-size: 16px;
+  font-family: "Mulish", sans-serif;
+  font-weight: 600;
+}
+
+.addBtn > i {
+  font-size: 14px;
+}
+
+.addBtn:hover {
+  background-color: #db9465;
+}
+
+
+/* dialog */
+#dialog-content {
+  position: fixed;
+  z-index: 9999;
+  bottom: 20px;
+  right: 10px;
+  background-color: #dc3545;
+  width: 320px;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: none;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+#dialog-content>p {
+  margin: 0;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+}
+
+#dialog-content > span > span{
+  margin-top: 5px;
+  font-size: 24px;
+}
+
+
+.add-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.cancelBtn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  outline: none;
+  padding: 8px 20px;
+  border-radius: 3px;
+  background-color: rgb(215, 215, 215);
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.cancelBtn > h4 {
+  margin: 0;
+  font-family: "Mulish", sans-serif;
+  font-weight: 600;
+}
+
+.cancelBtn:hover {
+  background-color: rgb(162, 162, 162);
+}
+
+.margin {
+  margin-bottom: 35px;
+}

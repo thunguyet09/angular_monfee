@@ -40,4 +40,12 @@ export class API{
   updateCategory(id:number, data:any){
     return this.http.put(this.url + `/categories/${id}`, data)
   }
+
+  addCategory(data: any){
+    return this.http.post(this.url + '/categories', data)
+  }
+
+  deleteCategory(id: number){
+    return this.http.delete(this.url + `/categories/${id}`)
+  }
 }

@@ -1,30 +1,26 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { API } from 'src/app/api/api.service';
-import { Category } from 'src/app/interfaces/Category';
 import { FormControl, FormGroup } from '@angular/forms';
+import { CategoryService } from 'src/app/services/category.service';
+import { Category } from 'src/app/interfaces/Category';
 @Component({
   selector: 'app-category-details',
   templateUrl: './category_details.component.html',
   styleUrls: ['./category_details.component.css']
 })
 export class CategoryDetailsComponent {
-  categoryForm: FormGroup;
-  public isView:boolean = true;
-  constructor(private api: API){
-    this.categoryForm = new FormGroup({
-      'name': new FormControl({value: '', disabled: this.isView}),
-      'date_added': new FormControl({value: '', disabled: true}),
-      'date_modified': new FormControl({value: '', disabled: true}),
-      'top': new FormControl({value: '', disabled: this.isView}),
-      'status': new FormControl({value: '', disabled: this.isView}),
-      'image': new FormControl({value: '', disabled: this.isView})
-    })
-  }
+  categoryForm!: FormGroup;
+  isView:boolean = true;
+  constructor(private api: API, private CategoryService: CategoryService){}
 
   public categories: Category[] = [];
   public id: string | null = localStorage.getItem('categoryId');
 
   ngOnInit() {
+    this.CategoryService.getView().subscribe((data) => {
+      this.isView = data;
+      this.initializeForm()
+    })
     const currentDate = new Date()
     const year = currentDate.getFullYear()
     const month = currentDate.getMonth() + 1
@@ -52,6 +48,17 @@ export class CategoryDetailsComponent {
         this.categoryForm.controls['status'].patchValue(data.status)
       });
     }
+  }
+
+  initializeForm() {
+    this.categoryForm = new FormGroup({
+      name: new FormControl({ value: '', disabled: this.isView }),
+      date_added: new FormControl({ value: '', disabled: true }),
+      date_modified: new FormControl({ value: '', disabled: true }),
+      top: new FormControl({ value: '', disabled: this.isView }),
+      status: new FormControl({ value: '', disabled: this.isView }),
+      image: new FormControl({ value: '', disabled: this.isView })
+    });
   }
 
   chooseImg(event: Event) {
@@ -87,7 +94,7 @@ export class CategoryDetailsComponent {
   }
 
   editClick(){
-    this.isView = !this.isView;
+    this.isView = !this.isView
     if(this.isView == false){
       Object.keys(this.categoryForm.controls).forEach(key => {
         this.categoryForm.controls[key].enable();
