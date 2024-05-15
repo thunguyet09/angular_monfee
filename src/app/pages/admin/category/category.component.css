@@ -352,6 +352,10 @@
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
+.searchBox {
+  position: relative;
+}
+
 .searchItem {
   display: flex;
   flex-direction: row;
@@ -360,6 +364,14 @@
   padding: 10px;
 }
 
+.search-container {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  background-color: white;
+}
 .searchItem-col {
   display: flex;
   flex-direction: row;
