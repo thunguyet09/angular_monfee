@@ -1,6 +1,6 @@
 import { AfterViewInit, Component} from '@angular/core';
 import { API } from 'src/app/api/api.service';
-import { Product } from 'src/app/interfaces/Product';
+import { Product } from 'src/app/models/Product';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

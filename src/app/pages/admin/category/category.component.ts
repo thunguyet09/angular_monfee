@@ -2,8 +2,8 @@ import { AfterViewInit, ChangeDetectorRef, Component, NgZone } from '@angular/co
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { API } from 'src/app/api/api.service';
-import { Category } from 'src/app/interfaces/Category';
-import { Theme } from 'src/app/interfaces/Theme';
+import { Category } from 'src/app/models/Category';
+import { Theme } from 'src/app/models/Theme';
 import { CategoryService } from 'src/app/services/category.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { AddComponent } from './add/add.component';

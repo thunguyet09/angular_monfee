@@ -2,7 +2,7 @@ import { AfterViewInit, Component } from '@angular/core';
 import { API } from 'src/app/api/api.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category.service';
-import { Category } from 'src/app/interfaces/Category';
+import { Category } from 'src/app/models/Category';
 @Component({
   selector: 'app-category-details',
   templateUrl: './category_details.component.html',
