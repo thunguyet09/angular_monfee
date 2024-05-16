@@ -30,7 +30,11 @@ export class CategoryComponent implements AfterViewInit {
   public themes: Theme[] = [];
   public bgColor: string = '';
   public categories: Category[] = [];
-
+  public data:Category[] = []
+  public total_pages = 0;
+  public startIndex = 0;
+  public endIndex = 0;
+  public categoríesLength = 0
   ngOnInit() {
     this.themeService.getTheme().subscribe((data: any) => {
       this.themes = data;
@@ -41,15 +45,41 @@ export class CategoryComponent implements AfterViewInit {
       });
     });
 
-    // this.api.getAllCategories().subscribe((data:any) => {
-    //   this.categories = data
-    // })
+    this.api.getAllCategories().subscribe((data:any) => {
+      this.data = data
+    })
     this.getAPI();
   }
 
   getAPI() {
-    this.api.getCategoryPagination('1', '10').subscribe((data: any) => {
+    this.api.getCategoryPagination('1', '1').subscribe((data: any) => {
       this.categories = data.categories;
+      this.total_pages = data.totalPages
+      this.startIndex = data.startIndex
+      this.endIndex = data.endIndex
+      this.categoríesLength = data.categoryLength
+      const pagination = document.querySelector('.pagination') as HTMLElement
+      const page_number = document.querySelector('.page-number > p') as HTMLElement
+      for(let i = 1; i <= this.total_pages; i++){
+        const button = document.createElement('button')
+        button.style.backgroundColor = 'white'
+        button.style.color = '#1e91cf'
+        button.style.border = '1px solid rgb(217, 217, 217)'
+        button.style.padding = '0px 15px'
+        button.style.height = '40px'
+        button.style.display = 'flex'
+        button.style.justifyContent = 'center'
+        button.style.alignItems = 'center'
+        button.style.borderRadius = '3px'
+        button.textContent = i.toString()
+        pagination.appendChild(button)
+        console.log(i)
+      }
+      if(this.total_pages > 1){
+        page_number.innerHTML = `Showing ${this.startIndex + 1} to ${this.endIndex} of ${this.categoríesLength} (${this.total_pages} Pages)`
+      }else{
+        page_number.innerHTML = `Showing ${this.startIndex + 1} to ${this.endIndex} of ${this.categoríesLength} (1 Page)`
+      }
     });
   }
 
@@ -255,6 +285,18 @@ export class CategoryComponent implements AfterViewInit {
 
     if (filteredCategories.length === 0) {
       this.getAPI();
+    }
+  }
+
+  handleSearchItem(event: Event){
+    const target = event.target as HTMLElement
+    const item_name = target.textContent
+    if(item_name !== null){
+      const filteredData = this.data.filter((item) =>
+        item.name.toLowerCase().includes(item_name.toLowerCase())
+      );
+      console.log(filteredData)
+      this.categories = filteredData
     }
   }
 }
