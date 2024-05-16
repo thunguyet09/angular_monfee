@@ -705,12 +705,7 @@ input[type="checkbox"] {
   font-size: 22px;
 }
 
-.pagination {
-  overflow-x: hidden;
-}
 .main-pagination {
   width: 85px;
   overflow-x: hidden;
-
-  transform: translateX(200px);
 }
