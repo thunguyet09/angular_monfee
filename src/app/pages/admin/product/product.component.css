@@ -4,6 +4,9 @@
   background-color: #f3f6f9;
 }
 
+.main-content {
+  background-color: #f3f6f9;
+}
 .products-heading {
   background-color: white;
   display: flex;
@@ -149,6 +152,7 @@
   color: #6691e7;
   font-size: 16px;
   padding: 0px 10px 15px 10px;
+  cursor: pointer;
 }
 
 
@@ -165,4 +169,202 @@
 
 .nav-tab-active {
   border-bottom: 1px solid #6691e7;
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Table header styles */
+thead th {
+  background-color: transparent;
+  padding: 12px 8px;
+  text-align: left;
+}
+
+/* Table body styles */
+tbody td {
+  padding: 15px 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  font-weight: 600;
+  font-family: "Nunito", sans-serif;
+}
+
+.quantity, .price, .orders, .published {
+  font-size: 15px;
+}
+
+tbody {
+  height: 100%;
+}
+
+/* Sort icon styles */
+th div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+}
+
+.fa-sort-up,
+.fa-sort-down {
+  font-size: 12px;
+  color: #999;
+  cursor: pointer;
+}
+
+.fa-sort-up.active,
+.fa-sort-down.active {
+  color: #333;
+}
+
+/* Hover effect */
+tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+
+th > button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-family: "Nunito", sans-serif;
+  font-size: 15px;
+  color: #6b7280;
+  font-weight: 700;
+}
+
+tbody {
+  background-color: white;
+}
+
+tbody > tr > td:first-child {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  text-align: left !important;
+}
+
+.img {
+  border-radius: 5px;
+}
+
+.product-info {
+  margin-top: 10px;
+}
+.product-info > h4 {
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: rgb(33,37,41,1);
+  margin: 0;
+}
+
+.product-info > p {
+  font-family: "Nunito", sans-serif;
+  margin-top: 5px;
+  color: grey;
+  font-weight: 600;
+}
+
+.dropdown-action {
+  background-color: #ede7fb;
+  padding: 7px 10px;
+  color: rgb(172, 172, 172);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.actions {
+  position: relative;
+}
+
+.dropdown-action > i {
+  font-size: 12px;
+}
+
+.dropdown-action:hover {
+  background-color: #865ce2;
+  color: white;
+}
+
+.dropdown {
+  box-shadow: 0 5px 10px rgba(30, 32, 37, .12);
+  padding: 2px 0px;
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background-color: white;
+  z-index: 9;
+  display: none;
+}
+
+.dropdown > ul > li {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  width: 120px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+
+.dropdown > ul {
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown > ul > li:hover {
+  background-color: #eff2f7;
+}
+
+.dropdown > ul > li > p {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-weight: 650;
+  font-size: 15px;
+  color: rgb(94, 94, 94);
+  width: 95%;
+  transform: translateX(-10px);
+}
+
+.dropdown > ul > li > span {
+  width: 5%;
+}
+.view-btn > span {
+  font-size: 18px;
+  color: rgb(94, 94, 94);
+}
+
+.edit-btn > span {
+  font-size: 15px;
+  color: rgb(94, 94, 94);
+}
+
+.dropdown-animate {
+  animation: dropdown 1s ease;
+}
+
+@keyframes dropdown {
+  0%{
+    transform: translateY(20px)
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }

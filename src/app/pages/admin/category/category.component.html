@@ -1,208 +1,211 @@
 <router-outlet></router-outlet>
 <div id="category">
-  <div class="container-fluid">
-    <div class="container-fluid-col1">
-      <h1>Category Manager</h1>
-      <div class="bread-crumb">
-        <a routerLink="home">
+  <div class="category">
+    <div class="container-fluid">
+      <div class="container-fluid-col1">
+        <h1>Category Manager</h1>
+        <div class="bread-crumb">
+          <a routerLink="home">
+            <span class="material-symbols-outlined">
+              home
+            </span>
+          </a>
+          <span>/</span>
+          <a routerLink="category">Categories</a>
+        </div>
+      </div>
+      <div class="container-fluid-col2">
+        <button class="add" (mouseenter)="hoverAddBtn($event)" (mouseleave)="leaveAddBtn($event)" (click)="handleAdd()">
           <span class="material-symbols-outlined">
-            home
+            add
           </span>
-        </a>
-        <span>/</span>
-        <a routerLink="category">Categories</a>
-      </div>
-    </div>
-    <div class="container-fluid-col2">
-      <button class="add" (mouseenter)="hoverAddBtn($event)" (mouseleave)="leaveAddBtn($event)" (click)="handleAdd()">
-        <span class="material-symbols-outlined">
-          add
-        </span>
-        <h4>Add category</h4>
-      </button>
-    </div>
-  </div>
-  <div class="panel">
-    <div class="panel-heading">
-      <div class="panel-title">
-        <i class="fa-solid fa-list"></i>
-        <h3>Category List</h3>
-      </div>
-      <div class="panel-actions">
-        <button class="delete-btn" (click)="handleDelete()">
-          <i class="fa-solid fa-trash-can"></i>
-          <h4>Delete</h4>
+          <h4>Add category</h4>
         </button>
       </div>
     </div>
-    <div class="panel-body">
-      <div class="category-actions">
-        <div class="actions-row1">
-          <button class="filterBtn" (click)="handleFilter()">
-            <i class="fa-solid fa-filter"></i>
-            <h4>FILTER</h4>
-            <i class="fa-solid fa-caret-down"></i>
-          </button>
-          <div class="searchBox">
-            <input class="search" placeholder="Search..." (input)="handleSearch($event)"/>
-            <span class="material-symbols-outlined">
-              search
-            </span>
-            <div class="search-container">
-              <ng-container *ngFor="let item of searchData">
-                <div class="searchItem">
-                  <div class="searchItem-col" (click)="handleSearchItem($event)">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <span>{{item.name}}</span>
-                  </div>
-                  <span class="remove-search-item">
-                    <span class="material-symbols-outlined">
-                      close
-                    </span>
-                  </span>
-                </div>
-              </ng-container>
-            </div>
-          </div>
+    <div class="panel">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <i class="fa-solid fa-list"></i>
+          <h3>Category List</h3>
         </div>
-        <div class="actions-row2">
-          <div class="filter-container">
-            <div class="filterBox">
-              <div class="row">
-                <label>ID</label>
-                <input type="number" placeholder="ID" class="ID_filter" [(ngModel)]="ID" />
-              </div>
-              <div class="row">
-                <label>Category Name</label>
-                <input type="text" placeholder="Category Name" class="categoryName_filter" [(ngModel)]="category_name" />
-              </div>
-              <div class="row">
-                <label>Date</label>
-                <select [(ngModel)]="date_value" class="date_value">
-                  <option></option>
-                  <option>Today</option>
-                  <option>Yesterday</option>
-                  <option>Last week</option>
-                  <option>Last month</option>
-                  <option>Last year</option>
-                </select>
-              </div>
-              <div class="row">
-                <label>Top</label>
-                <select [(ngModel)]="top" class="top">
-                  <option></option>
-                  <option>Yes</option>
-                  <option>No</option>
-                </select>
-              </div>
-              <div class="row">
-                <label>Status</label>
-                <select [(ngModel)]="status" class="status">
-                  <option></option>
-                  <option>Enabled</option>
-                  <option>Disabled</option>
-                </select>
-              </div>
-            </div>
-            <div class="filter-actions">
-              <button class="clearBtn" (click)="handleClear()">
-                <i class="fa-solid fa-eraser"></i>
-                <h4>Clear</h4>
-              </button>
-              <button class="filter-btn2" (click)="handleFilter2()">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <h4>Filter</h4>
-              </button>
-            </div>
-          </div>
+        <div class="panel-actions">
+          <button class="delete-btn" (click)="handleDelete()">
+            <i class="fa-solid fa-trash-can"></i>
+            <h4>Delete</h4>
+          </button>
         </div>
       </div>
-
-      <div class="table">
-        <table *ngIf="categories && categories.length > 0">
-          <thead>
-            <tr>
-              <th class="delete-all"><input type="checkbox" (change)="deleteAll()" /></th>
-              <th class="id">ID</th>
-              <th>Image</th>
-              <th class="category_name">
-                Category Name
-                <i class="fa-solid fa-arrow-down-a-z"></i>
-              </th>
-              <th class="date-added">Date Added</th>
-              <th class="date-modified">Date Modified</th>
-              <th>Top</th>
-              <th>Status</th>
-              <th class="actions">Action</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let item of categories">
-            <tr>
-              <td><input type="checkbox"  #checkbox (change)="checkedDelete(item.id, checkbox.checked)"/></td>
-              <td class="id-td">{{item.id}}</td>
-              <td class="img">
-                <img src="./assets/img/{{item.image}}" width="90px" />
-              </td>
-              <td class="category_name_td1">{{item.name}}</td>
-              <td>{{item.date_added}}</td>
-              <td>{{item.date_modified ? item.date_modified : item.date_added}}</td>
-              <td>
-                <button [class]="item.top == 'Yes' ? 'top-yes' : 'top-no'">{{item.top}}</button>
-              </td>
-              <td><button [class]="item.status == 'Enabled' ? 'enabled' : 'disabled'">{{item.status}}</button></td>
-              <td>
-                <div class="btns">
-                  <button class="view"  routerLink="/admin/category-details" (click)="handleView(item.id)">
-                    <span class="material-symbols-outlined">
-                      visibility
+      <div class="panel-body">
+        <div class="category-actions">
+          <div class="actions-row1">
+            <button class="filterBtn" (click)="handleFilter()">
+              <i class="fa-solid fa-filter"></i>
+              <h4>FILTER</h4>
+              <i class="fa-solid fa-caret-down"></i>
+            </button>
+            <div class="searchBox">
+              <input class="search" placeholder="Search..." (input)="handleSearch($event)"/>
+              <span class="material-symbols-outlined">
+                search
+              </span>
+              <div class="search-container">
+                <ng-container *ngFor="let item of searchData">
+                  <div class="searchItem">
+                    <div class="searchItem-col" (click)="handleSearchItem($event)">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                      <span>{{item.name}}</span>
+                    </div>
+                    <span class="remove-search-item">
+                      <span class="material-symbols-outlined">
+                        close
+                      </span>
                     </span>
-                  </button>
-                  <button class="edit" routerLink="/admin/category-details" (click)="handleEdit(item.id)">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="page-container">
-          <div class="page-box">
-            <button class="first-page-btn" (click)="firstPage()">
-              <span class="material-symbols-outlined">
-                first_page
-              </span>
-            </button>
-            <button class="prev-page-btn" (click)="prevPage()">
-              <span class="material-symbols-outlined">
-                keyboard_arrow_left
-              </span>
-            </button>
-            <div class="main-pagination">
-              <div class="pagination">
-
+                  </div>
+                </ng-container>
               </div>
             </div>
-            <button class="next-page-btn" (click)="nextPage()">
-              <span class="material-symbols-outlined">
-                chevron_right
-              </span>
-            </button>
-            <button class="last-page-btn">
-              <span class="material-symbols-outlined">
-                last_page
-              </span>
-            </button>
           </div>
+          <div class="actions-row2">
+            <div class="filter-container">
+              <div class="filterBox">
+                <div class="row">
+                  <label>ID</label>
+                  <input type="number" placeholder="ID" class="ID_filter" [(ngModel)]="ID" />
+                </div>
+                <div class="row">
+                  <label>Category Name</label>
+                  <input type="text" placeholder="Category Name" class="categoryName_filter" [(ngModel)]="category_name" />
+                </div>
+                <div class="row">
+                  <label>Date</label>
+                  <select [(ngModel)]="date_value" class="date_value">
+                    <option></option>
+                    <option>Today</option>
+                    <option>Yesterday</option>
+                    <option>Last week</option>
+                    <option>Last month</option>
+                    <option>Last year</option>
+                  </select>
+                </div>
+                <div class="row">
+                  <label>Top</label>
+                  <select [(ngModel)]="top" class="top">
+                    <option></option>
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
+                <div class="row">
+                  <label>Status</label>
+                  <select [(ngModel)]="status" class="status">
+                    <option></option>
+                    <option>Enabled</option>
+                    <option>Disabled</option>
+                  </select>
+                </div>
+              </div>
+              <div class="filter-actions">
+                <button class="clearBtn" (click)="handleClear()">
+                  <i class="fa-solid fa-eraser"></i>
+                  <h4>Clear</h4>
+                </button>
+                <button class="filter-btn2" (click)="handleFilter2()">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <h4>Filter</h4>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
 
-          <div class="page-number">
-            <p></p>
+        <div class="table">
+          <table *ngIf="categories && categories.length > 0">
+            <thead>
+              <tr>
+                <th class="delete-all"><input type="checkbox" (change)="deleteAll()" /></th>
+                <th class="id">ID</th>
+                <th>Image</th>
+                <th class="category_name">
+                  Category Name
+                  <i class="fa-solid fa-arrow-down-a-z"></i>
+                </th>
+                <th class="date-added">Date Added</th>
+                <th class="date-modified">Date Modified</th>
+                <th>Top</th>
+                <th>Status</th>
+                <th class="actions">Action</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let item of categories">
+              <tr>
+                <td><input type="checkbox"  #checkbox (change)="checkedDelete(item.id, checkbox.checked)"/></td>
+                <td class="id-td">{{item.id}}</td>
+                <td class="img">
+                  <img src="./assets/img/{{item.image}}" width="90px" />
+                </td>
+                <td class="category_name_td1">{{item.name}}</td>
+                <td>{{item.date_added}}</td>
+                <td>{{item.date_modified ? item.date_modified : item.date_added}}</td>
+                <td>
+                  <button [class]="item.top == 'Yes' ? 'top-yes' : 'top-no'">{{item.top}}</button>
+                </td>
+                <td><button [class]="item.status == 'Enabled' ? 'enabled' : 'disabled'">{{item.status}}</button></td>
+                <td>
+                  <div class="btns">
+                    <button class="view"  routerLink="/admin/category-details" (click)="handleView(item.id)">
+                      <span class="material-symbols-outlined">
+                        visibility
+                      </span>
+                    </button>
+                    <button class="edit" routerLink="/admin/category-details" (click)="handleEdit(item.id)">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="page-container">
+            <div class="page-box">
+              <button class="first-page-btn" (click)="firstPage()">
+                <span class="material-symbols-outlined">
+                  first_page
+                </span>
+              </button>
+              <button class="prev-page-btn" (click)="prevPage()">
+                <span class="material-symbols-outlined">
+                  keyboard_arrow_left
+                </span>
+              </button>
+              <div class="main-pagination">
+                <div class="pagination">
+
+                </div>
+              </div>
+              <button class="next-page-btn" (click)="nextPage()">
+                <span class="material-symbols-outlined">
+                  chevron_right
+                </span>
+              </button>
+              <button class="last-page-btn">
+                <span class="material-symbols-outlined">
+                  last_page
+                </span>
+              </button>
+            </div>
+
+            <div class="page-number">
+              <p></p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 <app-footer></app-footer>
 <div id="dialog-content">
   <span></span>

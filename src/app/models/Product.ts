@@ -15,5 +15,6 @@ export interface Product {
   createdAt: string;
   colors: Array<string>;
   sizes: Array<string>;
+  rating: number;
 }
 

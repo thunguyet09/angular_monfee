@@ -44,10 +44,108 @@
           </div>
         </div>
         <div class="table-body">
-          hhhhh
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  <button>
+                    <i class="fa-solid fa-arrow-up-a-z"></i>
+                    Product
+                  </button>
+                </th>
+                <th>
+                  <button>
+                    <i class="fa-solid fa-sort-down"></i>
+                    Quantity
+                  </button>
+                </th>
+                <th>
+                  <button>
+                    <i class="fa-solid fa-sort-down"></i>
+                    Price
+                  </button>
+                </th>
+                <th>
+                  <button>
+                    <i class="fa-solid fa-sort-down"></i>
+                    Orders
+                  </button>
+                </th>
+                <th>
+                  <button>
+                    <i class="fa-solid fa-sort-down"></i>
+                    Rating
+                  </button>
+                </th>
+                <th>
+                  <button>
+                    <i class="fa-solid fa-sort-down"></i>
+                    Published
+                  </button>
+                </th>
+                <th>
+                  <button>
+                    <i class="fa-solid fa-sort-down"></i>
+                    Action
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let item of products">
+              <tr>
+                <td>
+                  <input type="checkbox" />
+                  <img class="img" src="./assets/img/{{item.img_url[0]}}" width="60px" />
+                  <div class="product-info">
+                    <h4>{{item.name}}</h4>
+                    <p>Category: {{ getCategoryName(item.cat_id) }}</p>
+                  </div>
+                </td>
+                <td class="quantity">
+                  {{item.quantity}}
+                </td>
+                <td class="price">
+                  {{item.promo_price ? item.promo_price.toLocaleString() : item.price[0].toLocaleString()}}
+                </td>
+                <td class="orders">
+                  {{item.sales}}
+                </td>
+                <td>
+                  {{item.rating ? item.rating : ''}}
+                </td>
+                <td class="published">
+                  {{item.createdAt}}
+                </td>
+                <td>
+                  <div class="actions">
+                    <button class="dropdown-action" (click)="handleAction($event)">
+                      <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                    <div class="dropdown">
+                      <ul>
+                        <li class="view-btn">
+                          <span class="material-symbols-outlined">
+                            visibility
+                          </span>
+                          <p>View</p>
+                        </li>
+                        <li class="edit-btn">
+                          <span class="material-symbols-outlined">
+                            edit
+                          </span>
+                          <p>Edit</p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
+  <app-footer></app-footer>
 </div>
-<app-footer></app-footer>
+
