@@ -16,7 +16,70 @@
   </div>
   <div class="main-content">
     <div class="row">
-      <div class="card"></div>
+      <div class="card">
+        <div class="card-header">
+          <h2>Filters</h2>
+          <button class="clear-all-btn">
+            Clear All
+          </button>
+        </div>
+        <div class="filter-choices">
+          <div class="filter-choices-flex">
+            <div class="filter-choices-item">
+              <h4>500g</h4>
+              <button>
+                <span class="material-symbols-outlined">
+                  close
+                </span>
+              </button>
+            </div>
+            <div class="filter-choices-item">
+              <h4>1000g</h4>
+              <button>
+                <span class="material-symbols-outlined">
+                  close
+                </span>
+              </button>
+            </div>
+            <div class="filter-choices-item">
+              <h4>1500g</h4>
+              <button>
+                <span class="material-symbols-outlined">
+                  close
+                </span>
+              </button>
+            </div>
+            <div class="filter-choices-item">
+              <h4>20% or more</h4>
+              <button>
+                <span class="material-symbols-outlined">
+                  close
+                </span>
+              </button>
+            </div>
+            <div class="filter-choices-item">
+              <h4>4 & Above Star</h4>
+              <button>
+                <span class="material-symbols-outlined">
+                  close
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="categories">
+          <h4>PRODUCTS</h4>
+          <div class="categories-list">
+
+          </div>
+        </div>
+        <div class="price-box">
+          <h4>PRICE</h4>
+          <div class="range-slider">
+            <input type="range" />
+          </div>
+        </div>
+      </div>
       <div class="table-part">
         <div class="table-title">
           <div class="products-function">
@@ -41,6 +104,15 @@
               </li>
               <li>Draft</li>
             </ul>
+            <div class="select-remove">
+              <div>
+                <h3>Select</h3>
+                <button class="number-select"></button>
+              </div>
+              <button class="remove-btn">
+                Remove
+              </button>
+            </div>
           </div>
         </div>
         <div class="table-body">
@@ -94,7 +166,7 @@
             <tbody *ngFor="let item of products">
               <tr>
                 <td>
-                  <input type="checkbox" />
+                  <input type="checkbox" #checkbox (change)="deleteChecked(item.id, checkbox.checked)"/>
                   <img class="img" src="./assets/img/{{item.img_url[0]}}" width="60px" />
                   <div class="product-info">
                     <h4>{{item.name}}</h4>
