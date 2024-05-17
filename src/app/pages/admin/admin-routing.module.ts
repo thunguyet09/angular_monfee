@@ -4,6 +4,7 @@ import { AdminComponent } from './admin.component';
 import { CategoryComponent } from './category/category.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CategoryDetailsComponent } from './category-details/category_details.component';
+import { ProductComponent } from './product/product.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,13 @@ const routes: Routes = [
   {
     path: 'category-details',
     component: CategoryDetailsComponent,
+    children: [
+      { path: '', component: AdminComponent }
+    ]
+  },
+  {
+    path: 'products',
+    component: ProductComponent,
     children: [
       { path: '', component: AdminComponent }
     ]

@@ -26,11 +26,11 @@ export class CategoryComponent implements AfterViewInit {
     private router: Router,
     private CategoryService: CategoryService,
     private ngZone: NgZone
-  ) {}
+  ) { }
   public themes: Theme[] = [];
   public bgColor: string = '';
   public categories: Category[] = [];
-  public data:Category[] = []
+  public data: Category[] = []
   total_pages = 0;
   startIndex = 0;
   endIndex = 0;
@@ -45,91 +45,95 @@ export class CategoryComponent implements AfterViewInit {
       });
     });
 
-    this.api.getAllCategories().subscribe((data:any) => {
+    this.api.getAllCategories().subscribe((data: any) => {
       this.data = data
     })
 
-    this.api.getCategoryPagination('1', '1').subscribe((data: any) => {
-      this.total_pages = data.totalPages
-      this.handlePagination(this.total_pages)
-    });
 
     this.getAPI('1');
   }
 
-  getAPI(page:string) {
+  getAPI(page: string) {
     this.api.getCategoryPagination(page, '1').subscribe((data: any) => {
       this.categories = data.categories;
       this.startIndex = data.startIndex
       this.endIndex = data.endIndex
       this.categoriesLength = data.categoryLength
+      this.total_pages = data.totalPages
+      const pagination = document.querySelector('.pagination') as HTMLElement;
+      const page_number = document.querySelector('.page-number > p') as HTMLElement;
+
+      pagination.innerHTML = '';
+
+      for (let i = 1; i <= this.total_pages; i++) {
+        const button = document.createElement('button');
+
+        button.addEventListener('mouseenter', () => {
+          button.style.backgroundColor = '#1e91cf';
+          button.style.color = 'white';
+        });
+
+        button.addEventListener('mouseleave', () => {
+          button.style.backgroundColor = 'white';
+          button.style.color = '#1e91cf';
+        });
+
+        button.style.backgroundColor = 'white';
+        button.style.color = '#1e91cf';
+        button.style.border = '1px solid rgb(217, 217, 217)';
+        button.style.padding = '0px 15px';
+        button.style.height = '40px';
+        button.style.display = 'flex';
+        button.style.justifyContent = 'center';
+        button.style.alignItems = 'center';
+        button.style.borderRadius = '3px';
+        button.style.cursor = 'pointer';
+        button.textContent = i.toString();
+        pagination.appendChild(button);
+
+        button.addEventListener('click', (event: Event) => {
+          const target = event.target as HTMLElement;
+          const pageNumber = target.textContent;
+          if (pageNumber) {
+            this.getAPI(pageNumber);
+          }
+        });
+      }
+
+      const pagesText =
+        this.total_pages > 1
+          ? `(${this.total_pages} Pages)`
+          : `(1 Page)`;
+
+      page_number.innerHTML = `Showing ${this.startIndex + 1} to ${this.endIndex == 0 ? 1 : this.endIndex} of ${this.categoriesLength} ${pagesText}`;
     });
 
     const prev_page = document.querySelector('.prev-page-btn') as HTMLElement
     const first_page = document.querySelector('.first-page-btn') as HTMLElement
     const next_page = document.querySelector('.next-page-btn') as HTMLElement;
     const last_page = document.querySelector('.last-page-btn') as HTMLElement;
-    if(page == '1'){
+    if (page == '1') {
       prev_page.style.display = 'none'
       first_page.style.display = 'none'
-    }else {
+    } else {
       prev_page.style.display = 'block'
       first_page.style.display = 'block'
     }
 
-    if(page == this.total_pages.toString()){
+    if(Number(page) < Number(this.total_pages)){
+      next_page.style.display = 'block'
+      last_page.style.display = 'block'
+    }
+
+    if (page == this.total_pages.toString()) {
       next_page.style.display = 'none'
       last_page.style.display = 'none'
     }
-  }
 
-  handlePagination(total_pages: number) {
-    const pagination = document.querySelector('.pagination') as HTMLElement;
-    const page_number = document.querySelector('.page-number > p') as HTMLElement;
-
-    pagination.innerHTML = '';
-
-    for (let i = 1; i <= total_pages; i++) {
-      const button = document.createElement('button');
-
-      button.addEventListener('mouseenter', () => {
-        button.style.backgroundColor = '#1e91cf';
-        button.style.color = 'white';
-      });
-
-      button.addEventListener('mouseleave', () => {
-        button.style.backgroundColor = 'white';
-        button.style.color = '#1e91cf';
-      });
-
-      button.style.backgroundColor = 'white';
-      button.style.color = '#1e91cf';
-      button.style.border = '1px solid rgb(217, 217, 217)';
-      button.style.padding = '0px 15px';
-      button.style.height = '40px';
-      button.style.display = 'flex';
-      button.style.justifyContent = 'center';
-      button.style.alignItems = 'center';
-      button.style.borderRadius = '3px';
-      button.style.cursor = 'pointer';
-      button.textContent = i.toString();
-      pagination.appendChild(button);
-
-      button.addEventListener('click', (event: Event) => {
-        const target = event.target as HTMLElement;
-        const pageNumber = target.textContent;
-        if (pageNumber) {
-          this.getAPI(pageNumber);
-        }
-      });
-    }
-
-    const pagesText =
-      total_pages > 1
-        ? `(${total_pages} Pages)`
-        : `(1 Page)`;
-
-    page_number.innerHTML = `Showing ${this.startIndex + 1} to ${this.endIndex} of ${this.categoriesLength} ${pagesText}`;
+    last_page.addEventListener('click', () => {
+      page = this.total_pages.toString()
+      this.getAPI(this.total_pages.toString())
+    })
   }
   hoverAddBtn(event: Event) {
     const target = event.target as HTMLElement;
@@ -245,7 +249,7 @@ export class CategoryComponent implements AfterViewInit {
   }
 
   public removeItems: number[] = [];
-  deleteAll() {}
+  deleteAll() { }
 
   checkedDelete(id: number, checked: boolean) {
     if (checked) {
@@ -317,7 +321,7 @@ export class CategoryComponent implements AfterViewInit {
           );
           filteredCategories.push(...filteredData);
         }
-        if(typeof attributeValue == 'number') {
+        if (typeof attributeValue == 'number') {
           const filteredData = this.categories.filter(
             (item: any) => item[key] == attributeValue
           );
@@ -333,10 +337,10 @@ export class CategoryComponent implements AfterViewInit {
     }
   }
 
-  handleSearchItem(event: Event){
+  handleSearchItem(event: Event) {
     const target = event.target as HTMLElement
     const item_name = target.textContent
-    if(item_name !== null){
+    if (item_name !== null) {
       const filteredData = this.data.filter((item) =>
         item.name.toLowerCase().includes(item_name.toLowerCase())
       );
@@ -344,13 +348,38 @@ export class CategoryComponent implements AfterViewInit {
     }
   }
 
-  nextPage(){
+  slideIndex = 0;
+  nextPage() {
     const pagination = document.querySelector('.pagination') as HTMLElement
-    pagination.style.transform = 'translateX(-88px)'
+    this.slideIndex = (this.slideIndex + 1) % pagination.children.length;
+
+    if(this.slideIndex > 2){
+      this.slideIndex = 0;
+      pagination.style.transform = `translateX(0px)`
+    }else{
+      this.updateSliderPosition();
+    }
   }
 
-  prevPage(){
+  prevPage() {
     const pagination = document.querySelector('.pagination') as HTMLElement
-    pagination.style.transform = 'translateX(0)'
+    if(this.slideIndex == 0){
+      this.slideIndex = 2;
+      const slideWidth = pagination.clientWidth - 5;
+      pagination.style.transform = `translateX(-${this.slideIndex * slideWidth}px)`;
+    }else{
+      this.slideIndex = (this.slideIndex - 1 + pagination.children.length) % pagination.children.length;
+      this.updateSliderPosition();
+    }
+  }
+
+  updateSliderPosition() {
+    const pagination = document.querySelector('.pagination') as HTMLElement
+    const slideWidth = pagination.clientWidth - 5;
+    pagination.style.transform = `translateX(-${this.slideIndex * slideWidth}px)`;
+  }
+
+  firstPage(){
+    this.getAPI('1');
   }
 }

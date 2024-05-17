@@ -1,0 +1,53 @@
+<router-outlet></router-outlet>
+<div id="products">
+  <div class="products-heading">
+    <h2>PRODUCTS</h2>
+    <div class="bread-crumb">
+      <a routerLink="home">
+        <span class="material-symbols-outlined">
+          home
+        </span>
+      </a>
+      <span>/</span>
+      <a routerLink="/admin/products">
+        Products
+      </a>
+    </div>
+  </div>
+  <div class="main-content">
+    <div class="row">
+      <div class="card"></div>
+      <div class="table-part">
+        <div class="table-title">
+          <div class="products-function">
+            <button class="add-btn">
+              <span class="material-symbols-outlined">add</span>
+              <h4>Add Product</h4>
+            </button>
+            <div class="search-box">
+                <input type="text" placeholder="Search Products..."/>
+                <span class="material-symbols-outlined">
+                  search
+                </span>
+            </div>
+          </div>
+          <div class="nav-tabs">
+            <ul>
+              <li class="nav-tab-active">All
+                <span>17</span>
+              </li>
+              <li>Scheduled
+                <span>5</span>
+              </li>
+              <li>Draft</li>
+            </ul>
+          </div>
+        </div>
+        <div class="table-body">
+          hhhhh
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

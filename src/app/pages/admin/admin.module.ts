@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoryDetailsComponent } from './category-details/category_details.component';
 import { AddComponent } from './category/add/add.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ProductComponent } from './product/product.component';
 @NgModule({
   declarations: [
    AdminComponent,
@@ -18,7 +19,8 @@ import { MatDialogModule } from '@angular/material/dialog';
    CategoryComponent,
    DashboardComponent,
    CategoryDetailsComponent,
-   AddComponent
+   AddComponent,
+   ProductComponent
   ],
   imports: [
     AdminRoutingModule,

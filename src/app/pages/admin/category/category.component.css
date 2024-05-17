@@ -1,5 +1,7 @@
 #category {
-  padding: 20px 20px 20px 90px;
+  padding: 0px 0px 20px 70px;
+  height: 100%;
+  background-color: #f3f6f9;
 }
 
 .container-fluid-col1 {
@@ -14,7 +16,9 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  background-color: white;
+  padding: 15px 20px;
 }
 
 .bread-crumb {
@@ -30,6 +34,7 @@
   margin: 0;
   font-family: "Nunito", sans-serif;
   font-weight: 700;
+  font-size: 22px;
 }
 
 
@@ -152,6 +157,7 @@
 
 .panel-body {
   padding: 20px;
+  background-color: white;
 }
 
 .filterBtn:hover {
@@ -706,6 +712,6 @@ input[type="checkbox"] {
 }
 
 .main-pagination {
-  width: 85px;
+  width: 90px;
   overflow-x: hidden;
 }
