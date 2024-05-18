@@ -1,5 +1,4 @@
 #product-details {
-  height: 100%;
   background-color: #f3f6f9;
 }
 
@@ -52,7 +51,7 @@
 .details-body {
   background-color: white;
   box-shadow: 0 1px 2px rgba(56, 65, 74, .15);
-  margin: 20px;
+  margin: 20px 20px 50px 20px;
   border-radius: 5px;
   padding: 20px;
 }
@@ -199,3 +198,387 @@
 .prod-name > .published > b {
   color: black;
 }
+
+.star-icon {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.star-icon > i {
+  color: rgb(232, 188, 82);
+}
+
+.stars {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.stars > h4 {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #878a99;
+}
+
+.sub-info {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin-top: 30px;
+}
+.sub-info-col {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  border: 1px dashed #e9ebec;
+  padding: 7px 30px;
+}
+
+.sub-info-col > button {
+  border: none;
+  outline: none;
+  width: 30px;
+  height: 30px;
+  background-color: rgb(19,197,107,1);
+  border-radius: 50%;
+}
+
+.sub-info-col > button > i {
+  color: white;
+}
+
+.sub-info-col > div > h4 {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  color: #878a99;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.sub-info-col> div > h2 {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  color: #495057;
+  font-weight: 700;
+}
+
+.sub-info-1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.sizes> h4, .colors > h4, .ratings > h4, .reviews > h4 {
+  color: #495057;
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.size-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.size-container > button {
+  background-color: #e8effb;
+  color: #6691e7;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 7px 15px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.color-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.color-container > div > button {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+
+.color-container > div {
+  border: 1px solid rgb(218, 218, 218);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.description {
+  margin-top: 30px;
+}
+
+.description > h4 {
+  color: #495057;
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.description > span {
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  color: rgb(142, 142, 142);
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.feedbacks {
+  margin-top: 30px;
+}
+
+.ratings {
+  width: 35%;
+}
+
+.reviews {
+  width: 65%;
+}
+
+.average-stars {
+  background-color: rgb(243, 246, 249);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.point > h4 {
+  margin: 0;
+  color: #495057;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+}
+
+.reviews-total {
+  font-family: "Nunito", sans-serif;
+  text-align: center;
+  margin-top: 10px;
+  color: #878a99;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.separate-ratings {
+  margin-top: 35px;
+}
+
+.separate-ratings > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 15px 0px;
+}
+
+.progress {
+  background-color: #eff2f7;
+  height: 7px;
+  border-radius: 10px;
+  position: relative;
+  width: 60%;
+}
+
+.separate-ratings > div > p, .separate-ratings > div > h4 {
+  margin: 0;
+}
+
+.progress-bar-5 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90px;
+  background-color: rgb(19, 197, 107);
+  height: 7px;
+  border-radius: 10px;
+}
+
+.progress-bar-4 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  background-color: rgb(19, 197, 107);
+  height: 7px;
+  border-radius: 10px;
+}
+
+.progress-bar-3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  background-color: rgb(19, 197, 107);
+  height: 7px;
+  border-radius: 10px;
+}
+
+.separate-ratings > div > p {
+  font-weight: 650;
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  color: #495057;
+  width: 20%;
+}
+
+.separate-ratings > div > h4 {
+  font-weight: 650;
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  color: #878a99;
+  width: 20%;
+  text-align: right;
+}
+
+.progress-bar-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15px;
+  background-color: rgb(232, 188, 82);
+  height: 7px;
+  border-radius: 10px;
+}
+
+.progress-bar-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 7px;
+  background-color: #ed5e5e;
+  height: 7px;
+  border-radius: 10px;
+}
+
+.feedbacks {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.review-item {
+  border: 1px dashed #e9ebec;
+  padding: 10px 20px;
+}
+
+.review-content {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.main-review {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.review-content > button {
+  background-color: rgb(19, 197, 107);
+  color: white;
+  height: 22px;
+  width: 65px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+
+.review-content > button > i {
+  font-size: 9px;
+}
+
+.review-content > button > span {
+  font-weight: 650;
+  font-family: "Nunito", sans-serif;
+  font-size: 11px;
+}
+
+.main-review > span {
+  font-family: "Nunito", sans-serif;
+  color: #878a99;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.review-img {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.review-img > img {
+  border-radius: 5px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.user-info > h4 {
+  margin: 0;
+  color:#495057;
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.user-info > p {
+  margin: 0;
+  color:#878a99;
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+}
+
+.review-item {
+  margin-bottom: 20px;
+}
+
+.simplebar {
+  height: 400px;
+  overflow-y: auto;
+}
+
+.simplebar-wrapper,
+.simplebar-height,
+.simplebar-mask,
+.simplebar-offset,
+.simplebar-content-wrapper {
+  height: 100%;
+}
+

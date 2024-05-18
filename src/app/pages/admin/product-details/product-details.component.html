@@ -43,7 +43,224 @@
               </div>
             </div>
             <div class="stars">
+              <div class="star-icon">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <h4>(5.5k Customer Review)</h4>
+            </div>
+            <div class="sub-info">
+              <div class="sub-info-col">
+                <button>
+                  <i class="fa-solid fa-dollar-sign"></i>
+                </button>
+                <div>
+                  <h4>Price:</h4>
+                  <h2>{{item.price[0].toLocaleString()}}</h2>
+                </div>
+              </div>
+              <div class="sub-info-col">
+                <button>
+                  <i class="fa-solid fa-copy"></i>
+                </button>
+                <div>
+                  <h4>No. of Orders:</h4>
+                  <h2>2,234</h2>
+                </div>
+              </div>
+              <div class="sub-info-col">
+                <button>
+                  <i class="fa-solid fa-layer-group"></i>
+                </button>
+                <div>
+                  <h4>Available Stocks:</h4>
+                  <h2>50</h2>
+                </div>
+              </div>
+              <div class="sub-info-col">
+                <button>
+                  <i class="fa-solid fa-box"></i>
+                </button>
+                <div>
+                  <h4>Total Revenue:</h4>
+                  <h2>60,690,000</h2>
+                </div>
+              </div>
+            </div>
+            <div class="sub-info-1">
+              <div class="sizes">
+                <h4>Sizes</h4>
+                <div class="size-container">
+                  <ng-container *ngFor="let size of item.sizes">
+                    <button>{{size}}</button>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="colors" *ngIf="item.colors.length > 0">
+                <h4>Colors</h4>
+               <div class="color-container">
+                <ng-container *ngFor="let color of item.colors">
+                  <div>
+                    <button [style.background-color]="color"></button>
+                  </div>
+                </ng-container>
+               </div>
+              </div>
+            </div>
 
+            <div class="description">
+              <h4>Description :</h4>
+              <span>{{item.mo_ta}}</span>
+            </div>
+
+            <div class="feedbacks">
+              <div class="ratings">
+                <h4>Ratings & Reviews</h4>
+                <div class="average-stars">
+                  <div class="star-icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                  <div class="point">
+                    <h4>4.5 out of 5</h4>
+                  </div>
+                </div>
+                <div class="reviews-total">Total 5.5k reviews</div>
+                <div class="separate-ratings">
+                  <div class="5-star">
+                    <p>5 star</p>
+                    <div class="progress">
+                      <div class="progress-bar-5"></div>
+                    </div>
+                    <h4>2758</h4>
+                  </div>
+                  <div class="4-star">
+                    <p>4 star</p>
+                    <div class="progress">
+                      <div class="progress-bar-4"></div>
+                    </div>
+                    <h4>1063</h4>
+                  </div>
+                  <div class="3-star">
+                    <p>3 star</p>
+                    <div class="progress">
+                      <div class="progress-bar-3"></div>
+                    </div>
+                    <h4>997</h4>
+                  </div>
+                  <div class="2-star">
+                    <p>2 star</p>
+                    <div class="progress">
+                      <div class="progress-bar-2"></div>
+                    </div>
+                    <h4>408</h4>
+                  </div>
+                  <div class="1-star">
+                    <p>1 star</p>
+                    <div class="progress">
+                      <div class="progress-bar-1"></div>
+                    </div>
+                    <h4>274</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="reviews">
+                <h4>Reviews</h4>
+                <div class="simplebar">
+                  <div class="simplebar-wrapper">
+                    <div class="simplebar-height">
+                      <div class="simplebar-mask">
+                        <div class="simplebar-offset">
+                          <div class="simplebar-content-wrapper">
+                            <div class="review-item">
+                              <div class="review-content">
+                                <button>
+                                  <i class="fa-solid fa-star"></i>
+                                  <span>4.2</span>
+                                </button>
+                                <div class="main-review">
+                                  <span>
+                                    I'm usually picky about my coffee, but this brand has exceeded all my expectations. The aroma is so fragrant, and the taste is perfectly balanced between smooth and bold. Highly recommend!
+                                  </span>
+                                  <div class="review-img">
+                                    <img src="./assets/img/feedback1.jpg" width="60px" height="60px" />
+                                    <img src="./assets/img/feedback2.jpg" width="60px" height="60px" />
+                                    <img src="./assets/img/feedback3.jpg" width="60px" height="60px" />
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="user-info">
+                                <h4>Jane</h4>
+                                <p>2024-05-13</p>
+                              </div>
+                            </div>
+
+                            <div class="review-item">
+                              <div class="review-content">
+                                <button>
+                                  <i class="fa-solid fa-star"></i>
+                                  <span>4.1</span>
+                                </button>
+                                <div class="main-review">
+                                  <span>
+                                    This coffee is absolutely divine! The rich, bold flavor is the perfect way to start my day. It has become my new go-to brew.
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="user-info">
+                                <h4>Jimmy</h4>
+                                <p>2024-05-08</p>
+                              </div>
+                            </div>
+
+                            <div class="review-item">
+                              <div class="review-content">
+                                <button>
+                                  <i class="fa-solid fa-star"></i>
+                                  <span>4.5</span>
+                                </button>
+                                <div class="main-review">
+                                  <span>
+                                    I was a bit hesitant to try this coffee, but I'm so glad I did. It's quickly become my new favorite. The subtle notes of caramel and chocolate make it absolutely heavenly. I'll be ordering this again and again.
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="user-info">
+                                <h4>Nancy</h4>
+                                <p>2024-04-26</p>
+                              </div>
+                            </div>
+
+                            <div class="review-item">
+                              <div class="review-content">
+                                <button>
+                                  <i class="fa-solid fa-star"></i>
+                                  <span>5.0</span>
+                                </button>
+                                <div class="main-review">
+                                  <span>
+                                    As someone who loves to experiment with different coffee blends, this one has quickly become a new favorite. The unique flavor profile is simply unforgettable. I can't get enough of it!
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="user-info">
+                                <h4>Emma</h4>
+                                <p>2024-04-21</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </ng-container>
         </div>

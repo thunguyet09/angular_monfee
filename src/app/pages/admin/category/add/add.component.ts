@@ -116,5 +116,7 @@ export class AddComponent {
 
   closeModal(){
     this.dialogRef.close(null);
+    const dialog_content = document.querySelector('#dialog-content') as HTMLElement
+    dialog_content.style.display = 'none'
   }
 }

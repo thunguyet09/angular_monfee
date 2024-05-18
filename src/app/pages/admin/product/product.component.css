@@ -1,11 +1,11 @@
 #products {
-  padding: 0px 0px 20px 70px;
-  height: 100%;
+  padding: 0px 0px 0px 70px;
   background-color: #f3f6f9;
 }
 
 .main-content {
   background-color: #f3f6f9;
+  margin-bottom: 50px;
 }
 
 .products-heading {
