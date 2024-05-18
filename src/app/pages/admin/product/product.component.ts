@@ -15,7 +15,10 @@ export class ProductComponent implements AfterViewInit{
   public themes: Theme[] = [];
   public products: Product[] = []
   public categories: Category[] = []
+  public max_price = 0;
   ngOnInit(){
+    const range = document.querySelector('.range-slider > input') as HTMLInputElement
+    range.max = '200000';
     this.themeService.getTheme().subscribe((data: any) => {
       this.themes = data;
       this.themes.forEach((item) => {
@@ -24,16 +27,27 @@ export class ProductComponent implements AfterViewInit{
       });
     });
 
+
+    this.getApiProducts()
+    this.getApiCategories()
+  }
+
+  getApiProducts(){
     this.api.getAllProducts().subscribe((data: any) => {
       this.products = data
+      data.forEach((item:any) => {
+        this.max_price = Math.max(...item.price)
+      })
+      this.maxRange(this.max_price)
     })
+  }
 
+  getApiCategories(){
     this.api.getAllCategories().subscribe((data: any) => {
       this.categories = data
       this.calculateProductCounts()
     })
   }
-
   calculateProductCounts(): void {
     const elementCounts: Record<number, number> = {};
 
@@ -55,7 +69,6 @@ export class ProductComponent implements AfterViewInit{
       }
     });
 
-    console.log(categoryLength)
     const categories_list = document.querySelector('.categories-list') as HTMLElement
     categoryLength.forEach((item) => {
       const categories_item = document.createElement('div') as HTMLElement
@@ -106,9 +119,14 @@ export class ProductComponent implements AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-
   }
 
+  maxRange(max_price: number){
+    const max_range = document.querySelector('.range-slider > input') as HTMLInputElement
+    max_range.max = max_price.toString()
+    const max = document.querySelector('.max_cost') as HTMLInputElement
+    max.value = max_price.toString()
+  }
   public removeArr:number[] = []
   deleteChecked(id: number, checked: boolean){
     const number_select = document.querySelector('.number-select') as HTMLElement
@@ -127,5 +145,40 @@ export class ProductComponent implements AfterViewInit{
     }else{
       removeItem.style.display = 'none'
     }
+  }
+
+  handleFilterPrice(event: Event){
+    const target = event.target as HTMLInputElement
+    const max_cost = document.querySelector('.max_cost') as HTMLInputElement
+    max_cost.value = target.value
+    this.api.getAllProducts().subscribe((data: any) => {
+      this.products = data.filter((item:any) => {
+        return item.price[0] > 0 && item.price[0] <= target.value
+      })
+    })
+  }
+
+  minCost(event: Event){
+    const target = event.target as HTMLInputElement
+    const max = document.querySelector('.max_cost') as HTMLInputElement
+    this.api.getAllProducts().subscribe((data: any) => {
+      this.products = data.filter((item:any) => {
+        return item.price[0] > Number(target.value) && item.price[0] <= Number(max.value)
+      })
+    })
+  }
+
+  maxCost(event: Event){
+    const target = event.target as HTMLInputElement
+    const min = document.querySelector('.min_cost') as HTMLInputElement
+    this.api.getAllProducts().subscribe((data: any) => {
+      this.products = data.filter((item:any) => {
+        return item.price[0] > Number(min.value) && item.price[0] <= Number(target.value)
+      })
+    })
+  }
+
+  handleView(id: number){
+    localStorage.setItem('productId', id.toString())
   }
 }

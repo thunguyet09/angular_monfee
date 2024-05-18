@@ -11,6 +11,7 @@ import { CategoryDetailsComponent } from './category-details/category_details.co
 import { AddComponent } from './category/add/add.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ProductComponent } from './product/product.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 @NgModule({
   declarations: [
    AdminComponent,
@@ -20,7 +21,8 @@ import { ProductComponent } from './product/product.component';
    DashboardComponent,
    CategoryDetailsComponent,
    AddComponent,
-   ProductComponent
+   ProductComponent,
+   ProductDetailsComponent
   ],
   imports: [
     AdminRoutingModule,

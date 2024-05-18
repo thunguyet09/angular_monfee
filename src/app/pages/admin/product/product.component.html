@@ -76,7 +76,22 @@
         <div class="price-box">
           <h4>PRICE</h4>
           <div class="range-slider">
-            <input type="range" />
+            <input type="range" min="0" (change)="handleFilterPrice($event)"/>
+          </div>
+          <div class="cost">
+            <div class="min">
+              <input class="min_cost" value="0" (change)="minCost($event)"/>
+              <span class="material-symbols-outlined">
+                attach_money
+              </span>
+            </div>
+            <h3>to</h3>
+            <div class="max">
+              <input class="max_cost" (change)="maxCost($event)"/>
+              <span class="material-symbols-outlined">
+                attach_money
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -195,7 +210,7 @@
                     </button>
                     <div class="dropdown">
                       <ul>
-                        <li class="view-btn">
+                        <li class="view-btn" routerLink="/admin/product-details" (click)="handleView(item.id)">
                           <span class="material-symbols-outlined">
                             visibility
                           </span>

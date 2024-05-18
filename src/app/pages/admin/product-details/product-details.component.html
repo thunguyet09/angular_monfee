@@ -1,0 +1,54 @@
+<router-outlet></router-outlet>
+<div id="product-details">
+  <div class="product-details">
+    <div class="details-heading">
+      <h2>PRODUCT DETAILS</h2>
+      <div class="bread-crumb">
+        <a routerLink="/admin/products">Products</a>
+        <i class="fa-solid fa-angle-right"></i>
+        <a>Product Details</a>
+      </div>
+    </div>
+    <div class="details-body">
+      <div class="details-body-row">
+        <div class="product-img-slider">
+          <div class="swiper">
+            <div class="swiper-wrapper" *ngFor="let item of product">
+              <div class="swiper-slider" *ngFor="let img of item.img_url">
+                <img src="./assets/img/{{img}}" />
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-next" (click)="handleNextSlide()">
+            <i class="fa-solid fa-chevron-right"></i>
+          </div>
+          <div class="swiper-button-prev" (click)="handlePrevSlide()">
+            <i class="fa-solid fa-chevron-left"></i>
+          </div>
+          <div class="product-nav-slider" *ngFor="let item of product">
+            <img src="./assets/img/{{img}}" width="65px"  *ngFor="let img of item.img_url" />
+          </div>
+        </div>
+        <div class="details-content">
+          <ng-container *ngFor="let item of product">
+            <div class="details-content-col1">
+              <div class="prod-name">
+                <h1>{{item.name}}</h1>
+                <p class="published">Published: <b>{{item.createdAt}}</b></p>
+              </div>
+              <div class="edit">
+                <button class="edit-btn">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+              </div>
+            </div>
+            <div class="stars">
+
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>
