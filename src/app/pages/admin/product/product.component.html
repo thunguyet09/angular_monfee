@@ -98,7 +98,7 @@
       <div class="table-part">
         <div class="table-title">
           <div class="products-function">
-            <button class="add-btn">
+            <button class="add-btn" routerLink="/admin/add-product">
               <span class="material-symbols-outlined">add</span>
               <h4>Add Product</h4>
             </button>
@@ -189,7 +189,9 @@
                   </div>
                 </td>
                 <td class="quantity">
-                  {{item.quantity}}
+                  <ng-container *ngFor="let quantity of item.quantity">
+                    <h4>{{quantity}}</h4>
+                  </ng-container>
                 </td>
                 <td class="price">
                   {{item.promo_price ? item.promo_price.toLocaleString() : item.price[0].toLocaleString()}}

@@ -27,6 +27,11 @@
   font-size: 17px;
 }
 
+.imgBox > img {
+  border: 1px solid rgb(223, 223, 223);
+  border-radius: 3px;
+}
+
 .change-img > input[type="file"] {
   color: transparent;
   font-size: 0;
@@ -122,11 +127,6 @@
 
 .form-group > label > b {
   color: red;
-}
-
-.imgBox > img {
-  border: 1px solid rgb(223, 223, 223);
-  border-radius: 3px;
 }
 
 .form-group > input {

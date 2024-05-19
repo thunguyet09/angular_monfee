@@ -58,4 +58,11 @@ export class ProductDetailsComponent implements AfterViewInit{
     const slideWidth = swiper_wrapper.clientWidth;
     swiper_wrapper.style.transform = `translateX(-${this.slideIndex * slideWidth}px)`;
   }
+
+  sizeIndex = 0
+  handleSize(size:string){
+    this.product.forEach((item) => {
+      this.sizeIndex = item.sizes.indexOf(size)
+    })
+  }
 }

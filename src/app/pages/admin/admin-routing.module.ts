@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CategoryDetailsComponent } from './category-details/category_details.component';
 import { ProductComponent } from './product/product.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { AddProductComponent } from './add-product/add-product.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,13 @@ const routes: Routes = [
   {
     path: 'products',
     component: ProductComponent,
+    children: [
+      { path: '', component: AdminComponent }
+    ]
+  },
+  {
+    path: 'add-product',
+    component: AddProductComponent,
     children: [
       { path: '', component: AdminComponent }
     ]

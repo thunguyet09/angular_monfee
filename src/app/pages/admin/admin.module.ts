@@ -12,6 +12,7 @@ import { AddComponent } from './category/add/add.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ProductComponent } from './product/product.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { AddProductComponent } from './add-product/add-product.component';
 @NgModule({
   declarations: [
    AdminComponent,
@@ -22,7 +23,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
    CategoryDetailsComponent,
    AddComponent,
    ProductComponent,
-   ProductDetailsComponent
+   ProductDetailsComponent,
+   AddProductComponent
   ],
   imports: [
     AdminRoutingModule,

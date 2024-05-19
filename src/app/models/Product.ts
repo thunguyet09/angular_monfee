@@ -5,7 +5,7 @@ export interface Product {
   price: Array<number>;
   gia_nhap: number;
   promo_price: number;
-  quantity: number;
+  quantity: Array<number>;
   stock: string;
   mo_ta: string;
   img_url: Array<string>;
@@ -16,5 +16,7 @@ export interface Product {
   colors: Array<string>;
   sizes: Array<string>;
   rating: number;
+  publish_schedule: string;
+  status: string;
 }
 

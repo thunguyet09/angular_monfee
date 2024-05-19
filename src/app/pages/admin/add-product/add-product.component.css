@@ -1,0 +1,608 @@
+#add-product{
+  background-color: #f3f6f9;
+}
+
+.add-product {
+  padding: 0px 0px 20px 70px;
+  height: 100%;
+}
+
+.add-product-heading {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  margin-bottom: 30px;
+}
+
+.add-product-heading>h2 {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-weight: 800;
+  color: #495057;
+  font-size: 18px;
+}
+
+.bread-crumb {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.bread-crumb>a:first-child  {
+  font-size: 15px;
+  color: #495057;
+  text-decoration: none;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+}
+
+.bread-crumb>a:last-child {
+  font-family: "Nunito", sans-serif;
+  font-size: 15px;
+  color: rgb(0, 149, 255);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.bread-crumb > span {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgb(163, 163, 163);
+}
+
+.main-content {
+  margin: 20px 20px 50px 20px;
+}
+
+.content-row {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.card-1-row {
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px 30px 20px 20px;
+}
+
+.card-1 {
+  width: 70%;
+}
+
+.card-2 {
+  width: 30%;
+}
+
+.product-title > h4, .product-description > h4 {
+  font-family: "Nunito", sans-serif;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.product-title > input {
+  width: 100%;
+  padding: 10px 0px 10px 10px;
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid rgb(189, 189, 189);
+}
+
+.product-title > input:focus {
+  border: 1px solid #6691e7;
+}
+
+.product-title {
+  margin-bottom: 20px;
+}
+
+
+.product-description > textarea {
+  width: 100%;
+  padding: 10px 0px 10px 10px;
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid rgb(189, 189, 189);
+}
+
+.gallery {
+  background-color: white;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.gallery > h2 {
+  font-family: "Nunito", sans-serif;
+  padding: 20px;
+  border-bottom: 1px solid rgb(217, 217, 217);
+  color:#495057;
+  font-weight: 700;
+  margin: 0;
+}
+
+.gallery-box {
+  padding: 20px;
+}
+.main-img-title > h3, .gallery-title > h3 {
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color:#495057;
+  margin: 0;
+}
+
+.main-img-title > h4, .gallery-title > h4 {
+  color: rgb(144, 144, 144);
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+}
+
+.imgBox > img {
+  border: 1px solid rgb(223, 223, 223);
+  border-radius: 3px;
+}
+
+.change-img > input[type="file"] {
+  color: transparent;
+  font-size: 0;
+}
+
+.change-img {
+  position: relative;
+}
+
+.dropzone {
+  border: 2px dashed #ccc;
+  background-color: #f9f9f9;
+  transition: .3s ease;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.change-img > i {
+  position: absolute;
+  top: 16px;
+  left: 15px;
+  z-index: 1;
+  color: grey;
+  font-size: 14px;
+  transition: .3s ease;
+}
+
+.imgBox {
+  position: relative;
+  width: 100%;
+}
+
+.center {
+  margin: 30px 0px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.gallery-center {
+  margin: 30px 0px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border: 2px dashed rgb(213, 213, 213);
+  padding: 50px;
+}
+.change-img-box {
+  position: absolute;
+  bottom: -5px;
+  right: 41%;
+}
+
+.change-img-box {
+  cursor: pointer;
+}
+
+.change-img-box:hover > .change-img > .dropzone {
+  border: 2px dashed black;
+}
+
+.change-img-box:hover > .change-img > i {
+  color: black;
+}
+
+.change-gallery-box {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 900px;
+  z-index: 2;
+}
+
+#fileMainImg {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+  color: transparent;
+  text-indent: -9999px;
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+}
+#fileMainImg::before {
+  content: "       ";
+  display: inline-block;
+  padding: 10px 12px;
+  background-color: rgba(0, 0, 0, 0.91);
+  color: #fff;
+  cursor: pointer;
+}
+
+#fileMainImg::-webkit-file-upload-button {
+  display: none;
+}
+
+#fileInput {
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  z-index: 2;
+  color: transparent;
+  text-indent: -9999px;
+  cursor: pointer;
+  width: 1000px;
+  height: 550%;
+}
+#fileInput::before {
+  content: "       ";
+  display: inline-block;
+  padding: 10px 12px;
+  background-color: rgba(0, 0, 0, 0.91);
+  color: #fff;
+  cursor: pointer;
+}
+
+#fileInput::-webkit-file-upload-button {
+  display: none;
+}
+
+.imgBox > span {
+  font-size: 100px;
+  color:#7f8385;
+}
+
+.change-gallery-box > h2 {
+  color: transparent;
+}
+
+.imgBox > h1 {
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  color:#495057;
+  font-size: 23px;
+  margin-top: 10px;
+}
+
+.general {
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.general-heading > h4 {
+  color: #6691e7;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  padding: 20px;
+  border-bottom: 1px solid rgb(206, 206, 206);
+}
+
+.general-info {
+  padding: 10px 20px 20px 20px;
+}
+.sizes {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sizes > label {
+  width: 7%;
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  color:#495057;
+  font-weight: 600;
+}
+
+.sizes > label > b {
+  color: red;
+}
+
+.size-box {
+  width: 93%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.sizes-input > input, .colors-input > input {
+  width: 100px;
+  padding: 8px 5px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  border: 1px solid rgb(197, 197, 197);
+}
+
+.sizes-input > input:focus, .colors-input > input:focus {
+  border: 1px solid #6691e7;
+}
+
+.add-size {
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  background-color: #729bec;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #4382ff;
+  transition: .2s ease;
+}
+
+.add-size > span {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.add-size:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+}
+
+th {
+  padding: 8px 0px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-family: "Nunito", sans-serif;
+  font-size: 15px;
+  color:#495057;
+}
+
+th > b {
+  color: red;
+}
+
+td {
+  padding: 10px 0px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+}
+
+td > input {
+  outline: none;
+  border: 1px solid rgb(201, 201, 201);
+  border-radius: 5px;
+  padding: 8px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+}
+
+.submit-btn {
+  background-color: #db9465;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 9px 25px;
+  font-family: "Nunito", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.submit-box {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.submit-btn:hover {
+  color: black;
+}
+
+.publish {
+  background-color: white;
+  border-radius: 5px;
+}
+
+.publish-heading > h2 {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  color:#495057;
+  font-weight: 700;
+}
+
+.publish-heading {
+  padding: 20px;
+  border-bottom: 1px solid rgb(212, 212, 212);
+}
+
+.status {
+  padding: 20px;
+}
+
+.status > h4, .schedule-status > h4 {
+  color:#495057;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.status > select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  border:1px solid rgb(205, 205, 205);
+  cursor: pointer;
+  font-family: "Nunito", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.status > select:focus {
+  border: 1px solid #8db3ff;
+}
+
+.schedule-status > input {
+  width: 95%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  border:1px solid rgb(205, 205, 205);
+  cursor: pointer;
+  font-size: 15px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+}
+
+.scheduled {
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.schedule-status {
+  padding: 20px;
+}
+
+.schedule-status > input:focus {
+  border: 1px solid #aac7ff;
+}
+
+.categories {
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.categories-heading > h2 {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  color:#495057;
+  font-weight: 700;
+}
+
+.categories-heading {
+  padding: 20px;
+  border-bottom: 1px solid rgb(212, 212, 212);
+}
+
+
+.categories-content > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.categories-content {
+  padding: 20px;
+}
+
+.categories-content > div > p {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  color:#495057;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.categories-content > div > button {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #4382ff;
+  background-color: white;
+  padding: 3px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  color:#4382ff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.categories-content > select {
+  border: none;
+  outline: none;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.categories-content > select:focus {
+  border: 1px solid #729bec;
+}
+
+.err-msg {
+  font-family: "Nunito", sans-serif;
+  color: red;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+.gia_von {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.gia_von > label {
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color:#495057;
+}
+
+.gia_von > div > input {
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  border: 1px solid rgb(206, 206, 206);
+  padding: 6px 5px;
+  width: 300px;
+  font-size: 15px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+}

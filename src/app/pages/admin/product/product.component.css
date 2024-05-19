@@ -175,20 +175,17 @@
   border-bottom: 1px solid #6691e7;
 }
 
-/* Table styles */
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-/* Table header styles */
 thead th {
   background-color: transparent;
   padding: 12px 8px;
   text-align: left;
 }
 
-/* Table body styles */
 tbody td {
   padding: 15px 10px;
   border-bottom: 1px solid #ddd;
@@ -209,12 +206,6 @@ tbody {
 }
 
 /* Sort icon styles */
-th div {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 4px;
-}
 
 .fa-sort-up,
 .fa-sort-down {
@@ -463,8 +454,6 @@ input[type="checkbox"] {
   padding: 20px;
 }
 
-
-
 .card-header>h2 {
   color: #495057;
   font-family: "Nunito", sans-serif;
@@ -560,7 +549,7 @@ input[type="checkbox"] {
 /* Container styles */
 .range-slider {
   width: 100%;
-  height: 10px;
+  height: 5px;
   background-color: #e29ae9;
   border-radius: 10px;
 }
@@ -569,7 +558,7 @@ input[type="checkbox"] {
 .range-slider input[type=range] {
   appearance: none;
   width: 100%;
-  height: 10px;
+  height: 5px;
   background-color: transparent;
   outline: none;
 }
@@ -577,11 +566,11 @@ input[type="checkbox"] {
 .range-slider input[type=range]::-webkit-slider-thumb {
   appearance: none;
   cursor: pointer;
-  height: 17px;
-  width: 17px;
+  height: 15px;
+  width: 15px;
   border-radius: 50%;
   background: #ed5e5e;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   box-shadow: rgb(218, 218, 218) 0px 8px 24px;
 }
 
@@ -620,4 +609,10 @@ input[type="checkbox"] {
 
 .min, .max {
   position: relative;
+}
+
+.quantity > h4 {
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  margin: 0;
 }

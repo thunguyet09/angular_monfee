@@ -59,7 +59,7 @@
                 </button>
                 <div>
                   <h4>Price:</h4>
-                  <h2>{{item.price[0].toLocaleString()}}</h2>
+                  <h2>{{item.price[sizeIndex].toLocaleString()}}</h2>
                 </div>
               </div>
               <div class="sub-info-col">
@@ -77,7 +77,7 @@
                 </button>
                 <div>
                   <h4>Available Stocks:</h4>
-                  <h2>50</h2>
+                  <h2>{{item.quantity[sizeIndex]}}</h2>
                 </div>
               </div>
               <div class="sub-info-col">
@@ -95,7 +95,7 @@
                 <h4>Sizes</h4>
                 <div class="size-container">
                   <ng-container *ngFor="let size of item.sizes">
-                    <button>{{size}}</button>
+                    <button (click)="handleSize(size)">{{size}}</button>
                   </ng-container>
                 </div>
               </div>
