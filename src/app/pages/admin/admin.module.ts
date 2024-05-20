@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ProductComponent } from './product/product.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { AddProductComponent } from './add-product/add-product.component';
+import { DeleteConfirmComponent } from './product/delete-confirm/delete-confirm.component';
 @NgModule({
   declarations: [
    AdminComponent,
@@ -24,7 +25,8 @@ import { AddProductComponent } from './add-product/add-product.component';
    AddComponent,
    ProductComponent,
    ProductDetailsComponent,
-   AddProductComponent
+   AddProductComponent,
+   DeleteConfirmComponent
   ],
   imports: [
     AdminRoutingModule,

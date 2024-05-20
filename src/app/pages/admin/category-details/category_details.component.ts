@@ -123,7 +123,7 @@ export class CategoryDetailsComponent {
         dialog_text.textContent = 'Danh mục đã cập nhật thành công'
       })
       setTimeout(() => {
-        document.location.href = '/admin/category'
+        document.location.href = '/admin/categories'
       }, 2000)
     }
   }

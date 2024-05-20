@@ -13,6 +13,7 @@ export interface Product {
   sales: number;
   luot_xem: number;
   createdAt: string;
+  date_modified: string;
   colors: Array<string>;
   sizes: Array<string>;
   rating: number;

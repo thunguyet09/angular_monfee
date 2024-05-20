@@ -44,7 +44,7 @@
                     <div class="change-img-box">
                       <form class="change-img">
                         <div id="myDropzone" class="dropzone">
-                          <input type="file" id="fileMainImg" (change)="chooseImg($event)" />
+                          <input type="file" id="fileMainImg" (change)="chooseImgMain($event)" />
                         </div>
                         <i class="fa-regular fa-image"></i>
                       </form>
@@ -65,7 +65,7 @@
                     <h1>Click to upload</h1>
                     <div class="change-gallery-box">
                       <h2>ahihi</h2>
-                      <input type="file" id="fileInput" (change)="chooseImg($event)" />
+                      <input type="file" id="fileInput" />
                     </div>
                   </div>
                 </div>
@@ -151,7 +151,7 @@
             </div>
             <div class="status">
               <h4>Status</h4>
-                <select [formControlName]="'status'">
+                <select [formControlName]="'status'" (change)="selectedStatus($event)">
                   <option value="published">Published</option>
                   <option value="scheduled">Scheduled</option>
                   <option value="draft">Draft</option>

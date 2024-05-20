@@ -1,0 +1,110 @@
+#delete-confirmation {
+  width: 600px;
+  height: 100%;
+  background-color: white;
+}
+
+.confirmation {
+  padding: 40px 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+.trash-icon {
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+}
+
+.trash-icon i {
+  width: 100%;
+  height: 100%;
+  color: #f1963b;
+  font-size: 100px;
+}
+
+.trash-icon i {
+  animation: trashAnimation 3s infinite ease-in-out;
+  transform-origin: bottom center;
+}
+
+@keyframes trashAnimation {
+  0% {
+    transform: rotate(-10deg);
+  }
+
+  30% {
+    transform: rotate(0deg);
+  }
+
+  60% {
+    transform: rotate(15deg);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
+}
+
+.confirmation > h1 {
+  color: #495057;
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  margin: 0;
+  margin-top: 50px;
+  font-size: 26px;
+}
+
+.confirmation > h2 {
+  color: #9ea8b2;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0;
+  margin-top: 10px;
+  line-height: 26px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.delete {
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  color: white;
+  background-color: #ed5e5e;
+  padding: 10px 20px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  transition: .3s ease;
+}
+
+.close {
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 10px 30px;
+  background-color: #f3f6f9;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.close:hover {
+  background-color: #ced4da;
+}
+
+.delete:hover {
+  background-color: #c95050;
+  cursor: pointer;
+}

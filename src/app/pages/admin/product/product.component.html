@@ -1,240 +1,277 @@
 <router-outlet></router-outlet>
 <div id="products">
-  <div class="products-heading">
-    <h2>PRODUCTS</h2>
-    <div class="bread-crumb">
-      <a routerLink="home">
-        <span class="material-symbols-outlined">
-          home
-        </span>
-      </a>
-      <span>/</span>
-      <a routerLink="/admin/products">
-        Products
-      </a>
-    </div>
-  </div>
-  <div class="main-content">
-    <div class="row">
-      <div class="card">
-        <div class="card-header">
-          <h2>Filters</h2>
-          <button class="clear-all-btn">
-            Clear All
-          </button>
-        </div>
-        <div class="filter-choices">
-          <div class="filter-choices-flex">
-            <div class="filter-choices-item">
-              <h4>500g</h4>
-              <button>
-                <span class="material-symbols-outlined">
-                  close
-                </span>
-              </button>
-            </div>
-            <div class="filter-choices-item">
-              <h4>1000g</h4>
-              <button>
-                <span class="material-symbols-outlined">
-                  close
-                </span>
-              </button>
-            </div>
-            <div class="filter-choices-item">
-              <h4>1500g</h4>
-              <button>
-                <span class="material-symbols-outlined">
-                  close
-                </span>
-              </button>
-            </div>
-            <div class="filter-choices-item">
-              <h4>20% or more</h4>
-              <button>
-                <span class="material-symbols-outlined">
-                  close
-                </span>
-              </button>
-            </div>
-            <div class="filter-choices-item">
-              <h4>4 & Above Star</h4>
-              <button>
-                <span class="material-symbols-outlined">
-                  close
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="categories">
-          <h4>PRODUCTS</h4>
-          <div class="categories-list">
-
-          </div>
-        </div>
-        <div class="price-box">
-          <h4>PRICE</h4>
-          <div class="range-slider">
-            <input type="range" min="0" (change)="handleFilterPrice($event)"/>
-          </div>
-          <div class="cost">
-            <div class="min">
-              <input class="min_cost" value="0" (change)="minCost($event)"/>
-              <span class="material-symbols-outlined">
-                attach_money
-              </span>
-            </div>
-            <h3>to</h3>
-            <div class="max">
-              <input class="max_cost" (change)="maxCost($event)"/>
-              <span class="material-symbols-outlined">
-                attach_money
-              </span>
-            </div>
-          </div>
-        </div>
+  <div class="container">
+    <div class="products-heading">
+      <h2>PRODUCTS</h2>
+      <div class="bread-crumb">
+        <a routerLink="home">
+          <span class="material-symbols-outlined">
+            home
+          </span>
+        </a>
+        <span>/</span>
+        <a routerLink="/admin/products">
+          Products
+        </a>
       </div>
-      <div class="table-part">
-        <div class="table-title">
-          <div class="products-function">
-            <button class="add-btn" routerLink="/admin/add-product">
-              <span class="material-symbols-outlined">add</span>
-              <h4>Add Product</h4>
+    </div>
+    <div class="main-content">
+      <div class="row">
+        <div class="card">
+          <div class="card-header">
+            <h2>Filters</h2>
+            <button class="clear-all-btn">
+              Clear All
             </button>
-            <div class="search-box">
-                <input type="text" placeholder="Search Products..."/>
-                <span class="material-symbols-outlined">
-                  search
-                </span>
+          </div>
+          <div class="filter-choices">
+            <div class="filter-choices-flex">
+              <div class="filter-choices-item">
+                <h4>500g</h4>
+                <button>
+                  <span class="material-symbols-outlined">
+                    close
+                  </span>
+                </button>
+              </div>
+              <div class="filter-choices-item">
+                <h4>1000g</h4>
+                <button>
+                  <span class="material-symbols-outlined">
+                    close
+                  </span>
+                </button>
+              </div>
+              <div class="filter-choices-item">
+                <h4>1500g</h4>
+                <button>
+                  <span class="material-symbols-outlined">
+                    close
+                  </span>
+                </button>
+              </div>
+              <div class="filter-choices-item">
+                <h4>20% or more</h4>
+                <button>
+                  <span class="material-symbols-outlined">
+                    close
+                  </span>
+                </button>
+              </div>
+              <div class="filter-choices-item">
+                <h4>4 & Above Star</h4>
+                <button>
+                  <span class="material-symbols-outlined">
+                    close
+                  </span>
+                </button>
+              </div>
             </div>
           </div>
-          <div class="nav-tabs">
-            <ul>
-              <li class="nav-tab-active">All
-                <span>17</span>
-              </li>
-              <li>Scheduled
-                <span>5</span>
-              </li>
-              <li>Draft</li>
-            </ul>
-            <div class="select-remove">
-              <div>
-                <h3>Select</h3>
-                <button class="number-select"></button>
+          <div class="categories">
+            <h4>PRODUCTS</h4>
+            <div class="categories-list">
+
+            </div>
+          </div>
+          <div class="price-box">
+            <h4>PRICE</h4>
+            <div class="range-slider">
+              <input type="range" min="0" (change)="handleFilterPrice($event)"/>
+            </div>
+            <div class="cost">
+              <div class="min">
+                <input class="min_cost" value="0" (change)="minCost($event)"/>
+                <span class="material-symbols-outlined">
+                  attach_money
+                </span>
               </div>
-              <button class="remove-btn">
-                Remove
-              </button>
+              <h3>to</h3>
+              <div class="max">
+                <input class="max_cost" (change)="maxCost($event)"/>
+                <span class="material-symbols-outlined">
+                  attach_money
+                </span>
+              </div>
             </div>
           </div>
         </div>
-        <div class="table-body">
-          <table>
-            <thead>
-              <tr>
-                <th>
-                  <button>
-                    <i class="fa-solid fa-arrow-up-a-z"></i>
-                    Product
-                  </button>
-                </th>
-                <th>
-                  <button>
-                    <i class="fa-solid fa-sort-down"></i>
-                    Quantity
-                  </button>
-                </th>
-                <th>
-                  <button>
-                    <i class="fa-solid fa-sort-down"></i>
-                    Price
-                  </button>
-                </th>
-                <th>
-                  <button>
-                    <i class="fa-solid fa-sort-down"></i>
-                    Orders
-                  </button>
-                </th>
-                <th>
-                  <button>
-                    <i class="fa-solid fa-sort-down"></i>
-                    Rating
-                  </button>
-                </th>
-                <th>
-                  <button>
-                    <i class="fa-solid fa-sort-down"></i>
-                    Published
-                  </button>
-                </th>
-                <th>
-                  <button>
-                    <i class="fa-solid fa-sort-down"></i>
-                    Action
-                  </button>
-                </th>
-              </tr>
-            </thead>
-            <tbody *ngFor="let item of products">
-              <tr>
-                <td>
-                  <input type="checkbox" #checkbox (change)="deleteChecked(item.id, checkbox.checked)"/>
-                  <img class="img" src="./assets/img/{{item.img_url[0]}}" width="60px" />
-                  <div class="product-info">
-                    <h4>{{item.name}}</h4>
-                    <p>Category: {{ getCategoryName(item.cat_id) }}</p>
-                  </div>
-                </td>
-                <td class="quantity">
-                  <ng-container *ngFor="let quantity of item.quantity">
-                    <h4>{{quantity}}</h4>
-                  </ng-container>
-                </td>
-                <td class="price">
-                  {{item.promo_price ? item.promo_price.toLocaleString() : item.price[0].toLocaleString()}}
-                </td>
-                <td class="orders">
-                  {{item.sales}}
-                </td>
-                <td>
-                  {{item.rating ? item.rating : ''}}
-                </td>
-                <td class="published">
-                  {{item.createdAt}}
-                </td>
-                <td>
-                  <div class="actions">
-                    <button class="dropdown-action" (click)="handleAction($event)">
-                      <i class="fa-solid fa-ellipsis"></i>
+        <div class="table-part">
+          <div class="table-title">
+            <div class="products-function">
+              <button class="add-btn" routerLink="/admin/add-product">
+                <span class="material-symbols-outlined">add</span>
+                <h4>Add Product</h4>
+              </button>
+              <div class="search-box">
+                  <input type="text" placeholder="Search Products..."/>
+                  <span class="material-symbols-outlined">
+                    search
+                  </span>
+              </div>
+            </div>
+            <div class="nav-tabs">
+              <ul>
+                <li class="nav-tab-active publish-products">All
+                  <span></span>
+                </li>
+                <li class="schedule-products">Scheduled
+                  <span></span>
+                </li>
+                <li class="draft">Draft
+                  <span></span>
+                </li>
+              </ul>
+              <div class="select-remove">
+                <div>
+                  <h3>Select</h3>
+                  <button class="number-select"></button>
+                </div>
+                <button class="remove-btn" (click)="handleDelete()">
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="table-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    <button>
+                      <i class="fa-solid fa-arrow-up-a-z"></i>
+                      Product
                     </button>
-                    <div class="dropdown">
-                      <ul>
-                        <li class="view-btn" routerLink="/admin/product-details" (click)="handleView(item.id)">
-                          <span class="material-symbols-outlined">
-                            visibility
-                          </span>
-                          <p>View</p>
-                        </li>
-                        <li class="edit-btn">
-                          <span class="material-symbols-outlined">
-                            edit
-                          </span>
-                          <p>Edit</p>
-                        </li>
-                      </ul>
+                  </th>
+                  <th>
+                    <button>
+                      <i class="fa-solid fa-sort-down"></i>
+                      Quantity
+                    </button>
+                  </th>
+                  <th>
+                    <button>
+                      <i class="fa-solid fa-sort-down"></i>
+                      Price
+                    </button>
+                  </th>
+                  <th>
+                    <button>
+                      <i class="fa-solid fa-sort-down"></i>
+                      Orders
+                    </button>
+                  </th>
+                  <th>
+                    <button>
+                      <i class="fa-solid fa-sort-down"></i>
+                      Rating
+                    </button>
+                  </th>
+                  <th>
+                    <button>
+                      <i class="fa-solid fa-sort-down"></i>
+                      Published
+                    </button>
+                  </th>
+                  <th>
+                    <button>
+                      <i class="fa-solid fa-sort-down"></i>
+                      Action
+                    </button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let item of products">
+                <tr>
+                  <td>
+                    <input type="checkbox" #checkbox (change)="handleCheckboxChange(item.id, checkbox.checked)"/>
+                    <img class="img" src="./assets/img/{{item.img_url[0]}}" width="60px" />
+                    <div class="product-info">
+                      <h4>{{item.name}}</h4>
+                      <p>Category: {{ getCategoryName(item.cat_id) }}</p>
+                    </div>
+                  </td>
+                  <td class="quantity">
+                    <ng-container *ngFor="let quantity of item.quantity">
+                      <h4>{{quantity}}</h4>
+                    </ng-container>
+                  </td>
+                  <td class="price">
+                    {{item.promo_price ? item.promo_price.toLocaleString() : item.price[0].toLocaleString()}}
+                  </td>
+                  <td class="orders">
+                    {{item.sales}}
+                  </td>
+                  <td>
+                    {{item.rating ? item.rating : ''}}
+                  </td>
+                  <td class="published">
+                    {{item.createdAt}}
+                  </td>
+                  <td>
+                    <div class="actions">
+                      <button class="dropdown-action" (click)="handleAction($event)">
+                        <i class="fa-solid fa-ellipsis"></i>
+                      </button>
+                      <div class="dropdown">
+                        <ul>
+                          <li class="view-btn" routerLink="/admin/product-details" (click)="handleView(item.id)">
+                            <span class="material-symbols-outlined">
+                              visibility
+                            </span>
+                            <p>View</p>
+                          </li>
+                          <li class="edit-btn">
+                            <span class="material-symbols-outlined">
+                              edit
+                            </span>
+                            <p>Edit</p>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="pagination-container">
+              <div class="pagination-box">
+                <div class="page-showing"></div>
+                <div class="page-container">
+                  <button class="first-page-btn" (click)="firstPage()">
+                    <span class="material-symbols-outlined">
+                      first_page
+                    </span>
+                  </button>
+                  <button class="prev-page-btn" (click)="prevPage()">
+                    <span class="material-symbols-outlined">
+                      keyboard_arrow_left
+                    </span>
+                  </button>
+                  <div class="main-pagination">
+                    <div class="pagination">
+
                     </div>
                   </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  <button class="next-page-btn" (click)="nextPage()">
+                    <span class="material-symbols-outlined">
+                      chevron_right
+                    </span>
+                  </button>
+                  <button class="last-page-btn">
+                    <span class="material-symbols-outlined">
+                      last_page
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
   <app-footer></app-footer>
 </div>
 

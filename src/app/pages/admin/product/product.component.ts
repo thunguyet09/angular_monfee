@@ -1,22 +1,27 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { API } from 'src/app/api/api.service';
 import { Category } from 'src/app/models/Category';
 import { Product } from 'src/app/models/Product';
 import { Theme } from 'src/app/models/Theme';
 import { ThemeService } from 'src/app/services/theme.service';
+import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent implements AfterViewInit{
-  constructor(private themeService: ThemeService, private api: API){}
+export class ProductComponent implements AfterViewInit {
+  constructor(private themeService: ThemeService,
+    private api: API,
+    private dialog: MatDialog) { }
   public themes: Theme[] = [];
   public products: Product[] = []
   public categories: Category[] = []
+  public total_pages = 0;
   public max_price = 0;
-  ngOnInit(){
+  ngOnInit() {
     const range = document.querySelector('.range-slider > input') as HTMLInputElement
     range.max = '200000';
     this.themeService.getTheme().subscribe((data: any) => {
@@ -28,21 +33,78 @@ export class ProductComponent implements AfterViewInit{
     });
 
 
-    this.getApiProducts()
+    this.getApiProducts('1')
     this.getApiCategories()
   }
 
-  getApiProducts(){
-    this.api.getAllProducts().subscribe((data: any) => {
-      this.products = data
-      data.forEach((item:any) => {
+  getApiProducts(page: any) {
+    const page_showing = document.querySelector('.page-showing') as HTMLElement
+    const published_products = document.querySelector('.publish-products > span') as HTMLElement
+    const scheduled_products = document.querySelector('.schedule-products > span') as HTMLElement
+    const draft_products = document.querySelector('.draft > span') as HTMLElement
+    this.api.productPagination(page, '6').subscribe((data: any) => {
+      this.products = data.products
+      const published = data.all_products.filter((item:any) => item.status == 'published')
+      published_products.textContent = published.length
+      const scheduled = data.all_products.filter((item:any) => item.status == 'scheduled')
+      scheduled_products.textContent = scheduled.length
+      const draft = data.all_products.filter((item:any) => item.status == 'draft')
+      draft_products.textContent = draft.length
+      this.total_pages = data.totalPages
+      if(data.endIndex > data.productLength){
+        page_showing.innerHTML = `<span>Showing <b>${data.startIndex + 1}</b> to <b>${data.productLength}</b> of <b>${data.productLength}</b> results </span>`
+      }else{
+        page_showing.innerHTML = `<span>Showing <b>${data.startIndex + 1}</b> to <b>${data.endIndex}</b> of <b>${data.productLength}</b> results </span>`
+      }
+
+      const pagination = document.querySelector('.pagination') as HTMLElement;
+
+      pagination.innerHTML = '';
+
+      for (let i = 1; i <= this.total_pages; i++) {
+        const button = document.createElement('button');
+
+        button.addEventListener('mouseenter', () => {
+          button.style.backgroundColor = '#1e91cf';
+          button.style.color = 'white';
+        });
+
+        button.addEventListener('mouseleave', () => {
+          button.style.backgroundColor = 'white';
+          button.style.color = '#1e91cf';
+        });
+
+        button.style.backgroundColor = 'white';
+        button.style.color = '#1e91cf';
+        button.style.border = '1px solid rgb(217, 217, 217)';
+        button.style.padding = '0px 15px';
+        button.style.height = '40px';
+        button.style.display = 'flex';
+        button.style.justifyContent = 'center';
+        button.style.alignItems = 'center';
+        button.style.borderRadius = '3px';
+        button.style.cursor = 'pointer';
+        button.style.fontWeight = '550'
+        button.style.fontSize = '14px'
+        button.textContent = i.toString();
+        pagination.appendChild(button);
+
+        button.addEventListener('click', (event: Event) => {
+          const target = event.target as HTMLElement;
+          const pageNumber = target.textContent;
+          if (pageNumber) {
+            this.getApiProducts(pageNumber)
+          }
+        });
+      }
+      this.products.forEach((item: any) => {
         this.max_price = Math.max(...item.price)
       })
       this.maxRange(this.max_price)
     })
   }
 
-  getApiCategories(){
+  getApiCategories() {
     this.api.getAllCategories().subscribe((data: any) => {
       this.categories = data
       this.calculateProductCounts()
@@ -62,7 +124,7 @@ export class ProductComponent implements AfterViewInit{
       }
     });
 
-    const categoryLength:any[] = [];
+    const categoryLength: any[] = [];
     this.categories.forEach((cat) => {
       if (elementCounts[cat.id] !== undefined) {
         categoryLength.push({ id: cat.id, name: cat.name, length: elementCounts[cat.id] });
@@ -104,15 +166,15 @@ export class ProductComponent implements AfterViewInit{
   }
 
   isToggle = false;
-  handleAction(event: Event){
+  handleAction(event: Event) {
     const target = event.target as HTMLElement
     const parentNode = target.parentNode
     const childElement = parentNode?.childNodes[1] as HTMLElement
     this.isToggle = !this.isToggle
-    if(this.isToggle){
+    if (this.isToggle) {
       childElement.style.display = 'block'
       childElement.classList.add('dropdown-animate')
-    }else{
+    } else {
       childElement.style.display = 'none'
       childElement.classList.remove('dropdown-animate')
     }
@@ -121,64 +183,125 @@ export class ProductComponent implements AfterViewInit{
   ngAfterViewInit(): void {
   }
 
-  maxRange(max_price: number){
+  maxRange(max_price: number) {
     const max_range = document.querySelector('.range-slider > input') as HTMLInputElement
     max_range.max = max_price.toString()
     const max = document.querySelector('.max_cost') as HTMLInputElement
     max.value = max_price.toString()
   }
-  public removeArr:number[] = []
-  deleteChecked(id: number, checked: boolean){
-    const number_select = document.querySelector('.number-select') as HTMLElement
-    const removeItem = document.querySelector('.select-remove') as HTMLElement
-    if(checked){
-      this.removeArr.push(id)
-    }else{
-      const index = this.removeArr.indexOf(id);
-      if (index !== -1) {
-        this.removeArr.splice(index, 1);
-      }
+  removeArr: number[] = [];
+
+  handleCheckboxChange(id: number, checked: boolean): void {
+    if (checked) {
+      this.removeArr.push(id);
+    } else {
+      this.removeArr = this.removeArr.filter((itemId) => itemId !== id);
     }
-    if(this.removeArr.length > 0){
-      removeItem.style.display = 'flex'
-      number_select.innerHTML = `(${this.removeArr.length})`
-    }else{
-      removeItem.style.display = 'none'
+
+    this.updateDeleteButtonState();
+  }
+
+  updateDeleteButtonState(): void {
+    const numberSelect = document.querySelector('.number-select') as HTMLElement;
+    const removeItem = document.querySelector('.select-remove') as HTMLElement;
+
+    console.log(this.removeArr)
+    if (this.removeArr.length > 0) {
+      removeItem.style.display = 'flex';
+      numberSelect.innerHTML = `(${this.removeArr.length})`;
+    } else {
+      removeItem.style.display = 'none';
     }
   }
 
-  handleFilterPrice(event: Event){
+  handleDelete(): void {
+    const deleteDialog = this.dialog.open(DeleteConfirmComponent, {
+      exitAnimationDuration: '200ms',
+      enterAnimationDuration: '200ms',
+      data: {
+        removeItems: this.removeArr,
+      },
+    });
+
+    deleteDialog.afterClosed().subscribe((result) => {
+      this.notifyParentAboutDeletion();
+      this.removeArr = []
+      this.updateDeleteButtonState()
+    });
+  }
+
+  notifyParentAboutDeletion(): void {
+    // Notify the parent component about the deletion
+    // This could be done using an event emitter or a subject
+    this.getApiProducts('1');
+  }
+  handleFilterPrice(event: Event) {
     const target = event.target as HTMLInputElement
     const max_cost = document.querySelector('.max_cost') as HTMLInputElement
     max_cost.value = target.value
     this.api.getAllProducts().subscribe((data: any) => {
-      this.products = data.filter((item:any) => {
+      this.products = data.filter((item: any) => {
         return item.price[0] > 0 && item.price[0] <= target.value
       })
     })
   }
 
-  minCost(event: Event){
+  minCost(event: Event) {
     const target = event.target as HTMLInputElement
     const max = document.querySelector('.max_cost') as HTMLInputElement
     this.api.getAllProducts().subscribe((data: any) => {
-      this.products = data.filter((item:any) => {
+      this.products = data.filter((item: any) => {
         return item.price[0] > Number(target.value) && item.price[0] <= Number(max.value)
       })
     })
   }
 
-  maxCost(event: Event){
+  maxCost(event: Event) {
     const target = event.target as HTMLInputElement
     const min = document.querySelector('.min_cost') as HTMLInputElement
     this.api.getAllProducts().subscribe((data: any) => {
-      this.products = data.filter((item:any) => {
+      this.products = data.filter((item: any) => {
         return item.price[0] > Number(min.value) && item.price[0] <= Number(target.value)
       })
     })
   }
 
-  handleView(id: number){
+  handleView(id: number) {
     localStorage.setItem('productId', id.toString())
+  }
+
+  slideIndex = 0;
+  nextPage() {
+    const pagination = document.querySelector('.pagination') as HTMLElement
+    this.slideIndex = (this.slideIndex + 1) % (pagination.children.length);
+
+    if (this.slideIndex >= 2) {
+      this.slideIndex = 0;
+      pagination.style.transform = `translateX(0)`
+    } else {
+      this.updateSliderPosition();
+    }
+  }
+
+  prevPage() {
+    const pagination = document.querySelector('.pagination') as HTMLElement
+    if (this.slideIndex == 0) {
+      this.slideIndex = 2;
+      const slideWidth = pagination.clientWidth - 39;
+      pagination.style.transform = `translateX(-${this.slideIndex * slideWidth}px)`;
+    } else {
+      this.slideIndex = (this.slideIndex - 1 + pagination.children.length) % pagination.children.length;
+      this.updateSliderPosition();
+    }
+  }
+
+  updateSliderPosition() {
+    const pagination = document.querySelector('.pagination') as HTMLElement
+    const slideWidth = pagination.clientWidth;
+    pagination.style.transform = `translateX(-${this.slideIndex * slideWidth}px)`;
+  }
+
+  firstPage() {
+    this.getApiProducts('1');
   }
 }

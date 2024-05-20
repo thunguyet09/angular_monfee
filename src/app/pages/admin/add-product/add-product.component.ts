@@ -1,7 +1,9 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { API } from 'src/app/api/api.service';
 import { Category } from 'src/app/models/Category';
+import { Product } from 'src/app/models/Product';
 
 @Component({
   selector: 'app-add-product',
@@ -11,50 +13,70 @@ import { Category } from 'src/app/models/Category';
 export class AddProductComponent implements AfterViewInit{
   addForm!: FormGroup;
   public categories: Category[] = []
-  constructor(private api: API) { }
+  public products: Product[] = []
+  constructor(private api: API, private router: Router) { }
 
   public categoryId: number = 0;
   ngOnInit() {
     this.initializeForm()
     this.getCategories()
+    this.getProducts()
   }
+
   getCategories(){
     this.api.getAllCategories().subscribe((data: any) => {
       this.categories = data
     })
   }
+
+  getProducts(){
+    let index = 0;
+    this.api.getAllProducts().subscribe((data: any) => {
+      this.products = data
+      index = data[data.length - 1].id + 1
+      this.addForm.patchValue({
+        'id': index
+      })
+    })
+  }
+
   initializeForm() {
     this.addForm = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', Validators.required),
-      date_added: new FormControl(''),
+      createdAt: new FormControl(''),
       date_modified: new FormControl(''),
       status: new FormControl('', Validators.required),
-      stock: new FormControl(''),
-      image: new FormControl(''),
+      stock: new FormControl('In Stock'),
+      img_url: new FormControl(''),
       colors: new FormControl('', Validators.required),
       sizes: new FormControl('', Validators.required),
-      prices: new FormControl('', Validators.required),
+      price: new FormControl('', Validators.required),
       cat_id: new FormControl('', Validators.required),
       gia_nhap: new FormControl('', Validators.required),
       promo_price: new FormControl(0),
       mo_ta: new FormControl(''),
       quantity: new FormControl(''),
+      sales: new FormControl(0),
+      likes: new FormControl(0)
     });
   }
 
-  chooseImg(event: Event) {
+  public image: string[] = []
+  chooseImgMain(event: Event) {
     const target = event.target as HTMLInputElement;
     const file = target.files?.[0];
     const img = document.querySelector('.imgBox > img') as HTMLImageElement
     if (file) {
+      this.image[0] = file.name
       this.addForm.patchValue({
-        'image': file.name
+        'img_url': this.image
       });
       img.src = `./assets/img/${file.name}`
     } else {
+      this.image[0] = 'img.jpg'
       this.addForm.patchValue({
-        'image': 'img.jpg'
+        'img_url': this.image
       });
     }
   }
@@ -68,17 +90,22 @@ export class AddProductComponent implements AfterViewInit{
     const size = document.createElement('input')
     size.addEventListener('change', (e: Event) => {
       const target = e.target as HTMLInputElement
-      this.sizes.push(target.value)
+      const existingSize = this.sizes.filter((item) => item == target.value)
+      if(existingSize.length > 0){
+        return;
+      }else{
+        this.sizes.push(target.value)
+        size.style.width = '100px'
+        size.style.padding = '8px 5px'
+        size.style.borderRadius = '5px'
+        size.style.border = 'none'
+        size.style.outline = 'none'
+        size.style.border = '1px solid rgb(197, 197, 197)'
+        size.style.marginLeft = '10px'
+        size.type = 'text'
+        sizes_input.appendChild(size)
+      }
     })
-    size.style.width = '100px'
-    size.style.padding = '8px 5px'
-    size.style.borderRadius = '5px'
-    size.style.border = 'none'
-    size.style.outline = 'none'
-    size.style.border = '1px solid rgb(197, 197, 197)'
-    size.style.marginLeft = '10px'
-    size.type = 'text'
-    sizes_input.appendChild(size)
   }
 
   addColor(){
@@ -112,7 +139,7 @@ export class AddProductComponent implements AfterViewInit{
 
   inputSize(event: Event) {
     const target = event.target as HTMLInputElement
-    this.sizes.push(target.value)
+    this.sizes.push(target.value.trim())
     this.addForm.patchValue({
       'sizes': this.sizes
     })
@@ -126,7 +153,7 @@ export class AddProductComponent implements AfterViewInit{
     this.prices.push(parseInt(target.value))
     if(this.prices.length > 0){
       this.addForm.patchValue({
-        'prices': this.prices
+        'price': this.prices
       })
     }
   }
@@ -168,7 +195,40 @@ export class AddProductComponent implements AfterViewInit{
     this.addForm.patchValue({'date_modified': formatDate})
 
     if(this.addForm && this.addForm.valid){
-      console.log(this.addForm.value)
+      this.api.addProduct(this.addForm.value).subscribe((data) => {
+        this.router.navigate(['/admin/products'])
+      })
     }
+  }
+
+  selectedStatus(event: Event){
+    const scheduled_status = document.querySelector('.schedule-status > input') as HTMLInputElement
+    const target = event.target as HTMLInputElement
+    const currentDate = new Date()
+    const year = currentDate.getFullYear()
+    const month = currentDate.getMonth() + 1
+    const day = currentDate.getDate()
+    const hour = currentDate.getHours()
+    const minute = currentDate.getMinutes()
+    let formatDate:string;
+    if(minute < 10 && hour < 10){
+        formatDate = year + '-' + month + '-' + day + " " + "0" + hour + ":" + "0" + minute
+    }else if(hour < 10){
+        formatDate = year + '-' + month + '-' + day + " " + "0"+ hour + ":" + minute
+    }else if(minute < 10){
+        formatDate = year + '-' + month + '-' + day  + " " + hour + ":" + "0" + minute
+    }else{
+        formatDate = year + "-" + month + "-" + day + " " + hour + ":" + minute
+    }
+    if(target.value == 'scheduled'){
+      scheduled_status.disabled = false;
+    }else{
+      scheduled_status.disabled = true;
+      this.addForm.patchValue({
+        'createdAt': formatDate
+      })
+    }
+
+    this.addForm.patchValue({'status': target.value})
   }
 }

@@ -10,7 +10,7 @@ import { AddProductComponent } from './add-product/add-product.component';
 
 const routes: Routes = [
   {
-    path: 'category',
+    path: 'categories',
     component: CategoryComponent,
     children: [
       { path: '', component: AdminComponent }

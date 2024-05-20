@@ -48,4 +48,16 @@ export class API{
   deleteCategory(id: number){
     return this.http.delete(this.url + `/categories/${id}`)
   }
+
+  addProduct(data: any){
+    return this.http.post(this.url + '/products', data)
+  }
+
+  deleteProduct(id: number){
+    return this.http.delete(this.url + `/products/${id}`)
+  }
+
+  productPagination(page:any, limit:any){
+    return this.http.get(this.url + '/products/' + page + '/' + limit)
+  }
 }
