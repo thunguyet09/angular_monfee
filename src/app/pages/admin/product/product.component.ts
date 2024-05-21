@@ -182,6 +182,23 @@ export class ProductComponent implements AfterViewInit {
     }
   }
 
+  handleActionChild(event: Event){
+    event.stopPropagation()
+    const target = event.target as HTMLElement
+    const parentNode = target.parentNode
+    const parentNode1 = parentNode?.parentNode
+    console.log(parentNode1?.childNodes)
+    const childElement = parentNode1?.childNodes[1] as HTMLElement
+    this.isToggle = !this.isToggle
+    if (this.isToggle) {
+      childElement.style.display = 'block'
+      childElement.classList.add('dropdown-animate')
+    } else {
+      childElement.style.display = 'none'
+      childElement.classList.remove('dropdown-animate')
+    }
+  }
+
   ngAfterViewInit(): void {
   }
 

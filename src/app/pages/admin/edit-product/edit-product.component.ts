@@ -11,13 +11,17 @@ import { Product } from 'src/app/models/Product';
   styleUrls: ['./edit-product.component.css']
 })
 export class EditProductComponent implements AfterViewInit{
-  addForm!: FormGroup;
+  editForm!: FormGroup;
   public categories: Category[] = []
   public products: Product[] = []
   public id = localStorage.getItem('productId')
   public data: any[] = []
   public colorsArr: string[] = []
   public status = ''
+  public name = ''
+  public description = ''
+  public gia_nhap = ''
+  public gallery_images:string[] = []
   constructor(private api: API, private router: Router) { }
   public categoryId: number = 0;
   ngOnInit() {
@@ -34,17 +38,28 @@ export class EditProductComponent implements AfterViewInit{
       this.quantities = data.quantity
       this.status = data.status
       this.categoryId = data.cat_id
+      this.name = data.name
+      this.description = data.mo_ta
+      this.gia_nhap = data.gia_nhap
+      this.colors = data.colors
+      this.gallery_images = data.img_url.slice(1)
       if(this.status == 'scheduled'){
         scheduled_status.disabled = false;
       }
       img.src = `./assets/img/${data.img_url[0]}`
-      this.addForm.patchValue({
+      this.editForm.patchValue({
         'name': data.name,
         'mo_ta': data.mo_ta,
         'gia_nhap': data.gia_nhap,
-        'sizes': data.sizes
+        'sizes': data.sizes,
+        'colors': data.colors,
+        'status': this.status,
+        'cat_id': this.categoryId,
+        'createdAt': data.createdAt,
+        'img_url': data.img_url,
+        'price': data.price,
+        'quantity': data.quantity
       })
-      console.log(this.addForm.value)
     })
   }
 
@@ -59,14 +74,14 @@ export class EditProductComponent implements AfterViewInit{
     this.api.getAllProducts().subscribe((data: any) => {
       this.products = data
       index = data[data.length - 1].id + 1
-      this.addForm.patchValue({
+      this.editForm.patchValue({
         'id': index
       })
     })
   }
 
   initializeForm() {
-    this.addForm = new FormGroup({
+    this.editForm = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', Validators.required),
       createdAt: new FormControl(''),
@@ -93,16 +108,11 @@ export class EditProductComponent implements AfterViewInit{
     const file = target.files?.[0];
     const img = document.querySelector('.imgBox > img') as HTMLImageElement
     if (file) {
-      this.image[0] = file.name
-      this.addForm.patchValue({
-        'img_url': this.image
+      this.gallery_images.unshift(file.name)
+      this.editForm.patchValue({
+        'img_url': this.gallery_images
       });
       img.src = `./assets/img/${file.name}`
-    } else {
-      this.image[0] = 'img.jpg'
-      this.addForm.patchValue({
-        'img_url': this.image
-      });
     }
   }
 
@@ -139,9 +149,10 @@ export class EditProductComponent implements AfterViewInit{
     color.addEventListener('change', (e: Event) => {
       const target = e.target as HTMLInputElement
       this.colors.push(target.value)
-      this.addForm.patchValue({
+      this.editForm.patchValue({
         'colors': this.colors
       })
+      colors_input.removeChild(color)
     })
     color.style.width = '100px'
     color.style.padding = '8px 5px'
@@ -156,7 +167,7 @@ export class EditProductComponent implements AfterViewInit{
   inputColor(event: Event){
     const target = event.target as HTMLInputElement
     this.colors.push(target.value)
-    this.addForm.patchValue({
+    this.editForm.patchValue({
       'colors': this.colors
     })
   }
@@ -164,10 +175,9 @@ export class EditProductComponent implements AfterViewInit{
   inputSize(event: Event) {
     const target = event.target as HTMLInputElement
     this.sizes.push(target.value.trim())
-    this.addForm.patchValue({
+    this.editForm.patchValue({
       'sizes': this.sizes
     })
-    console.log(this.addForm.value)
   }
 
   ngAfterViewInit(): void {
@@ -177,7 +187,7 @@ export class EditProductComponent implements AfterViewInit{
     const target = event.target as HTMLInputElement
     this.prices[index] = +target.value
     if(this.prices.length > 0){
-      this.addForm.patchValue({
+      this.editForm.patchValue({
         'price': this.prices
       })
     }
@@ -187,16 +197,15 @@ export class EditProductComponent implements AfterViewInit{
     const target = event.target as HTMLInputElement
     this.quantities[index] = +target.value
     if(this.quantities.length > 0){
-      this.addForm.patchValue({
+      this.editForm.patchValue({
         'quantity': this.quantities
       })
-      console.log(this.addForm.value)
     }
   }
 
   selectCategory(event: Event){
     const target = event.target as HTMLInputElement
-    this.addForm.patchValue({
+    this.editForm.patchValue({
       'cat_id': parseInt(target.value)
     })
   }
@@ -218,10 +227,13 @@ export class EditProductComponent implements AfterViewInit{
     }else{
         formatDate = year + "-" + month + "-" + day + " " + hour + ":" + minute
     }
-    this.addForm.patchValue({'date_modified': formatDate})
+    this.editForm.patchValue({'date_modified': formatDate})
 
-    if(this.addForm && this.addForm.valid){
-      console.log(this.addForm.value)
+    if(this.id && this.editForm && this.editForm.valid){
+      this.api.updateProduct(parseInt(this.id),this.editForm.value).subscribe((data) => {
+        this.router.navigate(['/admin/products'])
+      })
+      console.log(this.editForm.value)
     }
   }
 
@@ -248,18 +260,36 @@ export class EditProductComponent implements AfterViewInit{
       scheduled_status.disabled = false;
     }else{
       scheduled_status.disabled = true;
-      this.addForm.patchValue({
+      this.editForm.patchValue({
         'createdAt': formatDate
       })
     }
 
-    this.addForm.patchValue({'status': target.value})
+    this.editForm.patchValue({'status': target.value})
   }
 
   handleRemoveSize(index:number){
     this.sizes.splice(index,1)
-    this.addForm.patchValue({
-      'sizes': this.sizes
+    this.prices.splice(index,1)
+    this.quantities.splice(index,1)
+    this.editForm.patchValue({
+      'sizes': this.sizes,
+      'price': this.prices,
+      'quantity': this.quantities
+    })
+  }
+
+  handleRemoveColor(index: number){
+    this.colorsArr.splice(index,1)
+    this.editForm.patchValue({
+      'colors': this.colorsArr
+    })
+  }
+
+  removeImg(index: number){
+    this.gallery_images.splice(index,1)
+    this.editForm.patchValue({
+      'img_url': this.gallery_images
     })
   }
 }

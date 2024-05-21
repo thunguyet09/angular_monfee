@@ -636,3 +636,68 @@ td > input {
   background-color: red;
   color: white;
 }
+
+.colors-input {
+  position: relative;
+}
+.remove-color {
+  position: absolute;
+  top:8px;
+  right: 0px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.remove-color > span {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.remove-color:hover {
+  color: red;
+}
+
+.delete-img {
+  background-color: #ed5e5e;
+  color: white;
+  font-family: "Nunito", sans-serif;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  padding: 6px 15px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: .3s ease;
+}
+
+.img-info > img {
+  border-radius: 10px;
+}
+
+.gallery-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.img-info {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.gallery-box {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.delete-img:hover {
+  background-color: #c95050;
+  cursor: pointer;
+}

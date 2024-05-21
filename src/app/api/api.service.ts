@@ -60,4 +60,8 @@ export class API{
   productPagination(page:any, limit:any){
     return this.http.get(this.url + '/products/' + page + '/' + limit)
   }
+
+  updateProduct(id: number, data: any){
+    return this.http.put(this.url + `/products/${id}`, data)
+  }
 }

@@ -14,19 +14,19 @@
       </div>
     </div>
     <div class="main-content">
-      <form class="content-row" [formGroup]="addForm" (ngSubmit)="handleSubmit()">
+      <form class="content-row" [formGroup]="editForm" (ngSubmit)="handleSubmit()">
         <div class="card-1">
           <div class="card-1-row">
             <div class="product-title">
               <h4>Product Title</h4>
-              <input type="text" [formControlName]="'name'" placeholder="Enter product title" />
-              <div *ngIf="addForm.get('name')?.invalid || (addForm.get('name')?.dirty || addForm.get('name')?.touched)" class="err-msg">
-                <div *ngIf="addForm.get('name')?.errors?.['required']">Please enter a product title.</div>
+              <input type="text" [formControlName]="'name'" [value]="'name'" placeholder="Enter product title" />
+              <div *ngIf="editForm.get('name')?.invalid || (editForm.get('name')?.dirty || editForm.get('name')?.touched)" class="err-msg">
+                <div *ngIf="editForm.get('name')?.errors?.['required']">Please enter a product title.</div>
               </div>
             </div>
             <div class="product-description">
               <h4>Product Description</h4>
-              <textarea [formControlName]="'mo_ta'" rows="10">
+              <textarea [formControlName]="'mo_ta'" rows="10" [value]="'description'">
               </textarea>
             </div>
           </div>
@@ -69,6 +69,15 @@
                     </div>
                   </div>
                 </div>
+                <div class="gallery-box">
+                  <div *ngFor="let item of gallery_images; let i = index" class="gallery-container">
+                    <div class="img-info">
+                      <img src="./assets/img/{{item}}" width="60px" />
+                      <h3>{{item}}</h3>
+                    </div>
+                    <button class="delete-img" (click)="removeImg(i)">Delete</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -81,19 +90,20 @@
               <div class="gia_von">
                 <label>Cost of Inventory:</label>
                 <div>
-                  <input [formControlName]="'gia_nhap'" type="number" min="0" />
-                  <div *ngIf="addForm.get('gia_nhap')?.invalid || (addForm.get('gia_nhap')?.dirty || addForm.get('gia_nhap')?.touched)" class="err-msg">
-                    <div *ngIf="addForm.get('gia_nhap')?.errors?.['required']">Please enter the cost of inventory.</div>
+                  <input [formControlName]="'gia_nhap'" type="number" min="0" [value]="'gia_nhap'" />
+                  <div *ngIf="editForm.get('gia_nhap')?.invalid || (editForm.get('gia_nhap')?.dirty || editForm.get('gia_nhap')?.touched)" class="err-msg">
+                    <div *ngIf="editForm.get('gia_nhap')?.errors?.['required']">Please enter the cost of inventory.</div>
                   </div>
                 </div>
               </div>
               <div class="sizes">
                 <label><b>*</b> Colors</label>
                 <div class="size-box">
-                  <div class="colors-input">
-                    <ng-container *ngFor="let item of colorsArr">
-                      <input type="text" value="{{item}}" placeholder="Ex: Blue" (change)="inputColor($event)"/>
-                    </ng-container>
+                  <div class="colors-input" *ngFor="let item of colorsArr; let i = index">
+                    <input type="text" value="{{item}}" [value]="item" placeholder="Ex: Blue" (change)="inputColor($event)"/>
+                    <button class="remove-color" (click)="handleRemoveColor(i)">
+                      <span class="material-symbols-outlined">close</span>
+                    </button>
                     <ng-container *ngIf="colorsArr.length == 0">
                       <input type="text" placeholder="Ex: Blue" (change)="inputColor($event)"/>
                     </ng-container>
@@ -110,7 +120,7 @@
                 <div class="size-box">
                   <div class="sizes-input">
                     <ng-container *ngFor="let item of sizes">
-                      <input type="text" value="{{item}}" placeholder="Ex: 500g" (change)="inputSize($event)"/>
+                      <input type="text" value="{{item}}" [value]="item" placeholder="Ex: 500g" (change)="inputSize($event)"/>
                     </ng-container>
                   </div>
                   <button class="add-size" type="button" (click)="addSize()">
@@ -162,7 +172,7 @@
             </div>
             <div class="status">
               <h4>Status</h4>
-              <select [formControlName]="'status'" (change)="selectedStatus($event)">
+              <select [formControlName]="'status'" [value]="'status'" (change)="selectedStatus($event)">
                 <option [selected]="status === 'draft'" [value]="'draft'">Draft</option>
                 <option [selected]="status === 'published'" [value]="'published'">Published</option>
                 <option [selected]="status === 'scheduled'" [value]="'scheduled'">Scheduled</option>
