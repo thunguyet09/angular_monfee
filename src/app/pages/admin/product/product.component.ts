@@ -6,6 +6,7 @@ import { Product } from 'src/app/models/Product';
 import { Theme } from 'src/app/models/Theme';
 import { ThemeService } from 'src/app/services/theme.service';
 import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -15,7 +16,8 @@ import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.componen
 export class ProductComponent implements AfterViewInit {
   constructor(private themeService: ThemeService,
     private api: API,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private router: Router) { }
   public themes: Theme[] = [];
   public products: Product[] = []
   public categories: Category[] = []
@@ -231,8 +233,6 @@ export class ProductComponent implements AfterViewInit {
   }
 
   notifyParentAboutDeletion(): void {
-    // Notify the parent component about the deletion
-    // This could be done using an event emitter or a subject
     this.getApiProducts('1');
   }
   handleFilterPrice(event: Event) {
@@ -303,5 +303,10 @@ export class ProductComponent implements AfterViewInit {
 
   firstPage() {
     this.getApiProducts('1');
+  }
+
+  handleEdit(id: number){
+    localStorage.setItem('productId', id.toString())
+    this.router.navigate(['/admin/edit-product'])
   }
 }

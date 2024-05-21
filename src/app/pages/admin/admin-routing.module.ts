@@ -7,6 +7,7 @@ import { CategoryDetailsComponent } from './category-details/category_details.co
 import { ProductComponent } from './product/product.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { AddProductComponent } from './add-product/add-product.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,13 @@ const routes: Routes = [
   {
     path: 'add-product',
     component: AddProductComponent,
+    children: [
+      { path: '', component: AdminComponent }
+    ]
+  },
+  {
+    path: 'edit-product',
+    component: EditProductComponent,
     children: [
       { path: '', component: AdminComponent }
     ]

@@ -1,0 +1,202 @@
+<router-outlet></router-outlet>
+<div id="add-product">
+  <div class="add-product">
+    <div class="add-product-heading">
+      <h2>EDIT PRODUCT</h2>
+      <div class="bread-crumb">
+        <a routerLink="/admin/products">
+          Products
+        </a>
+        <span class="material-symbols-outlined">
+          chevron_right
+        </span>
+        <a>Edit Product</a>
+      </div>
+    </div>
+    <div class="main-content">
+      <form class="content-row" [formGroup]="addForm" (ngSubmit)="handleSubmit()">
+        <div class="card-1">
+          <div class="card-1-row">
+            <div class="product-title">
+              <h4>Product Title</h4>
+              <input type="text" [formControlName]="'name'" placeholder="Enter product title" />
+              <div *ngIf="addForm.get('name')?.invalid || (addForm.get('name')?.dirty || addForm.get('name')?.touched)" class="err-msg">
+                <div *ngIf="addForm.get('name')?.errors?.['required']">Please enter a product title.</div>
+              </div>
+            </div>
+            <div class="product-description">
+              <h4>Product Description</h4>
+              <textarea [formControlName]="'mo_ta'" rows="10">
+              </textarea>
+            </div>
+          </div>
+          <div class="gallery">
+            <h2>Product Gallery</h2>
+            <div class="gallery-box">
+              <div class="main-img-box">
+                <div class="main-img-title">
+                  <h3>Product Image</h3>
+                  <h4>Add Product Main Image.</h4>
+                </div>
+                <div class="center">
+                  <div class="imgBox">
+                    <img src="./assets/img/img.jpg" width="150px" />
+                    <div class="change-img-box">
+                      <form class="change-img">
+                        <div id="myDropzone" class="dropzone">
+                          <input type="file" id="fileMainImg" (change)="chooseImgMain($event)" />
+                        </div>
+                        <i class="fa-regular fa-image"></i>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="product-gallery-box">
+                <div class="gallery-title">
+                  <h3>Product Gallery</h3>
+                  <h4>Add Product Gallery Images.</h4>
+                </div>
+                <div class="gallery-center">
+                  <div class="imgBox">
+                    <span class="material-symbols-outlined">
+                      cloud_upload
+                    </span>
+                    <h1>Click to upload</h1>
+                    <div class="change-gallery-box">
+                      <h2>ahihi</h2>
+                      <input type="file" id="fileInput" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="general">
+            <div class="general-heading">
+              <h4>General Info</h4>
+            </div>
+            <div class="general-info">
+              <div class="gia_von">
+                <label>Cost of Inventory:</label>
+                <div>
+                  <input [formControlName]="'gia_nhap'" type="number" min="0" />
+                  <div *ngIf="addForm.get('gia_nhap')?.invalid || (addForm.get('gia_nhap')?.dirty || addForm.get('gia_nhap')?.touched)" class="err-msg">
+                    <div *ngIf="addForm.get('gia_nhap')?.errors?.['required']">Please enter the cost of inventory.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="sizes">
+                <label><b>*</b> Colors</label>
+                <div class="size-box">
+                  <div class="colors-input">
+                    <ng-container *ngFor="let item of colorsArr">
+                      <input type="text" value="{{item}}" placeholder="Ex: Blue" (change)="inputColor($event)"/>
+                    </ng-container>
+                    <ng-container *ngIf="colorsArr.length == 0">
+                      <input type="text" placeholder="Ex: Blue" (change)="inputColor($event)"/>
+                    </ng-container>
+                  </div>
+                  <button class="add-size" type="button" (click)="addColor()">
+                    <span class="material-symbols-outlined">
+                      add
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div class="sizes">
+                <label><b>*</b> Sizes</label>
+                <div class="size-box">
+                  <div class="sizes-input">
+                    <ng-container *ngFor="let item of sizes">
+                      <input type="text" value="{{item}}" placeholder="Ex: 500g" (change)="inputSize($event)"/>
+                    </ng-container>
+                  </div>
+                  <button class="add-size" type="button" (click)="addSize()">
+                    <span class="material-symbols-outlined">
+                      add
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div class="variant">
+                <table *ngIf="sizes.length > 0">
+                  <thead>
+                    <tr>
+                      <th>Variant Name</th>
+                      <th><b>*</b> Price</th>
+                      <th><b>*</b> Quantity</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let size of sizes; let i = index">
+                      <td>{{ size }}</td>
+                      <td>
+                        <input type="number" [value]="prices[i]" (change)="inputPrice($event, i)" />
+                      </td>
+                      <td>
+                        <input type="number" [value]="quantities[i]" (change)="inputQuantity($event, i)" />
+                      </td>
+                      <td>
+                        <button class="remove-size" (click)="handleRemoveSize(i)">
+                          <span class="material-symbols-outlined">close</span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="submit-box">
+            <button type="submit" class="submit-btn">Submit</button>
+          </div>
+        </div>
+        <div class="card-2">
+          <div class="publish">
+            <div class="publish-heading">
+              <h2>Publish</h2>
+            </div>
+            <div class="status">
+              <h4>Status</h4>
+              <select [formControlName]="'status'" (change)="selectedStatus($event)">
+                <option [selected]="status === 'draft'" [value]="'draft'">Draft</option>
+                <option [selected]="status === 'published'" [value]="'published'">Published</option>
+                <option [selected]="status === 'scheduled'" [value]="'scheduled'">Scheduled</option>
+              </select>
+            </div>
+          </div>
+          <div class="scheduled">
+            <div class="publish-heading">
+              <h2>Publish Schedule</h2>
+            </div>
+            <div class="schedule-status">
+              <h4>Publish Date & Time</h4>
+              <input placeholder="Enter publish date" disabled="true" />
+            </div>
+          </div>
+          <div class="categories">
+            <div class="categories-heading">
+              <h2>Product Categories</h2>
+            </div>
+            <div class="categories-content">
+              <div>
+                <p>Select product category</p>
+                <button>Add New</button>
+              </div>
+              <select (change)="selectCategory($event)">
+                <ng-container *ngFor="let item of categories">
+                  <option [selected]="+categoryId == item.id" [value]="item.id">{{item.name}}</option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

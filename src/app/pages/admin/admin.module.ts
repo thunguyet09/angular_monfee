@@ -14,6 +14,7 @@ import { ProductComponent } from './product/product.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { DeleteConfirmComponent } from './product/delete-confirm/delete-confirm.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 @NgModule({
   declarations: [
    AdminComponent,
@@ -26,7 +27,8 @@ import { DeleteConfirmComponent } from './product/delete-confirm/delete-confirm.
    ProductComponent,
    ProductDetailsComponent,
    AddProductComponent,
-   DeleteConfirmComponent
+   DeleteConfirmComponent,
+   EditProductComponent
   ],
   imports: [
     AdminRoutingModule,

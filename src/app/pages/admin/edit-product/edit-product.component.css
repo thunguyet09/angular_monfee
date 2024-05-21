@@ -334,6 +334,13 @@
   gap: 20px;
 }
 
+.sizes-input, .colors-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
 .sizes-input > input, .colors-input > input {
   width: 100px;
   padding: 8px 5px;
@@ -606,4 +613,26 @@ td > input {
   font-size: 15px;
   font-family: "Nunito", sans-serif;
   font-weight: 600;
+}
+
+.remove-size > span {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.remove-size {
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.remove-size:hover {
+  background-color: red;
+  color: white;
 }
