@@ -23,6 +23,7 @@ export class HomeComponent implements AfterViewInit {
   public detail: Product[] = []
   public imgCarousel: string[] = []
   public products: Product[] = []
+  public sale_products: Product[] = []
   async fetchData(): Promise<void> {
     this.api.getAllProducts().subscribe((data:any) => {
       const newProducts = data.sort((a:any, b:any) => {
@@ -31,6 +32,18 @@ export class HomeComponent implements AfterViewInit {
       this.data = newProducts.slice(0, 8);
     })
 
+    this.api.getAllProducts().subscribe((data:any) => {
+      const res = data.filter((item:any) => {
+        return (
+          item.hasOwnProperty("promo_price") &&
+          typeof item.promo_price !== "undefined" &&
+          item.promo_price.length > 0
+        );
+      })
+
+      this.sale_products = res.slice(0,8)
+      console.log(this.sale_products)
+    })
   }
 
   handlePrevClick(): void {

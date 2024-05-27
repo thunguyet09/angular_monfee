@@ -4,7 +4,7 @@ export interface Product {
   name: string;
   price: Array<number>;
   gia_nhap: number;
-  promo_price: number;
+  promo_price: Array<number>;
   quantity: Array<number>;
   stock: string;
   mo_ta: string;

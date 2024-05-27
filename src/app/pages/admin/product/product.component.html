@@ -196,8 +196,10 @@
                       <h4>{{quantity}}</h4>
                     </ng-container>
                   </td>
-                  <td class="price">
-                    {{item.promo_price ? item.promo_price.toLocaleString() : item.price[0].toLocaleString()}}
+                  <td class="prices">
+                    <ng-container>
+                      <h4 *ngFor="let price of item.price">{{ price.toLocaleString() }}</h4>
+                    </ng-container>
                   </td>
                   <td class="orders">
                     {{item.sales}}

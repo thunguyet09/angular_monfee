@@ -12,6 +12,7 @@ import { Theme } from 'src/app/models/Theme';
 import { CategoryService } from 'src/app/services/category.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { AddComponent } from './add/add.component';
+import { SaveIdService } from 'src/app/services/saveId.service';
 
 @Component({
   selector: 'app-category',
@@ -25,7 +26,8 @@ export class CategoryComponent implements AfterViewInit {
     private api: API,
     private router: Router,
     private CategoryService: CategoryService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private saveIdService: SaveIdService
   ) { }
   public themes: Theme[] = [];
   public bgColor: string = '';
@@ -54,7 +56,7 @@ export class CategoryComponent implements AfterViewInit {
   }
 
   getAPI(page: string) {
-    this.api.getCategoryPagination(page, '1').subscribe((data: any) => {
+    this.api.getCategoryPagination(page, '3').subscribe((data: any) => {
       this.categories = data.categories;
       this.startIndex = data.startIndex
       this.endIndex = data.endIndex
@@ -228,12 +230,12 @@ export class CategoryComponent implements AfterViewInit {
   }
 
   handleView(id: number) {
-    localStorage.setItem('categoryId', id.toString());
+    this.saveIdService.setCategoryId(id)
     this.CategoryService.setView(true);
   }
 
   handleEdit(id: number) {
-    localStorage.setItem('categoryId', id.toString());
+    this.saveIdService.setCategoryId(id)
     this.CategoryService.setView(false);
   }
 

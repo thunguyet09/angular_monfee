@@ -7,6 +7,7 @@ import { Theme } from 'src/app/models/Theme';
 import { ThemeService } from 'src/app/services/theme.service';
 import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
 import { Router } from '@angular/router';
+import { SaveIdService } from 'src/app/services/saveId.service';
 
 @Component({
   selector: 'app-product',
@@ -17,7 +18,8 @@ export class ProductComponent implements AfterViewInit {
   constructor(private themeService: ThemeService,
     private api: API,
     private dialog: MatDialog,
-    private router: Router) { }
+    private router: Router,
+    private saveIdService: SaveIdService) { }
   public themes: Theme[] = [];
   public products: Product[] = []
   public categories: Category[] = []
@@ -224,7 +226,6 @@ export class ProductComponent implements AfterViewInit {
     const numberSelect = document.querySelector('.number-select') as HTMLElement;
     const removeItem = document.querySelector('.select-remove') as HTMLElement;
 
-    console.log(this.removeArr)
     if (this.removeArr.length > 0) {
       removeItem.style.display = 'flex';
       numberSelect.innerHTML = `(${this.removeArr.length})`;
@@ -323,7 +324,7 @@ export class ProductComponent implements AfterViewInit {
   }
 
   handleEdit(id: number){
-    localStorage.setItem('productId', id.toString())
+    this.saveIdService.setProductId(id)
     this.router.navigate(['/admin/edit-product'])
   }
 }

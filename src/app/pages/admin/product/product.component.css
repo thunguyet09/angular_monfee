@@ -75,6 +75,13 @@
   width: 22%;
 }
 
+.prices > h4{
+  font-family: "Nunito", sans-serif;
+  margin: 0;
+  font-weight: 600;
+  color:rgb(102, 145, 231);
+}
+
 .table-part {
   width: 78%;
   height: 100%;

@@ -3,6 +3,7 @@ import { API } from 'src/app/api/api.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/models/Category';
+import { SaveIdService } from 'src/app/services/saveId.service';
 @Component({
   selector: 'app-category-details',
   templateUrl: './category_details.component.html',
@@ -11,15 +12,20 @@ import { Category } from 'src/app/models/Category';
 export class CategoryDetailsComponent {
   categoryForm!: FormGroup;
   isView:boolean = true;
-  constructor(private api: API, private CategoryService: CategoryService){}
+  constructor(private api: API,
+              private CategoryService: CategoryService,
+              private saveIdService: SaveIdService){}
 
   public categories: Category[] = [];
-  public id: string | null = localStorage.getItem('categoryId');
+  public id = 0;
 
   ngOnInit() {
     this.CategoryService.getView().subscribe((data) => {
       this.isView = data;
       this.initializeForm()
+    })
+    this.saveIdService.getCategoryId().subscribe((val) => {
+      this.id = val
     })
     const currentDate = new Date()
     const year = currentDate.getFullYear()
@@ -38,7 +44,7 @@ export class CategoryDetailsComponent {
         formatDate = year + "-" + month + "-" + day + " " + hour + ":" + minute
     }
     if (this.id !== null) {
-      this.api.getCategoryDetail(parseInt(this.id)).subscribe((data: any) => {
+      this.api.getCategoryDetail(this.id).subscribe((data: any) => {
         this.categories = [data];
         this.categoryForm.controls['name'].patchValue(data.name);
         this.categoryForm.controls['date_added'].patchValue(data.date_added)
@@ -116,7 +122,7 @@ export class CategoryDetailsComponent {
     const dialog_icon = document.querySelector('#dialog-content > span') as HTMLElement
     const dialog_text = document.querySelector('.dialog-text') as HTMLElement
     if(this.id !== null){
-      this.api.updateCategory(parseInt(this.id), this.categoryForm.value).subscribe((res) => {
+      this.api.updateCategory(this.id, this.categoryForm.value).subscribe((res) => {
         dialog_content.style.display = 'flex'
         dialog_content.style.backgroundColor = '#ABC270'
         dialog_icon.innerHTML = '<i class="fa-solid fa-check"></i>'

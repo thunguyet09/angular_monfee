@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { API } from 'src/app/api/api.service';
 import { Category } from 'src/app/models/Category';
 import { Product } from 'src/app/models/Product';
+import { SaveIdService } from 'src/app/services/saveId.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -14,7 +15,6 @@ export class EditProductComponent implements AfterViewInit{
   editForm!: FormGroup;
   public categories: Category[] = []
   public products: Product[] = []
-  public id = localStorage.getItem('productId')
   public data: any[] = []
   public colorsArr: string[] = []
   public status = ''
@@ -22,12 +22,16 @@ export class EditProductComponent implements AfterViewInit{
   public description = ''
   public gia_nhap = ''
   public gallery_images:string[] = []
-  constructor(private api: API, private router: Router) { }
+  constructor(private api: API, private router: Router,private saveIdService: SaveIdService) { }
   public categoryId: number = 0;
+  public id = 0;
   ngOnInit() {
     this.initializeForm()
     this.getCategories()
     this.getProducts()
+    this.saveIdService.getProductId().subscribe((val) => {
+      this.id = val;
+    })
     const img = document.querySelector('.imgBox > img') as HTMLImageElement
     const scheduled_status = document.querySelector('.schedule-status > input') as HTMLInputElement
     this.api.getDetail(this.id).subscribe((data: any) => {
@@ -230,7 +234,7 @@ export class EditProductComponent implements AfterViewInit{
     this.editForm.patchValue({'date_modified': formatDate})
 
     if(this.id && this.editForm && this.editForm.valid){
-      this.api.updateProduct(parseInt(this.id),this.editForm.value).subscribe((data) => {
+      this.api.updateProduct(this.id,this.editForm.value).subscribe((data) => {
         this.router.navigate(['/admin/products'])
       })
       console.log(this.editForm.value)
