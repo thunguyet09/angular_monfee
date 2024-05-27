@@ -194,11 +194,11 @@
                   <div class="product_item_v1">
                       <div class="product_grid_parent">
                         <ng-container *ngFor="let item of pagination">
-                          <div class="row">
-                            <div class="img_product">
+                          <div class="row" (click)="handleNavigation(item.id)">
+                            <div class="img_product" (mouseenter)="imgProductMouseEnter($event)" (mouseleave)="imgProductMouseLeave($event)">
                               <img src="./assets/img/{{item.img_url[0]}}" width="280px" />
                               <ul class="product_icon_action">
-                                  <button class="select_option" *ngIf="item.colors; else addToCart">
+                                  <button class="select_option" *ngIf="item.colors.length > 0; else addToCart" (click)="handleNavigation(item.id)">
                                     <span class="material-symbols-outlined">more_horiz</span>
                                   </button>
                                   <ng-template  #addToCart>
@@ -206,7 +206,7 @@
                                       <span class="material-symbols-outlined">local_mall</span>
                                     </button>
                                   </ng-template>
-                                  <button>
+                                  <button >
                                     <span class="material-symbols-outlined">search</span>
                                   </button>
                                   <button>
@@ -226,9 +226,13 @@
                             </ng-template>
 
                             <div class="product_colors" *ngIf="item.colors.length > 0">
-                              <ng-container *ngFor="let item of item.colors">
-                                <button [style.backgroundColor]="item"></button>
+                              <ng-container *ngFor="let color of item.colors">
+                                <button [style.backgroundColor]="color"></button>
                               </ng-container>
+                            </div>
+
+                            <div *ngIf="item.promo_price && item.promo_price.length > 0 && item.promo_price[0] > 0" class="discount">
+                              -{{getDiscountPercentage(item.promo_price, item.price)}}%
                             </div>
                           </div>
                         </ng-container>

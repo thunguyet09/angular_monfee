@@ -521,18 +521,6 @@
   list-style-type: none;
 }
 
-.list_price>li {
-  list-style-type: none;
-  padding: 10px 0px;
-  font-family: "Nunito", sans-serif;
-}
-
-.list_price>li>a {
-  font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
-  transition: .2s ease;
-}
 
 .list_price>li>a:hover {
   color: #b8784e;
@@ -597,6 +585,7 @@
   flex-direction: column;
   width: 280px;
   position: relative;
+  text-align: center;
 }
 
 .img_product {
@@ -611,7 +600,8 @@
 .row>.title_product {
   font-family: "Nunito", sans-serif;
   font-size: 17px;
-  height: 23px;
+  height: 50px;
+  font-weight: 600;
 }
 
 .product_icon_action {
@@ -684,29 +674,37 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 7px;
   font-family: "Nunito", sans-serif;
 }
 
 .price_box>h4 {
   color: #b8784e;
   font-size: 17px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  margin: 0;
 }
 
 .price_item {
   font-family: "Nunito", sans-serif;
+  font-weight: 600;
   color: #b8784e;
   font-size: 17px;
+  margin: 0;
 }
 
 .price_box>h5 {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
   font-size: 16px;
   color: rgb(122, 122, 122);
 }
 
 .product_colors {
   position: absolute;
-  bottom: 43%;
+  bottom: 37%;
   left: 38%;
   display: none;
   flex-direction: row;
@@ -756,6 +754,7 @@
   top: 10px;
   left: 10px;
   font-family: "Nunito", sans-serif;
+  font-weight: 600;
   background-color: #ed1f1f;
   font-size: 12px;
   color: white;
@@ -772,6 +771,7 @@
   color:#b8784e;
   cursor: pointer;
 }
+
 .filter_v2 {
   margin-top: 25px;
   transition: all .3s ease;
@@ -917,7 +917,7 @@
   gap: 10px;
 }
 
-.pagination > a, .total_pages > a{
+.pagination > a{
   font-family: "Nunito", sans-serif;
   border: 1px solid rgb(216, 216, 216);
   width: 45px;
@@ -971,7 +971,6 @@
 }
 
 .rows_per_page{
-  font-family: "Nunito", sans-serif;
   display: flex;
   flex-direction: row;
   gap: 20px;
@@ -980,7 +979,10 @@
 }
 
 .rows_per_page > h4 {
+  font-family: "Nunito", sans-serif;
   margin: 0;
+  font-weight: 600;
+  font-size: 16px;
 }
 .row_list > ul > li{
   list-style-type: none;
@@ -994,10 +996,6 @@
   padding: 0;
 }
 
-.rows_per_page > h4 {
-  font-weight: 650;
-  font-size: 16px;
-}
 .row_active {
   padding: 5px 15px;
   font-family: "Nunito", sans-serif;
@@ -1032,4 +1030,8 @@
 .title_product:hover {
   color: #b8784e;
   cursor: pointer;
+}
+
+.addToCart > span {
+  font-size: 22px;
 }
