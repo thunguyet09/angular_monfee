@@ -7,12 +7,14 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { ProductComponent } from './product/product.component';
 @NgModule({
   declarations: [
     UserComponent,
     HeaderComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    ProductComponent
   ],
   imports: [
     CommonModule,

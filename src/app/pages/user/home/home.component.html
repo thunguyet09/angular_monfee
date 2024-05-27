@@ -156,7 +156,7 @@
         <p>Discount every Monday</p>
         <div class="products_sale">
           <ng-container *ngFor="let item of sale_products">
-            <div class="productItem">
+            <div class="productItem" (mouseenter)="saleProductMouseEnter($event)" (mouseleave)="saleProductMouseLeave($event)">
               <div class="actionBtns">
                 <div class="heartBtn">
                   <button><span class="material-symbols-outlined">favorite</span></button>
@@ -170,8 +170,9 @@
                     Add to Cart
                   </div>
                 </div>
+
                 <div class="searchBtn">
-                  <button><span class="material-symbols-outlined">search</span></button>
+                  <button (click)="handleQuickView(item.id)"><span class="material-symbols-outlined">search</span></button>
                   <div class="tooltip">
                     Quick view
                   </div>
@@ -199,7 +200,7 @@
 
               <div class="imgThumbnail">
                 <ng-container *ngFor="let img of item.img_url">
-                  <img [class]="item.img_url[0] == img ? 'activeImg' : '' "src="./assets/img/{{img}}" width="45px" />
+                  <img [class]="item.img_url[0] == img ? 'activeImg' : '' "src="./assets/img/{{img}}" width="45px" (click)="handleThumbnails($event)"/>
                 </ng-container>
               </div>
             </div>

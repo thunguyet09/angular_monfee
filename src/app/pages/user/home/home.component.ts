@@ -17,6 +17,7 @@ export class HomeComponent implements AfterViewInit {
 
   ngOnInit(): void {
     this.fetchData();
+    this.handleDraggable();
   }
 
   public data: Product[] = []
@@ -178,5 +179,37 @@ export class HomeComponent implements AfterViewInit {
 
   addToCart(){
     console.log(this.quantity)
+  }
+
+  saleProductMouseEnter(event: Event){
+    const target = event.target as HTMLElement
+    const actions = target.childNodes[0] as HTMLElement
+    actions.style.display = 'flex'
+  }
+
+  saleProductMouseLeave(event: Event){
+    const target = event.target as HTMLElement
+    const actions = target.childNodes[0] as HTMLElement
+    actions.style.display = 'none'
+  }
+
+  handleDraggable(){
+    const draggableBtns = document.querySelectorAll('.draggable > button')
+    const productBox = document.querySelector('.products_sale') as HTMLElement
+    draggableBtns.forEach((val:any) => {
+      val.addEventListener("click", () => {
+        draggableBtns.forEach((res) => {
+          res.removeAttribute("id");
+        });
+        val.setAttribute("id", 'slide_active');
+        if (val.textContent == 2) {
+          productBox.style.transform = "translate3d(-1250px, 0px, 0px)";
+        } else if (val.textContent == 3) {
+          productBox.style.transform = "translate3d(-1670px, 0px, 0px)";
+        } else {
+          productBox.style.transform = "translate3d(0px, 0px, 0px)";
+        }
+      });
+    });
   }
 }

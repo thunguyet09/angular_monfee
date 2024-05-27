@@ -1,0 +1,287 @@
+<div class="main">
+  <router-outlet></router-outlet>
+  <div class="homePage">
+    <div id="products">
+      <div class="title_page">
+        <img src="./assets/img/product_bg.webp" width="100%" />
+        <div class="bread_crumb">
+          <h1>Products</h1>
+          <div>
+            <h4>Home</h4>
+            <span class="material-symbols-outlined">chevron_right</span>
+            <h4>Products</h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="collectionBox">
+        <div class="cate_collection">
+          <div class="slick_track">
+            <div class="slider_item">
+              <img src="./assets/img/collect1.jpg" width="110px" height="110px" />
+              <h3>ALL ITEMS</h3>
+            </div>
+            <div class="slider_item">
+              <img src="./assets/img/collect2.jpg" width="110px" height="110px" />
+              <h3>BEST SELLER</h3>
+            </div>
+            <div class="slider_item">
+              <img src="./assets/img/collect3.jpg" width="110px" height="110px" />
+              <h3>COFFEE</h3>
+            </div>
+            <div class="slider_item">
+              <img src="./assets/img/collect4.jpg" width="110px" height="110px" />
+              <h3>SALE</h3>
+            </div>
+            <div class="slider_item">
+              <img src="./assets/img/collect5.jpg" width="110px" height="110px" />
+              <h3>NEW</h3>
+            </div>
+            <div class="slider_item">
+              <img src="./assets/img/collect6.jpg" width="110px" height="110px" />
+              <h3>HIGHLIGHT</h3>
+            </div>
+          </div>
+          <button class="prevBtn"><span class="material-symbols-outlined">arrow_back_ios</span></button>
+          <button class="nextBtn"><span class="material-symbols-outlined">arrow_forward_ios</span></button>
+        </div>
+      </div>
+
+      <div class="shop_container">
+        <div class="widget">
+          <div class="filter_category">
+            <div class="widget_title">
+              <h3>Categories</h3>
+            </div>
+            <div class="widget_content">
+              <ul>
+                <li><a href='/'>Home</a></li>
+                <li><a href=''>Shop</a></li>
+                <li><a href='/'>Featured</a></li>
+                <li><a href='/'>Pages</a></li>
+                <li><a href='/'>Element</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="color_option">
+            <div class="widget_title">
+              <h3>Color Option</h3>
+            </div>
+            <div>
+              <ul class="list_color">
+                <ng-container *ngFor="let item of uniqueColors">
+                  <li><a title="{{item}}" [style.backgroundColor]="item"></a></li>
+                </ng-container>
+              </ul>
+            </div>
+          </div>
+          <div class="size_option">
+            <div class="widget_title">
+              <h3>Size Option</h3>
+            </div>
+            <div>
+              <ul class="list_size">
+                <ng-container *ngFor="let item of uniqueSizes">
+                  <li><a title="{{item}}">{{item}}</a></li>
+                </ng-container>
+              </ul>
+            </div>
+          </div>
+          <div class="price_filter_option">
+            <div class="widget_title">
+              <h3>Price Filter</h3>
+            </div>
+            <div>
+              <ul class="list_price"></ul>
+            </div>
+          </div>
+          <div class="banner_sidebar">
+            <a>
+              <img src='./assets/img/banner_sidebar.webp' width="350px" />
+            </a>
+          </div>
+        </div>
+
+        <div class="product_view">
+          <div class="shop_control">
+              <div class="shop_control_col1">
+                  <button class="filterBtn">
+                      <span><i class="fa-solid fa-filter"></i></span>
+                      <h3>FILTER</h3>
+                  </button>
+              </div>
+              <div class="shop_control_col2">
+                  <div class="change_column">
+                      <div class="prod_per">
+                          <button class="col_size_2">2</button>
+                          <button class="col_size_3">3</button>
+                          <button class="col_size_4" id="size_active">4</button>
+                          <button class="col_size_5">5</button>
+                      </div>
+                      <button class="icon_change">
+                          <img src="./assets/img/column.png" width="35px" height="35px" />
+                      </button>
+                  </div>
+                  <div class="featured">
+                      <button class="featuredBtn">
+                          <h3>Featured</h3>
+                          <span class="material-symbols-outlined">arrow_drop_down</span>
+                      </button>
+                      <ul class="dropdown">
+                          <li value="0">Featured</li>
+                          <li value="1">Best Selling</li>
+                          <li value="2">Alphabetically, A-Z</li>
+                          <li value="3">Price, high to low</li>
+                          <li value="4">Price, low to high</li>
+                          <li value="5">Date, old to new</li>
+                          <li value="6">Date, new to old</li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <div class="filter_v2">
+              <div class="filter_box">
+                  <div class="col">
+                      <div class="col_title">
+                          <h2>Categories</h2>
+                      </div>
+                      <div class="col_content">
+                          <ul>
+                              <li><a href="/">Home</a></li>
+                              <li><a href="/shop">Shop</a></li>
+                              <li><a href="/">Featured</a></li>
+                              <li><a href="/">Pages</a></li>
+                              <li><a href="/">Element</a></li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="col">
+                      <div class="col_title">
+                          <h2>Color Option</h2>
+                      </div>
+                      <div class="col_content">
+                          <div class="filter_colors">
+
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col">
+                      <div class="col_title">
+                          <h2>Size Option</h2>
+                      </div>
+                      <div class="col_content">
+                          <div class="filter_size">
+                              <button id="500g">500g</button>
+                              <button id="1000g">1000g</button>
+                              <button id="1500g">1500g</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col">
+                      <div class="col_title">
+                          <h2>Price Filter</h2>
+                      </div>
+                      <div class="col_content">
+                          <ul class="filter_price">
+
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="product_grid_uniform">
+              <div class="product_items">
+                  <div class="product_item_v1">
+                      <div class="product_grid_parent">
+                        <ng-container *ngFor="let item of pagination">
+                          <div class="row">
+                            <div class="img_product">
+                              <img src="./assets/img/{{item.img_url[0]}}" width="280px" />
+                              <ul class="product_icon_action">
+                                  <button class="select_option" *ngIf="item.colors; else addToCart">
+                                    <span class="material-symbols-outlined">more_horiz</span>
+                                  </button>
+                                  <ng-template  #addToCart>
+                                    <button class="addToCart">
+                                      <span class="material-symbols-outlined">local_mall</span>
+                                    </button>
+                                  </ng-template>
+                                  <button>
+                                    <span class="material-symbols-outlined">search</span>
+                                  </button>
+                                  <button>
+                                    <span class="material-symbols-outlined">favorite</span>
+                                  </button>
+                              </ul>
+                            </div>
+                            <h4 class="title_product">{{item.name}}</h4>
+                            <ng-container *ngIf="item.promo_price && item.promo_price.length > 0 && item.promo_price[0] > 0; else PromoPrice">
+                                <div class="price_box">
+                                  <h5><del>{{item.price[0].toLocaleString()}}</del></h5>
+                                  <h4>{{item.promo_price[0].toLocaleString()}}</h4>
+                                </div>
+                            </ng-container>
+                            <ng-template #PromoPrice>
+                                <h4 class="price_item">{{item.price[0].toLocaleString()}}</h4>
+                            </ng-template>
+
+                            <div class="product_colors" *ngIf="item.colors.length > 0">
+                              <ng-container *ngFor="let item of item.colors">
+                                <button [style.backgroundColor]="item"></button>
+                              </ng-container>
+                            </div>
+                          </div>
+                        </ng-container>
+                      </div>
+                  </div>
+              </div>
+              <div class="pagi_nav">
+                  <div class="pagination">
+                      <a class="first_page">
+                          <span class="material-symbols-outlined">
+                              keyboard_double_arrow_left
+                          </span>
+                      </a>
+                      <a class="prev_page">
+                          <span class="material-symbols-outlined">
+                              arrow_back_ios_new
+                          </span>
+                      </a>
+                      <div class="total_pages"></div>
+                      <a class="next_page">
+                          <span class="material-symbols-outlined">
+                              arrow_forward_ios
+                          </span>
+                      </a>
+                      <a class="last_page">
+                          <span class="material-symbols-outlined">
+                              keyboard_double_arrow_right
+                          </span>
+                      </a>
+                  </div>
+                  <div class="rows_per_page">
+                      <h4>Items per page:</h4>
+                      <div class="row_list">
+                          <button class="row_active">
+                              <span>12</span>
+                              <span class="material-symbols-outlined">
+                                  arrow_drop_down
+                              </span>
+                          </button>
+                          <ul>
+                              <li><a>6</a></li>
+                              <li><a>8</a></li>
+                              <li><a>10</a></li>
+                              <li><a>12</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+
+    </div>
+    <app-footer></app-footer>
+  </div>
+</div>
