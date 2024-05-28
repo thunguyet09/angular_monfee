@@ -44,6 +44,7 @@ export class ProductDetailComponent {
     this.loadDetail(this.productId)
   }
 
+  public zeroIndices:number[] = [];
   loadDetail(productId:number){
     this.api.getDetail(productId).subscribe((data: any) => {
       this.detail = [data]
@@ -51,7 +52,18 @@ export class ProductDetailComponent {
       console.log(this.originalQuantity)
       this.maxQuantity = Math.max(...data.quantity)
       this.remain_quantity = this.originalQuantity - this.maxQuantity
+
+      this.findZeroIndices(data.quantity)
     })
+  }
+
+  private findZeroIndices(quantities: number[]): void {
+    this.zeroIndices = quantities.reduce((indices:number[], quantity, index) => {
+      if (quantity === 0) {
+        indices.push(index);
+      }
+      return indices;
+    }, []);
   }
   loadNextProdData(nextProdId: number) {
     this.api.getDetail(nextProdId).subscribe((data: any) => {
