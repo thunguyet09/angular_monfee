@@ -1,1 +1,167 @@
-<p>product-detail works!</p>
+<div class="main">
+  <router-outlet></router-outlet>
+  <div class="homePage">
+    <div id="detail">
+      <ng-container *ngFor="let item of detail">
+        <div class="bread_crumb">
+          <div class="back_page">
+            <a href="/">Home</a>
+            <span class="material-symbols-outlined">
+              navigate_next
+            </span>
+            <strong class="product_name">{{item.name}}</strong>
+          </div>
+          <div class="arrows_product">
+            <div class="prev_prod">
+              <div class="prev_prod_btn" (click)="handlePrevProdBtn()" (mouseenter)="prevProdMouseEnter($event)" (mouseleave)="prevProdMouseLeave($event)">
+                <span class="material-symbols-outlined">
+                  arrow_back_ios_new
+                </span>
+                <h4>PREV</h4>
+              </div>
+              <div class="img_prev">
+                <ng-container *ngFor="let prevProd of prev_prod">
+                  <a [routerLink]="['/products', item.id]">
+                    <img [src]="'./assets/img/' + prevProd.img_url[0]" width="80px" />
+                  </a>
+                  <div class="info_prod">
+                    <a [routerLink]="['/products' + prevProd.id]">{{prevProd.name}}</a>
+                    <p *ngIf="prevProd.promo_price && prevProd.promo_price[0] > 0; else PromoPrice">
+                      {{prevProd.promo_price[0].toLocaleString()}}&#8363;</p>
+                    <ng-template #PromoPrice>
+                      <p>{{prevProd.price[0].toLocaleString()}}&#8363;</p>
+                    </ng-template>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div class="next_prod">
+              <div class="next_prod_btn" (click)="handleNextProdBtn()" (mouseenter)="NextProdBtnMouseEnter($event)" (mouseleave)="nextProdBtnMouseLeave($event)">
+                <h4>NEXT</h4>
+                <span class="material-symbols-outlined">
+                  navigate_next
+                </span>
+              </div>
+              <div class="img_next">
+                <ng-container *ngFor="let nextProd of next_prod">
+                  <a [routerLink]="['/products' + nextProd.id]">
+                    <img [src]="'./assets/img/' + nextProd.img_url[0]" width="80px" />
+                  </a>
+                  <div class="info_prod">
+                    <a [routerLink]="['/products' + nextProd.id]">{{nextProd.name}}</a>
+                    <p *ngIf="nextProd.promo_price && nextProd.promo_price[0] > 0; else PromoPrice">
+                      {{nextProd.promo_price[0].toLocaleString()}}&#8363;</p>
+                    <ng-template #PromoPrice>
+                      <p>{{nextProd.price[0].toLocaleString()}}&#8363;</p>
+                    </ng-template>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail_container">
+          <div class="slide_wrapper">
+              <div class="slides">
+                <ng-container *ngFor="let img of item.img_url">
+                  <img src="./assets/img/{{img}}" class="slick_slide" (click)="handleImgSlide(img)"/>
+                </ng-container>
+              </div>
+              <div class="slider">
+                  <img id="featured" src="./assets/img/{{item.img_url[0]}}"/>
+                  <img class="img1" />
+              </div>
+          </div>
+          <div class="detail_content">
+              <div class="product_title">
+                  <h1>{{item.name}}</h1>
+                  <div class="top_product" *ngIf="top_selling_product.length > 0">
+                    HOT
+                  </div>
+                  <div class="wishlist_icon">
+                      <h4></h4>
+                      <span><i class="fa-regular fa-heart"></i></span>
+                  </div>
+              </div>
+              <div class="main_detail">
+                <div class="sales">
+                  Lượt bán: {{item.sales}}
+                </div>
+                <div class="prices">
+                  <ng-container *ngIf="item.promo_price.length > 0 && item.promo_price[0] > 0; else PromoPrice1">
+                    <h2>{{item.promo_price[0].toLocaleString}}&#8363;</h2>
+                    <h3><del>{{item.price[0].toLocaleString()}}&#8363;</del></h3>
+                  </ng-container>
+                  <ng-template #PromoPrice1>
+                    <h2>{{item.price[0].toLocaleString()}}&#8363;</h2>
+                  </ng-template>
+                </div>
+                <div class="wrap_rating">
+                  <div>
+                    <span class="material-symbols-outlined">star</span>
+                    <span class="material-symbols-outlined">star</span>
+                    <span class="material-symbols-outlined">star</span>
+                    <span class="material-symbols-outlined">star</span>
+                    <span class="material-symbols-outlined">star_half</span>
+                  </div>
+                  <h5>1 review</h5>
+                </div>
+                <div class="describe">
+                  {{item.mo_ta}}
+                </div>
+
+                <div class="count_down">
+                  <h3 class="count_down_text">HURRY! ONLY <b>{{maxQuantity}}</b> LEFT IN STOCK</h3>
+                  <input type="range" min="0" max="{{originalQuantity}}" value="{{remain_quantity}}" class="process" disabled/>
+                </div>
+
+                <div class="size_guide">
+                  <img src="./assets/img/size.png" width="21px"/>
+                  <h4>Size guide</h4>
+                </div>
+
+                <div class="size_box">
+                  <button class="size_btn">SIZE</button>
+                  <div class="size_items">
+                    <ng-container *ngFor="let size of item.sizes">
+                      <button>{{size}}</button>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="content_detail">
+              <div class="content_box">
+                  <div class="content_text">
+                      <h3 class="content_title">Tại sao chọn chúng tôi ?</h3>
+                      <div class="text">
+                          Sở hữu 20 năm kinh nghiệm trong lĩnh vực đồ uống, chúng tôi tự tin khẳng định uy tín trong lòng khách hàng. Mục tiêu của chúng tôi là mang đến chất lượng tiêu chuẩn và trải nghiệm tuyệt vời cho khách hàng.
+                      </div>
+                  </div>
+              </div>
+              <div class="content_box">
+                  <div class="content_text">
+                      <h3 class="content_title">Hoàn trả</h3>
+                      <div class="text">
+                          Hoàn trả sản phẩm trong vòng 100 ngày nếu bạn thay đổi ý định.
+                          Nhận tiền hoàn lại/thay thế sản phẩm khác và miễn phí vận chuyển hoàn trả hàng nếu sản phẩm bị hư hỏng hoặc không như mô tả
+                      </div>
+                  </div>
+              </div>
+              <div class="content_box">
+                  <div class="content_text">
+                      <h3 class="content_title">Vận chuyển</h3>
+                      <div class="text">
+                          Giao hàng nhanh chóng, hỗ trợ phí vận chuyển.
+                          Miễn phí vận chuyển cho đơn hàng trong bán kính 3km
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </ng-container>
+    </div>
+    <app-footer></app-footer>
+  </div>
+</div>
