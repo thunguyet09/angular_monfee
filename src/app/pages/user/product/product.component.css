@@ -243,7 +243,6 @@
 }
 
 .filterBtn {
-  font-family: "Nunito", sans-serif;
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -264,9 +263,10 @@
 
 .filterBtn>h3 {
   margin: 0;
-  font-size: 19px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 650;
   letter-spacing: 2px;
+  font-family: "Nunito", sans-serif;
 }
 
 .filterBtn>span > i {

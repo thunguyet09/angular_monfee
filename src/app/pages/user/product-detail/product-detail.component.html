@@ -13,7 +13,8 @@
           </div>
           <div class="arrows_product">
             <div class="prev_prod">
-              <div class="prev_prod_btn" (click)="handlePrevProdBtn()" (mouseenter)="prevProdMouseEnter($event)" (mouseleave)="prevProdMouseLeave($event)">
+              <div class="prev_prod_btn" (click)="handlePrevProdBtn()" (mouseenter)="prevProdMouseEnter($event)"
+                (mouseleave)="prevProdMouseLeave($event)">
                 <span class="material-symbols-outlined">
                   arrow_back_ios_new
                 </span>
@@ -36,7 +37,8 @@
               </div>
             </div>
             <div class="next_prod">
-              <div class="next_prod_btn" (click)="handleNextProdBtn()" (mouseenter)="NextProdBtnMouseEnter($event)" (mouseleave)="nextProdBtnMouseLeave($event)">
+              <div class="next_prod_btn" (click)="handleNextProdBtn()" (mouseenter)="NextProdBtnMouseEnter($event)"
+                (mouseleave)="nextProdBtnMouseLeave($event)">
                 <h4>NEXT</h4>
                 <span class="material-symbols-outlined">
                   navigate_next
@@ -63,103 +65,205 @@
 
         <div class="detail_container">
           <div class="slide_wrapper">
-              <div class="slides">
-                <ng-container *ngFor="let img of item.img_url">
-                  <img src="./assets/img/{{img}}" class="slick_slide" (click)="handleImgSlide(img)"/>
-                </ng-container>
-              </div>
-              <div class="slider">
-                  <img id="featured" src="./assets/img/{{item.img_url[0]}}"/>
-                  <img class="img1" />
-              </div>
+            <div class="slides">
+              <ng-container *ngFor="let img of item.img_url">
+                <img src="./assets/img/{{img}}" class="slick_slide" (click)="handleImgSlide(img)" />
+              </ng-container>
+            </div>
+            <div class="slider">
+              <img id="featured" src="./assets/img/{{item.img_url[0]}}" />
+              <img class="img1" />
+            </div>
           </div>
           <div class="detail_content">
-              <div class="product_title">
-                  <h1>{{item.name}}</h1>
-                  <div class="top_product" *ngIf="top_selling_product.length > 0">
-                    HOT
-                  </div>
-                  <div class="wishlist_icon">
-                      <h4></h4>
-                      <span><i class="fa-regular fa-heart"></i></span>
-                  </div>
+            <div class="product_title">
+              <h1>{{item.name}}</h1>
+              <div class="top_product" *ngIf="top_selling_product.length > 0">
+                HOT
               </div>
-              <div class="main_detail">
-                <div class="sales">
-                  Lượt bán: {{item.sales}}
+              <div class="wishlist_icon">
+                <h4></h4>
+                <span><i class="fa-regular fa-heart"></i></span>
+              </div>
+            </div>
+            <div class="main_detail">
+              <div class="sales">
+                Lượt bán: {{item.sales}}
+              </div>
+              <div class="prices">
+                <ng-container *ngIf="item.promo_price.length > 0 && item.promo_price[0] > 0; else PromoPrice1">
+                  <h2>{{item.promo_price[0].toLocaleString}}&#8363;</h2>
+                  <h3><del>{{item.price[0].toLocaleString()}}&#8363;</del></h3>
+                </ng-container>
+                <ng-template #PromoPrice1>
+                  <h2>{{item.price[0].toLocaleString()}}&#8363;</h2>
+                </ng-template>
+              </div>
+              <div class="wrap_rating">
+                <div>
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star_half</span>
                 </div>
-                <div class="prices">
-                  <ng-container *ngIf="item.promo_price.length > 0 && item.promo_price[0] > 0; else PromoPrice1">
-                    <h2>{{item.promo_price[0].toLocaleString}}&#8363;</h2>
-                    <h3><del>{{item.price[0].toLocaleString()}}&#8363;</del></h3>
+                <h5>1 review</h5>
+              </div>
+              <div class="describe">
+                {{item.mo_ta}}
+              </div>
+
+              <div class="count_down">
+                <h3 class="count_down_text">HURRY! ONLY <b>{{maxQuantity}}</b> LEFT IN STOCK</h3>
+                <input type="range" min="0" max="{{originalQuantity}}" value="{{remain_quantity}}" class="process"
+                  disabled />
+              </div>
+
+              <div class="size_guide">
+                <img src="./assets/img/size.png" width="21px" />
+                <h4>Size guide</h4>
+              </div>
+
+              <div class="size_box">
+                <button class="size_btn">SIZE</button>
+                <div class="size_items">
+                  <ng-container *ngFor="let size of item.sizes">
+                    <button>{{size}}</button>
                   </ng-container>
-                  <ng-template #PromoPrice1>
-                    <h2>{{item.price[0].toLocaleString()}}&#8363;</h2>
-                  </ng-template>
-                </div>
-                <div class="wrap_rating">
-                  <div>
-                    <span class="material-symbols-outlined">star</span>
-                    <span class="material-symbols-outlined">star</span>
-                    <span class="material-symbols-outlined">star</span>
-                    <span class="material-symbols-outlined">star</span>
-                    <span class="material-symbols-outlined">star_half</span>
-                  </div>
-                  <h5>1 review</h5>
-                </div>
-                <div class="describe">
-                  {{item.mo_ta}}
-                </div>
-
-                <div class="count_down">
-                  <h3 class="count_down_text">HURRY! ONLY <b>{{maxQuantity}}</b> LEFT IN STOCK</h3>
-                  <input type="range" min="0" max="{{originalQuantity}}" value="{{remain_quantity}}" class="process" disabled/>
-                </div>
-
-                <div class="size_guide">
-                  <img src="./assets/img/size.png" width="21px"/>
-                  <h4>Size guide</h4>
-                </div>
-
-                <div class="size_box">
-                  <button class="size_btn">SIZE</button>
-                  <div class="size_items">
-                    <ng-container *ngFor="let size of item.sizes">
-                      <button>{{size}}</button>
-                    </ng-container>
-                  </div>
                 </div>
               </div>
+
+              <div class="color_box">
+                <button class="color_btn">COLOR</button>
+                <div class="color_items">
+                  <ng-container *ngFor="let item of item.colors">
+                    <div class="color_block">
+                      <button [style.backgroundColor]="item" value="{{item}}" type="button"></button>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="detail_actions">
+                <div class="quantity_box">
+                  <input value="1" />
+                  <div class="quantity_btns">
+                    <button><span class="material-symbols-outlined">add</span></button>
+                    <button><span class="material-symbols-outlined">remove</span></button>
+                  </div>
+                </div>
+                <button class="addToCart">
+                  ADD TO CART
+                </button>
+              </div>
+              <button class="buy_now">BUY IT NOW</button>
+            </div>
           </div>
           <div class="content_detail">
-              <div class="content_box">
-                  <div class="content_text">
-                      <h3 class="content_title">Tại sao chọn chúng tôi ?</h3>
-                      <div class="text">
-                          Sở hữu 20 năm kinh nghiệm trong lĩnh vực đồ uống, chúng tôi tự tin khẳng định uy tín trong lòng khách hàng. Mục tiêu của chúng tôi là mang đến chất lượng tiêu chuẩn và trải nghiệm tuyệt vời cho khách hàng.
-                      </div>
-                  </div>
+            <div class="content_box">
+              <div class="content_text">
+                <h3 class="content_title">Tại sao chọn chúng tôi ?</h3>
+                <div class="text">
+                  Sở hữu 20 năm kinh nghiệm trong lĩnh vực đồ uống, chúng tôi tự tin khẳng định uy tín trong lòng khách
+                  hàng. Mục tiêu của chúng tôi là mang đến chất lượng tiêu chuẩn và trải nghiệm tuyệt vời cho khách
+                  hàng.
+                </div>
               </div>
-              <div class="content_box">
-                  <div class="content_text">
-                      <h3 class="content_title">Hoàn trả</h3>
-                      <div class="text">
-                          Hoàn trả sản phẩm trong vòng 100 ngày nếu bạn thay đổi ý định.
-                          Nhận tiền hoàn lại/thay thế sản phẩm khác và miễn phí vận chuyển hoàn trả hàng nếu sản phẩm bị hư hỏng hoặc không như mô tả
-                      </div>
-                  </div>
+            </div>
+            <div class="content_box">
+              <div class="content_text">
+                <h3 class="content_title">Hoàn trả</h3>
+                <div class="text">
+                  Hoàn trả sản phẩm trong vòng 100 ngày nếu bạn thay đổi ý định.
+                  Nhận tiền hoàn lại/thay thế sản phẩm khác và miễn phí vận chuyển hoàn trả hàng nếu sản phẩm bị hư hỏng
+                  hoặc không như mô tả
+                </div>
               </div>
-              <div class="content_box">
-                  <div class="content_text">
-                      <h3 class="content_title">Vận chuyển</h3>
-                      <div class="text">
-                          Giao hàng nhanh chóng, hỗ trợ phí vận chuyển.
-                          Miễn phí vận chuyển cho đơn hàng trong bán kính 3km
-                      </div>
-                  </div>
+            </div>
+            <div class="content_box">
+              <div class="content_text">
+                <h3 class="content_title">Vận chuyển</h3>
+                <div class="text">
+                  Giao hàng nhanh chóng, hỗ trợ phí vận chuyển.
+                  Miễn phí vận chuyển cho đơn hàng trong bán kính 3km
+                </div>
               </div>
+            </div>
           </div>
-      </div>
+        </div>
+        <div class="tab_details">
+          <div class="nav_tab">
+            <li value="0"><a>Description</a></li>
+            <li value="1"><a>Additional Information</a></li>
+            <li value="2"><a>Review</a></li>
+          </div>
+          <div class="tab_container">
+            <div class="desc_prod">
+              <div class="row1">
+                <div class="desc_col1">
+                  <img src="./assets/img/des1.webp" />
+                </div>
+                <div class="desc_col2">
+                  <h1>Calf-Length Dress In Airy, Textured Cotton Fabric With A Printed Pattern</h1>
+                  <p>Sed hendrerit. Cras risus ipsum, faucibus ut, ullamcorper id, varius estibulum ante ipsum primis
+                    in faucibus</p>
+                  <img src="./assets/img/des2.jpg" />
+                </div>
+              </div>
+              <div class="desc_info">
+                <h3>PRODUCT DETAILS</h3>
+                <p>Inspired by traditional blockprinting techniques in India, our own in-house design is the vibrant
+                  pattern that every closet needs. That's why we crafted our party standout tiered maxi dress in this
+                  royal blue-and-yellow print: It's lightweight, lined and will look great at all your most festive
+                  summer events.</p>
+              </div>
+              <div class="img_block">
+                <img src="./assets/img/des3.webp" />
+              </div>
+            </div>
+            <div class="more_info">
+              <div class="more_info_col1">
+                <p>MORE INFORMATION TO YOU</p>
+                <h3>Things You Need To Know</h3>
+                <div class="row">
+                  <div class="more_info_content1">
+                    <p>We use industry standard SSL encryption to protect your details. Potentially sensitive
+                      information such as your name, address and card details are encoded so they can only be read on
+                      the secure server.</p>
+                    <ul>
+                      <li>Safe Payments</li>
+                      <li>Accept Credit Card</li>
+                      <li>Different Payment Method</li>
+                      <li>Price include VAT</li>
+                      <li>Easy To Order</li>
+                    </ul>
+                  </div>
+                  <div class="more_info_content2">
+                    <div class="info2">
+                      <h3>Express Delivery</h3>
+                      <ul>
+                        <li>Europe & USA within 2-4 days</li>
+                        <li>Rest of the world within 3-7 days</li>
+                        <li>Selected locations</li>
+                      </ul>
+                    </div>
+                    <div class="info2">
+                      <h3>Need More Information</h3>
+                      <ul>
+                        <li>Orders & Shipping</li>
+                        <li>Returns & Refunds</li>
+                        <li>Payments</li>
+                        <li>Your Orders</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="more_info_col2">
+
+              </div>
+            </div>
+          </div>
+        </div>
       </ng-container>
     </div>
     <app-footer></app-footer>

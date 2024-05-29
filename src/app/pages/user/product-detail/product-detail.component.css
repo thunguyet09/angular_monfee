@@ -200,7 +200,7 @@
   right: 0;
 }
 #featured {
-  z-index: 9;
+  z-index: 1;
 }
 .slides {
   display: flex;
@@ -780,6 +780,7 @@ input[type="range"] {
 
 .desc_col2 > h1, .desc_col2 > p {
   width: 600px;
+  font-family: "Nunito", sans-serif;
 }
 
 .desc_col2 > h1 {

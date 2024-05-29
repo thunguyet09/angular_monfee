@@ -42,6 +42,7 @@ export class ProductDetailComponent {
       this.loadNextProdData(this.productId + 1)
     }
     this.loadDetail(this.productId)
+    this.handleAdditionalInformation()
   }
 
   public zeroIndices:number[] = [];
@@ -150,5 +151,12 @@ export class ProductDetailComponent {
     imgAfter.src = `./assets/img/${img}`
     imgAfter.style.transform = 'translateX(0)'
     imgAfter.style.zIndex = '9'
+  }
+
+  handleAdditionalInformation(){
+    const navTabFirstChild = document.querySelector('.nav_tab') as HTMLElement
+    console.log(navTabFirstChild)
+    navTabFirstChild.setAttribute('id', 'nav_tab_after')
+    navTabFirstChild.style.borderBottom = '2px solid #b8784e'
   }
 }
