@@ -213,10 +213,33 @@
         </div>
       </div>
 
-      <div class="news_box">
-        <div class="slider_container"></div>
-        <button class="slider_button prev_button"><span class="material-symbols-outlined">arrow_back_ios</span></button>
-        <button class="slider_button next_button"><span
+      <div class="news_box" (mouseenter)="mouseenterNews()" (mouseleave)="mouseleaveNews()">
+        <div class="slider_container">
+          <ng-container *ngFor="let item of news">
+            <div class="newsItem">
+              <div class="imgBox">
+                <img src="./assets/img/{{item.img_url}}" width="560px" />
+              </div>
+
+              <div class="dateBox">
+                <h4>{{getDate(item.createdAt)}}</h4>
+                <hr>
+                <h3>{{getMonth(item.createdAt)}}</h3>
+              </div>
+
+              <div class="info_blog">
+                <a class="category_blog" href="/blog">
+                  NEWS
+                </a>
+                <a class="title_blog" href="/blog?id={{item.id}}">
+                  <h4>{{item.title}}</h4>
+                </a>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <button class="slider_button prev_button" (click)="handlePrevButton()"><span class="material-symbols-outlined">arrow_back_ios</span></button>
+        <button class="slider_button next_button" (click)="handleNextButton()"><span
             class="material-symbols-outlined">arrow_forward_ios</span>
         </button>
       </div>

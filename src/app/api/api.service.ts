@@ -64,4 +64,8 @@ export class API{
   updateProduct(id: number, data: any){
     return this.http.put(this.url + `/products/${id}`, data)
   }
+
+  getNewsApproved(){
+    return this.http.get(this.url + '/news')
+  }
 }

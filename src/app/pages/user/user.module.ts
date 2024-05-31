@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 @NgModule({
   declarations: [
     UserComponent,
@@ -16,7 +18,9 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     HomeComponent,
     FooterComponent,
     ProductComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,

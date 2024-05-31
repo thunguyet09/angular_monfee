@@ -1,5 +1,6 @@
 import { AfterViewInit, Component} from '@angular/core';
 import { API } from 'src/app/api/api.service';
+import { New } from 'src/app/models/New';
 import { Product } from 'src/app/models/Product';
 @Component({
   selector: 'app-home',
@@ -25,6 +26,8 @@ export class HomeComponent implements AfterViewInit {
   public imgCarousel: string[] = []
   public products: Product[] = []
   public sale_products: Product[] = []
+  public news: New[] = []
+  public slideIndex = 0;
   async fetchData(): Promise<void> {
     this.api.getAllProducts().subscribe((data:any) => {
       const newProducts = data.sort((a:any, b:any) => {
@@ -43,10 +46,39 @@ export class HomeComponent implements AfterViewInit {
       })
 
       this.sale_products = res.slice(0,8)
-      console.log(this.sale_products)
+
+      this.api.getNewsApproved().subscribe((data:any) => {
+        this.news = data
+        .sort((a:any, b:any) => {
+          return +new Date(b.createdAt) - +new Date(a.createdAt);
+        })
+        .slice(0, 8);
+      })
     })
   }
 
+  getDate(createdAt:any){
+    return new Date(createdAt).getDate()
+  }
+
+  getMonth(createdAt:any){
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    return monthNames[new Date(createdAt).getMonth()]
+  }
   handlePrevClick(): void {
     this.currentIndex = this.currentIndex === 0 ? this.slides.length - 1 : this.currentIndex - 1;
   }
@@ -211,5 +243,48 @@ export class HomeComponent implements AfterViewInit {
         }
       });
     });
+  }
+
+  mouseenterNews(){
+    const prevBtn = document.querySelector('.prev_button') as HTMLElement
+    const nextBtn = document.querySelector('.next_button') as HTMLElement
+    prevBtn.style.display = 'block'
+    nextBtn.style.display = 'block'
+  }
+
+  mouseleaveNews(){
+    const prevBtn = document.querySelector('.prev_button') as HTMLElement
+    const nextBtn = document.querySelector('.next_button') as HTMLElement
+    prevBtn.style.display = 'none'
+    nextBtn.style.display = 'none'
+  }
+
+  updateSliderPosition() {
+    const sliderContainer = document.querySelector('.slider_container') as HTMLElement
+    const slideWidth = sliderContainer.clientWidth;
+    sliderContainer.style.transform = `translateX(-${this.slideIndex * slideWidth}px)`;
+  }
+
+  handlePrevButton(){
+    const sliderContainer = document.querySelector('.slider_container') as HTMLElement
+    if (this.slideIndex == 0) {
+      this.slideIndex = 2;
+      const slideWidth = sliderContainer.clientWidth;
+      sliderContainer.style.transform = `translateX(-${this.slideIndex * slideWidth}px)`;
+    } else {
+      this.slideIndex = (this.slideIndex - 1 + sliderContainer.children.length) % sliderContainer.children.length;
+      this.updateSliderPosition();
+    }
+  }
+
+  handleNextButton(){
+    const sliderContainer = document.querySelector('.slider_container') as HTMLElement
+    this.slideIndex = (this.slideIndex + 1) % sliderContainer.children.length;
+    if (this.slideIndex > 2) {
+      this.slideIndex = 0;
+      sliderContainer.style.transform = `translateX(0px)`;
+    } else {
+      this.updateSliderPosition();
+    }
   }
 }
