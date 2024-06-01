@@ -11,6 +11,7 @@ import { ProductComponent } from './product/product.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     UserComponent,
@@ -26,7 +27,8 @@ import { RegisterComponent } from './register/register.component';
     CommonModule,
     UserRoutingModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [UserComponent],

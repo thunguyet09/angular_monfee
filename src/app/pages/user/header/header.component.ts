@@ -12,6 +12,8 @@ export class HeaderComponent {
   isHome = false;
   isShop = false;
   isDetail = false;
+  isLogin = false;
+  isRegister = false;
   openMiniCart = false;
   constructor(private router: Router, private minicart: MiniCart, private api: API)
   {}
@@ -27,6 +29,10 @@ export class HeaderComponent {
       this.isShop = true;
     }else if(detail){
       this.isDetail = true;
+    }else if(value == 'register'){
+      this.isRegister = true;
+    }else if(value == 'login'){
+      this.isLogin = true;
     }
     this.handleHeader()
     this.detail_page()
@@ -80,13 +86,12 @@ export class HeaderComponent {
       header.style.boxShadow = '0 2px 5px -2px #0000001a';
       header.style.transition = 'transform .35s cubic-bezier(.46,.01,.32,1), opacity .4s ease-out;';
     } else {
-      if (this.isShop || this.isDetail) {
+      if (this.isShop || this.isDetail || this.isRegister) {
         header.style.backgroundColor = 'white';
         header.style.position = 'absolute';
       } else {
         header.style.position = 'absolute';
         header.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-
         menuItems.forEach((node: HTMLElement) => {
           node.style.color = 'white';
         });
@@ -101,6 +106,7 @@ export class HeaderComponent {
   }
 
   handleHeader() {
+    const header = document.getElementById('header') as HTMLElement;
     const shoppingIcon = document.querySelector('.rightHeader > span:last-child') as HTMLElement;
     const menuItems = document.querySelectorAll('.leftHeader > ul > li > a');
     const icons = document.querySelectorAll('.rightHeader > span > span');
@@ -120,6 +126,7 @@ export class HeaderComponent {
       });
       (shoppingIcon as HTMLElement).style.color = 'white';
     } else {
+      header.style.backgroundColor = 'white'
       menuItems.forEach((node) => {
         (node as HTMLElement).style.color = 'black';
       });
@@ -198,6 +205,10 @@ export class HeaderComponent {
     const numsInCart = document.querySelector('.numsInCart') as HTMLElement
     const filteredCarts = this.carts.filter(((item:any) => item.user_id == userId))
     numsInCart.innerHTML = `${filteredCarts.length}`
+  }
+
+  navigateToLogin(){
+    this.router.navigate(['/login'])
   }
 }
 

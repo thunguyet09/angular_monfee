@@ -1,1 +1,73 @@
-<p>register works!</p>
+<div class="main">
+  <router-outlet></router-outlet>
+  <div class="homePage">
+    <div id="register">
+      <div class="register">
+        <img src="./assets/img/login.png" width="500px" />
+        <form class="registerForm" [formGroup]="registerForm">
+          <h2>REGISTER</h2>
+          <form onSubmit="handleSubmit">
+            <div class="groupControl">
+              <label for="username">Username</label>
+              <input type="text" id="username" formControlName="full_name" key="username" placeholder='Username' (change)="usernameField($event)"/>
+              <div *ngIf="registerForm.get('full_name')?.invalid || (registerForm.get('full_name')?.dirty || registerForm.get('full_name')?.touched)" class="err-msg">
+                <div *ngIf="registerForm.get('full_name')?.errors?.['required']">Please enter your full name.</div>
+                <div *ngIf="registerForm.get('full_name')?.errors?.['maxlength']">Username cannot be longer than 15 characters.</div>
+              </div>
+              <span class="userIcon">
+                <i class="fa-solid fa-user"></i>
+              </span>
+            </div>
+
+            <div class="groupControl">
+              <label for="email">Email address</label>
+              <input type="email" id="email"  formControlName="email" placeholder='Email address' (change)="emailField($event)" />
+              <div *ngIf="registerForm.get('email')?.invalid || (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="err-msg">
+                <div *ngIf="registerForm.get('email')?.errors?.['required']">Please enter your email.</div>
+              </div>
+              <span class="envelopeIcon">
+                <i class="fa-solid fa-envelope"></i>
+              </span>
+            </div>
+
+            <div class="groupControl">
+              <label for="password">Password</label>
+              <input type="password" id="password" formControlName="password" placeholder='Password' (change)="passwordField($event)" />
+              <div *ngIf="registerForm.get('password')?.invalid || (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" class="err-msg">
+                <div *ngIf="registerForm.get('password')?.errors?.['required']">Please enter your password.</div>
+              </div>
+              <span class="lockIcon">
+                <span class="material-symbols-outlined">lock</span>
+              </span>
+            </div>
+
+            <div class="groupControl">
+              <label for="confirmPassword">Confirm Password</label>
+              <input type="password" formControlName="confirm_password" key="password" placeholder='Confirm Password' (change)="confirmPasswordField($event)"/>
+              <div *ngIf="registerForm.get('confirm_password')?.invalid || (registerForm.get('confirm_password')?.dirty || registerForm.get('confirm_password')?.touched)" class="err-msg">
+                <div *ngIf="registerForm.get('confirm_password')?.errors?.['required']">Please enter your password.</div>
+              </div>
+              <span class="lockIcon">
+                <span class="material-symbols-outlined">lock</span>
+              </span>
+            </div>
+
+            <div class="registerBox">
+              <button type="submit" class="registerBtn">REGISTER</button>
+            </div>
+            <div class="btnAction">
+              <a href="/">Return to Store</a>
+              <p>Already have an account? <a href="/login">Sign in</a></p>
+            </div>
+          </form>
+        </form>
+      </div>
+
+      <div id="dialogContent">
+        <span></span>
+        <p class="dialogText"></p>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </div>
+</div>

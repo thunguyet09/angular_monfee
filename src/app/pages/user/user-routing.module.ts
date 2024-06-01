@@ -4,6 +4,8 @@ import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user.component';
 import { ProductComponent } from './product/product.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
@@ -13,6 +15,7 @@ const routes: Routes = [
       { path: '', component: UserComponent }
     ]
   },
+
   {
     path: 'shop',
     component: ProductComponent,
@@ -27,6 +30,22 @@ const routes: Routes = [
       { path: '', component: UserComponent }
     ]
   },
+
+  {
+    path: 'register',
+    component: RegisterComponent,
+    children: [
+      { path: '', component: UserComponent }
+    ]
+  },
+
+  {
+    path: 'login',
+    component: LoginComponent,
+    children: [
+      { path: '', component: UserComponent }
+    ]
+  }
 ];
 
 @NgModule({
