@@ -4,14 +4,14 @@
     <div id="register">
       <div class="register">
         <img src="./assets/img/login.png" width="500px" />
-        <form class="registerForm" [formGroup]="registerForm">
+        <div class="registerForm">
           <h2>REGISTER</h2>
-          <form onSubmit="handleSubmit">
+          <form [formGroup]="registerForm" (ngSubmit)="handleSubmit()">
             <div class="groupControl">
               <label for="username">Username</label>
               <input type="text" id="username" formControlName="full_name" key="username" placeholder='Username' (change)="usernameField($event)"/>
-              <div *ngIf="registerForm.get('full_name')?.invalid || (registerForm.get('full_name')?.dirty || registerForm.get('full_name')?.touched)" class="err-msg">
-                <div *ngIf="registerForm.get('full_name')?.errors?.['required']">Please enter your full name.</div>
+              <div *ngIf="registerForm.get('full_name')?.invalid && (registerForm.get('full_name')?.dirty || registerForm.get('full_name')?.touched)" class="err-msg">
+                <div>Please enter your full name.</div>
                 <div *ngIf="registerForm.get('full_name')?.errors?.['maxlength']">Username cannot be longer than 15 characters.</div>
               </div>
               <span class="userIcon">
@@ -22,8 +22,8 @@
             <div class="groupControl">
               <label for="email">Email address</label>
               <input type="email" id="email"  formControlName="email" placeholder='Email address' (change)="emailField($event)" />
-              <div *ngIf="registerForm.get('email')?.invalid || (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="err-msg">
-                <div *ngIf="registerForm.get('email')?.errors?.['required']">Please enter your email.</div>
+              <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="err-msg">
+                <div>Please enter your email.</div>
               </div>
               <span class="envelopeIcon">
                 <i class="fa-solid fa-envelope"></i>
@@ -33,8 +33,8 @@
             <div class="groupControl">
               <label for="password">Password</label>
               <input type="password" id="password" formControlName="password" placeholder='Password' (change)="passwordField($event)" />
-              <div *ngIf="registerForm.get('password')?.invalid || (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" class="err-msg">
-                <div *ngIf="registerForm.get('password')?.errors?.['required']">Please enter your password.</div>
+              <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" class="err-msg">
+                <div>Please enter your password.</div>
               </div>
               <span class="lockIcon">
                 <span class="material-symbols-outlined">lock</span>
@@ -44,9 +44,10 @@
             <div class="groupControl">
               <label for="confirmPassword">Confirm Password</label>
               <input type="password" formControlName="confirm_password" key="password" placeholder='Confirm Password' (change)="confirmPasswordField($event)"/>
-              <div *ngIf="registerForm.get('confirm_password')?.invalid || (registerForm.get('confirm_password')?.dirty || registerForm.get('confirm_password')?.touched)" class="err-msg">
-                <div *ngIf="registerForm.get('confirm_password')?.errors?.['required']">Please enter your password.</div>
+              <div *ngIf="registerForm.get('confirm_password')?.invalid && (registerForm.get('confirm_password')?.dirty || registerForm.get('confirm_password')?.touched)" class="err-msg">
+                <div>Please enter your confirm password.</div>
               </div>
+              <div *ngIf="confirmPasswordChecked == false" class="err-msg">The confirm password does not match the password.</div>
               <span class="lockIcon">
                 <span class="material-symbols-outlined">lock</span>
               </span>
@@ -60,7 +61,7 @@
               <p>Already have an account? <a href="/login">Sign in</a></p>
             </div>
           </form>
-        </form>
+        </div>
       </div>
 
       <div id="dialogContent">

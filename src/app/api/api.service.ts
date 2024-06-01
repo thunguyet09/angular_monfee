@@ -68,4 +68,16 @@ export class API{
   getNewsApproved(){
     return this.http.get(this.url + '/news')
   }
+
+  postRegister(data: any){
+    return this.http.post(this.url + '/users/register', data)
+  }
+
+  postLogin(data: any){
+    return this.http.post(this.url + '/users/login', data)
+  }
+
+  getUserById(id: string){
+    return this.http.get(this.url + `/users/${id}`)
+  }
 }

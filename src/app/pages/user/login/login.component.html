@@ -1,1 +1,50 @@
-<p>login works!</p>
+<div class="main">
+  <router-outlet></router-outlet>
+  <div class="homePage">
+    <div id="register">
+      <div class="register">
+        <img src="./assets/img/login.png" width="500px" />
+        <div class="registerForm">
+          <h2>LOGIN</h2>
+          <form [formGroup]="loginForm" (ngSubmit)="handleSubmit()">
+            <div class="groupControl">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" [formControlName]="'email'" placeholder='Email address' (change)="emailField($event)"/>
+              <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" class="err-msg">
+                <div>Please enter your email.</div>
+              </div>
+              <span class="envelopeIcon">
+                <i class="fa-solid fa-envelope"></i>
+              </span>
+            </div>
+
+            <div class="groupControl">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" [formControlName]="'password'" placeholder='Password' (change)="passwordField($event)"/>
+              <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="err-msg">
+                <div>Please enter your password.</div>
+              </div>
+              <span class="lockIcon">
+                <span class="material-symbols-outlined">lock</span>
+              </span>
+            </div>
+
+            <div class="registerBox">
+              <button type="submit" class="registerBtn">LOG IN</button>
+            </div>
+            <div class="btnAction">
+              <a href="/register">Sign Up</a>
+              <p><a>Forgot your password?</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="dialogContent">
+        <span></span>
+        <p class="dialogText"></p>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </div>
+</div>

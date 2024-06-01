@@ -86,9 +86,12 @@ export class HeaderComponent {
       header.style.boxShadow = '0 2px 5px -2px #0000001a';
       header.style.transition = 'transform .35s cubic-bezier(.46,.01,.32,1), opacity .4s ease-out;';
     } else {
-      if (this.isShop || this.isDetail || this.isRegister) {
+      if (this.isShop || this.isDetail || this.isRegister || this.isLogin) {
         header.style.backgroundColor = 'white';
         header.style.position = 'absolute';
+        menuItems.forEach((node: HTMLElement) => {
+          node.style.color = 'black';
+        });
       } else {
         header.style.position = 'absolute';
         header.style.backgroundColor = 'rgba(0, 0, 0, 0)';

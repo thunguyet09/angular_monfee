@@ -2,6 +2,8 @@ import { AfterViewInit, Component} from '@angular/core';
 import { API } from 'src/app/api/api.service';
 import { New } from 'src/app/models/New';
 import { Product } from 'src/app/models/Product';
+import { User } from 'src/app/models/User';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,7 +16,13 @@ export class HomeComponent implements AfterViewInit {
     { imageUrl: './assets/img/carousel2.webp', alt: 'Image 2', h3: "NEED-IT-NOW", h3_animate: 'h3_animate2', h1: "Start A Day With Coffee", h1_animate: 'h1_animate2', h2: "Contemporary, minimal and beautifully iconic.", h2_animate: 'h2_animate2', button: "BUY NOW", button_animate: 'button_animate2' }
   ];
 
-  constructor(private api: API) {}
+  public currentUser: User | null = null;
+  constructor(private api: API,
+    private authService: AuthService) {
+      this.authService.currentUser.subscribe((user:any) => {
+        this.currentUser = user;
+      });
+    }
 
   ngOnInit(): void {
     this.fetchData();
