@@ -105,11 +105,10 @@
 }
 
 .userChecked {
-  display: none;
   cursor: pointer;
 }
 
-.userChecked > i {
+.userChecked > span {
   font-size: 21px;
 }
 
@@ -157,8 +156,8 @@
   z-index: 19;
   box-shadow: 0 0 20px rgba(89, 102, 122, 0.431);
   font-family: "Nunito", sans-serif;
-  padding: 5px 20px;
-  width: 400%;
+  padding: 5px 10px;
+  width: 600%;
   background-color: white;
   border-radius: 5px;
   visibility: hidden;

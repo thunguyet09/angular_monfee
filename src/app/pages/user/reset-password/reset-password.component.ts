@@ -103,10 +103,11 @@ export class ResetPasswordComponent {
       if(res.token == token && this.confirmPasswordChecked){
         this.api.newPassword(obj, res._id).subscribe((data:any) => {
           if(data.message == 'Password is changed successfuly'){
-            this.router.navigate(['/'])
+            this.api.removeToken(res._id).subscribe((res:any) => {
+              this.router.navigate(['/'])
+            })
           }
         })
-        this.api.removeToken(res._id)
       }
     })
   }

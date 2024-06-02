@@ -20,7 +20,6 @@ export class HeaderComponent {
   constructor(private router: Router, private minicart: MiniCart, private api: API){}
 
   ngOnInit(){
-    const token = localStorage.getItem('user');
     const url = new URL(document.location.href);
     const path = url.pathname.split('/').filter(Boolean);
     const value = path[path.length - 1];
@@ -40,8 +39,8 @@ export class HeaderComponent {
     }else if(value == 'reset-password'){
       this.isResetPassword = true;
     }
-    this.handleHeader(token)
     this.detail_page()
+    this.handleHeader()
     this.numsInCart()
     this.minicart.getMiniCart().subscribe((val) => {
       this.openMiniCart = val;
@@ -115,14 +114,14 @@ export class HeaderComponent {
     }
   }
 
-  handleHeader(token:any) {
+  handleHeader() {
     const header = document.getElementById('header') as HTMLElement;
     const shoppingIcon = document.querySelector('.rightHeader > span:last-child') as HTMLElement;
     const menuItems = document.querySelectorAll('.leftHeader > ul > li > a');
     const icons = document.querySelectorAll('.rightHeader > span > span');
-    const userChecked = document.querySelector('.userChecked') as HTMLElement;
-    const userIcon = document.querySelector('.user') as HTMLElement;
+    const userChecked = document.querySelector('.userChecked > span > i') as HTMLElement;
     const subAvatar = document.querySelector('.subAvatar') as HTMLElement;
+    const userElement = document.querySelector('.userChecked') as HTMLElement
     shoppingIcon.addEventListener('click', () => {
       this.minicart.setMiniCart(true)
     });
@@ -146,70 +145,24 @@ export class HeaderComponent {
       (shoppingIcon as HTMLElement).style.color = 'black';
     }
 
-    if (token) {
-      userChecked.style.display = 'block';
-      userIcon.style.display = 'none';
-      subAvatar.innerHTML = `
-        <li><a href="/account">
-          <span class="material-symbols-outlined">
-              id_card
-          </span>
-          <p>Account</p>
-        </a></li>
-        <li class="order"><a>
-            <span class="material-symbols-outlined">
-                list_alt
-            </span>
-            <p>Order</p>
-        </a></li>
-        <li class="logout"><a>
-            <span class="material-symbols-outlined">
-                logout
-            </span>
-            <p>Log Out</p>
-        </a></li>
-      `;
+    const token = localStorage.getItem('user')
+    subAvatar.childNodes[2].addEventListener('click', () => {
+      localStorage.clear();
+      document.location.href = '/';
+      const userElementChild = userElement.childNodes[0] as HTMLElement
+      userElementChild.innerHTML = '<i class="fa-solid fa-user"></i>'
+    });
 
-      subAvatar.childNodes[5].addEventListener('click', () => {
-        localStorage.clear();
-        document.location.href = '/';
-      });
+    userChecked.addEventListener('click', () => {
+      document.location.href = '/login';
+    });
 
-      const subAvatar_childElements = subAvatar.childNodes;
-      for (let i = 0; i < subAvatar_childElements.length; i++) {
-        if (subAvatar_childElements[i].nodeType === Node.ELEMENT_NODE && subAvatar_childElements[i].nodeName === 'LI') {
-          const li_element = subAvatar_childElements[i] as HTMLElement
-          const a_element = subAvatar_childElements[i].childNodes[0] as HTMLElement
-          const p_element = a_element.childNodes[3] as HTMLElement
-          const span_element = a_element.childNodes[1] as HTMLElement
-          a_element.style.display = 'flex'
-          a_element.style.flexDirection = 'row'
-          a_element.style.alignItems = 'center'
-          a_element.style.transition = '.3s ease'
-          a_element.style.textDecoration = 'none'
-          li_element.style.listStyleType = 'none'
-          li_element.style.cursor = 'pointer'
-          p_element.style.fontSize = '16px'
-          p_element.style.color = 'black'
-          p_element.style.width = '70%'
-          p_element.style.margin = '0'
-          p_element.style.textAlign = 'left'
-          p_element.style.fontWeight = '600'
-          p_element.style.fontFamily = '"Nunito", sans-serif'
-          span_element.style.textAlign = 'left'
-          span_element.style.fontSize = '24px'
-          span_element.style.color = 'black'
-          span_element.style.width = '30%'
-          li_element.style.padding = '5px 0px'
-        }
-      }
-    } else {
-      userChecked.style.display = 'none';
-      userIcon.style.display = 'block';
-      userIcon.addEventListener('click', () => {
-        document.location.href = '/login';
-      });
+    if (token !== null) {
+      const userElementChild = userElement.childNodes[0] as HTMLElement
+      userElementChild.innerHTML = '<i class="fa-solid fa-user-check"></i>'
     }
+
+
   }
 
   detail_page() {

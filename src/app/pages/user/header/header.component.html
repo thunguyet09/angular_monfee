@@ -16,12 +16,30 @@
       <span class="searchItem">
         <mat-icon>search</mat-icon>
       </span>
-      <span class="user">
-        <i (click)="navigateToLogin()" class="fa-solid fa-user"></i>
-      </span>
       <span class="userChecked">
-        <i class="fa-solid fa-user-check"></i>
-        <ul class="subAvatar"></ul>
+        <span>
+          <i (click)="navigateToLogin()" class="fa-solid fa-user"></i>
+        </span>
+        <ul class="subAvatar">
+          <li><a href="/account">
+          <span class="material-symbols-outlined">
+              id_card
+          </span>
+          <p>Account</p>
+        </a></li>
+        <li class="order"><a>
+            <span class="material-symbols-outlined">
+                list_alt
+            </span>
+            <p>Order</p>
+        </a></li>
+        <li class="logout"><a>
+            <span class="material-symbols-outlined">
+                logout
+            </span>
+            <p>Log Out</p>
+        </a></li>
+        </ul>
       </span>
       <span class="heartIcon">
         <i class="fa-solid fa-heart"></i>

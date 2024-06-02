@@ -98,6 +98,6 @@ export class API{
   }
 
   removeToken(id:string){
-    return this.http.delete(this.url + `/remove-token/${id}`)
+    return this.http.delete(this.url + `/users/remove-token/${id}`)
   }
 }
