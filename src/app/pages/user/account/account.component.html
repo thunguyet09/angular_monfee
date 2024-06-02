@@ -1,0 +1,100 @@
+<div class="main">
+    <router-outlet></router-outlet>
+    <div class="homePage">
+      <div id="account">
+        <div id="header"></div>
+        <div class="account">
+            <div class="account-list">
+                <div class="avatar"></div>
+                <div class="listBox">
+                    <div><i class="fas fa-user"></i></div>
+                    <div>
+                        <p>Tài Khoản Của Tôi</p>
+                        <div class="sub-list">
+                            <p>Hồ Sơ</p>
+                            <p (click)="handlePasswordChange()">Đổi Mật Khẩu</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bills">
+                    <i class="fas fa-clipboard-list"></i>
+                    <p>Đơn Mua</p>
+                </div>
+            </div>
+            <div class="accountBox">
+                <div class="account-title">
+                    <h3>Hồ Sơ Của Tôi</h3>
+                    <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+                </div>
+                <div class="account-row">
+                    <div class="infos">
+                        <div class="group-control">
+                            <label>Tên</label>
+                            <div>
+                                <input type="text" id="full_name">
+                            </div>
+                        </div>
+                        <div class="group-control">
+                            <label>Email</label>
+                            <div>
+                                <span id="email"></span>
+                                <button class="change-email">Thay đổi</button>
+                            </div>
+                        </div>
+                        <div class="group-control">
+                            <label>Số điện thoại</label>
+                            <div>
+                                <span id="phone"></span>
+                                <button class="change-phone">Thay đổi</button>
+                            </div>
+                        </div>
+                        <div class="group-control">
+                            <label>Giới tính</label>
+                            <div class="gender-box">
+                                <div>
+                                    <input type="checkbox" class="gender" value="male">
+                                    <label>Nam</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="gender" value="female">
+                                    <label>Nữ</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="gender" value="other">
+                                    <label>Khác</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group-control">
+                            <label>Địa chỉ</label>
+                            <div>
+                                <input type="text" id="address">
+                            </div>
+                        </div>
+                        <div class="save-info">
+                            <button>Lưu</button>
+                        </div>
+                    </div>
+                    <div class="change-avatar">
+                        <div class="change-avatar-box">
+                            <img class="currentImg">
+                            <div class="choose-img">
+                                <button class="chooseImgBtn">Chọn Ảnh</button>
+                                <input type="file" name="img" class="avatarFile">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer"></div>
+      </div>
+
+      <div id="dialog-content">
+        <span></span>
+        <p class="dialog-text"></p>
+      </div>
+
+      <app-footer></app-footer>
+    </div>
+</div>

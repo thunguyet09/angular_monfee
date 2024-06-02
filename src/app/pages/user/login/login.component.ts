@@ -17,6 +17,7 @@ export class LoginComponent {
     });
   }
 
+  wrongPassword = false;
   handleSubmit(){
     this.api.postLogin(this.loginForm.value).subscribe((data:any) => {
       localStorage.setItem('user', JSON.stringify(data))
@@ -25,13 +26,19 @@ export class LoginComponent {
       const dialogIcon = document.querySelector('#dialogContent > span') as HTMLElement
       dialog_content.style.display = 'flex'
       dialog_content.style.backgroundColor = '#6B8A47'
-      dialogText.textContent = 'Đăng nhập thành công'
+      dialogText.textContent = 'Login successful'
       dialogIcon.innerHTML = `<span class="material-symbols-outlined">check</span>`
       setTimeout(() => {
         dialog_content.style.display = 'none'
         this.router.navigate(['/'])
       }, 2000)
-    })
+    },
+    (error: any) => {
+      if(error.status == 400){
+        this.wrongPassword = true;
+      }
+    }
+    )
   }
 
   emailField(event: Event){

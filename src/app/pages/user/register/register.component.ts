@@ -85,7 +85,7 @@ export class RegisterComponent {
         const dialogIcon = document.querySelector('#dialogContent > span') as HTMLElement
         dialog_content.style.display = 'flex'
         dialog_content.style.backgroundColor = '#6B8A47'
-        dialogText.textContent = 'Đăng kí thành công'
+        dialogText.textContent = 'Registration successful'
         dialogIcon.innerHTML = `<span class="material-symbols-outlined">check</span>`
         setTimeout(() => {
           dialog_content.style.display = 'none'

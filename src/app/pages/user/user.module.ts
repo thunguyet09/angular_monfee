@@ -12,6 +12,8 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AccountComponent } from './account/account.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 @NgModule({
   declarations: [
     UserComponent,
@@ -21,7 +23,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProductComponent,
     ProductDetailComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AccountComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,

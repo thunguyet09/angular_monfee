@@ -1,6 +1,5 @@
 
 .rightHeader > span {
-  font-size: 28px;
   color: white;
   cursor: pointer;
 }
@@ -106,10 +105,14 @@
 }
 
 .userChecked {
-  font-size: 22px;
   display: none;
   cursor: pointer;
 }
+
+.userChecked > i {
+  font-size: 21px;
+}
+
 @keyframes slideDown {
   0% {
       transform: translateY(-200px);
@@ -145,6 +148,7 @@
 .userChecked {
   position: relative;
 }
+
 .subAvatar {
   padding: 0;
   position: absolute;
@@ -153,13 +157,14 @@
   z-index: 19;
   box-shadow: 0 0 20px rgba(89, 102, 122, 0.431);
   font-family: "Nunito", sans-serif;
-  padding: 0 20px;
+  padding: 5px 20px;
   width: 400%;
   background-color: white;
   border-radius: 5px;
   visibility: hidden;
   transition: .3s linear;
   cursor: pointer;
+  color: black !important;
 }
 
 .subAvatar > li > a{
@@ -168,25 +173,30 @@
   align-items: center;
   transition: .3s ease;
   text-decoration: none;
-  color: black;
+  color: black !important;
 }
 
 .subAvatar > li > a > p {
   margin: 0;
   width: 70%;
-  font-size: 18px;
+  font-size: 17px !important;
   text-align: left;
+  color: black !important;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
 }
 
 .subAvatar > li > a > span {
   width: 30%;
   text-align: left;
   font-size: 24px;
+  color: black !important;
 }
 
 .subAvatar > li {
   list-style-type: none;
   cursor: pointer;
+  color: black !important;
 }
 
 .subAvatar > li:first-child {
@@ -208,7 +218,6 @@
   top: 90%;
   visibility: visible;
 }
-
 
 .bag {
   position: relative;

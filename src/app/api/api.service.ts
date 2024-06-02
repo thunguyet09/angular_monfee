@@ -80,4 +80,24 @@ export class API{
   getUserById(id: string){
     return this.http.get(this.url + `/users/${id}`)
   }
+
+  sendResetPasswordLink(data: any){
+    return this.http.post(this.url + '/users/reset-password', data)
+  }
+
+  getUserByToken(token:any){
+    return this.http.get(this.url + `/users/token/${token}`)
+  }
+
+  comparePassword(data:any){
+    return this.http.post(this.url + `/users/compare-password`, data)
+  }
+
+  newPassword(data:any, id:string){
+    return this.http.post(this.url + `/users/new-password/${id}`, data)
+  }
+
+  removeToken(id:string){
+    return this.http.delete(this.url + `/remove-token/${id}`)
+  }
 }

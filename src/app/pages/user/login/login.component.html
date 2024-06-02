@@ -24,6 +24,7 @@
               <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="err-msg">
                 <div>Please enter your password.</div>
               </div>
+              <div  class="err-msg" *ngIf="wrongPassword">The password you entered is incorrect.</div>
               <span class="lockIcon">
                 <span class="material-symbols-outlined">lock</span>
               </span>

@@ -15,10 +15,12 @@ export class HeaderComponent {
   isLogin = false;
   isRegister = false;
   openMiniCart = false;
-  constructor(private router: Router, private minicart: MiniCart, private api: API)
-  {}
+  isAccount = false;
+  isResetPassword = false;
+  constructor(private router: Router, private minicart: MiniCart, private api: API){}
 
   ngOnInit(){
+    const token = localStorage.getItem('user');
     const url = new URL(document.location.href);
     const path = url.pathname.split('/').filter(Boolean);
     const value = path[path.length - 1];
@@ -33,8 +35,12 @@ export class HeaderComponent {
       this.isRegister = true;
     }else if(value == 'login'){
       this.isLogin = true;
+    }else if(value == 'account'){
+      this.isAccount = true;
+    }else if(value == 'reset-password'){
+      this.isResetPassword = true;
     }
-    this.handleHeader()
+    this.handleHeader(token)
     this.detail_page()
     this.numsInCart()
     this.minicart.getMiniCart().subscribe((val) => {
@@ -86,7 +92,8 @@ export class HeaderComponent {
       header.style.boxShadow = '0 2px 5px -2px #0000001a';
       header.style.transition = 'transform .35s cubic-bezier(.46,.01,.32,1), opacity .4s ease-out;';
     } else {
-      if (this.isShop || this.isDetail || this.isRegister || this.isLogin) {
+      if (this.isShop || this.isDetail || this.isRegister || this.isLogin || this.isAccount
+        || this.isResetPassword) {
         header.style.backgroundColor = 'white';
         header.style.position = 'absolute';
         menuItems.forEach((node: HTMLElement) => {
@@ -108,7 +115,7 @@ export class HeaderComponent {
     }
   }
 
-  handleHeader() {
+  handleHeader(token:any) {
     const header = document.getElementById('header') as HTMLElement;
     const shoppingIcon = document.querySelector('.rightHeader > span:last-child') as HTMLElement;
     const menuItems = document.querySelectorAll('.leftHeader > ul > li > a');
@@ -139,8 +146,6 @@ export class HeaderComponent {
       (shoppingIcon as HTMLElement).style.color = 'black';
     }
 
-    const token = localStorage.getItem('token');
-
     if (token) {
       userChecked.style.display = 'block';
       userIcon.style.display = 'none';
@@ -169,6 +174,35 @@ export class HeaderComponent {
         localStorage.clear();
         document.location.href = '/';
       });
+
+      const subAvatar_childElements = subAvatar.childNodes;
+      for (let i = 0; i < subAvatar_childElements.length; i++) {
+        if (subAvatar_childElements[i].nodeType === Node.ELEMENT_NODE && subAvatar_childElements[i].nodeName === 'LI') {
+          const li_element = subAvatar_childElements[i] as HTMLElement
+          const a_element = subAvatar_childElements[i].childNodes[0] as HTMLElement
+          const p_element = a_element.childNodes[3] as HTMLElement
+          const span_element = a_element.childNodes[1] as HTMLElement
+          a_element.style.display = 'flex'
+          a_element.style.flexDirection = 'row'
+          a_element.style.alignItems = 'center'
+          a_element.style.transition = '.3s ease'
+          a_element.style.textDecoration = 'none'
+          li_element.style.listStyleType = 'none'
+          li_element.style.cursor = 'pointer'
+          p_element.style.fontSize = '16px'
+          p_element.style.color = 'black'
+          p_element.style.width = '70%'
+          p_element.style.margin = '0'
+          p_element.style.textAlign = 'left'
+          p_element.style.fontWeight = '600'
+          p_element.style.fontFamily = '"Nunito", sans-serif'
+          span_element.style.textAlign = 'left'
+          span_element.style.fontSize = '24px'
+          span_element.style.color = 'black'
+          span_element.style.width = '30%'
+          li_element.style.padding = '5px 0px'
+        }
+      }
     } else {
       userChecked.style.display = 'none';
       userIcon.style.display = 'block';

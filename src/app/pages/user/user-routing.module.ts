@@ -6,6 +6,8 @@ import { ProductComponent } from './product/product.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { AccountComponent } from './account/account.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -42,6 +44,22 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    children: [
+      { path: '', component: UserComponent }
+    ]
+  },
+
+  {
+    path: 'account',
+    component: AccountComponent,
+    children: [
+      { path: '', component: UserComponent }
+    ]
+  },
+
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent,
     children: [
       { path: '', component: UserComponent }
     ]
