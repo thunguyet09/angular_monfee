@@ -14,6 +14,8 @@ import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AccountComponent } from './account/account.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { TokenInterceptor } from 'src/app/interceptors/token.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 @NgModule({
   declarations: [
     UserComponent,
@@ -34,7 +36,9 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   bootstrap: [UserComponent],
 })
 export class UserModule { }

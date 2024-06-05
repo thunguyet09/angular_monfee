@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { API } from 'src/app/api/api.service';
 import { User } from 'src/app/models/User';
+import { SaveIdService } from 'src/app/services/saveId.service';
 import { TokenResetPasswordService } from 'src/app/services/token_reset_password.service';
 
 @Component({
@@ -12,7 +13,8 @@ import { TokenResetPasswordService } from 'src/app/services/token_reset_password
 })
 export class ResetPasswordComponent {
   resetPasswordForm!: FormGroup;
-  constructor(private api: API, private router: Router, private tokenResetPasswordService: TokenResetPasswordService){
+  constructor(private api: API, private router: Router, private tokenResetPasswordService: TokenResetPasswordService,
+    private saveIdService: SaveIdService){
     this.resetPasswordForm = new FormGroup({
       current_password: new FormControl('', [Validators.required]),
       new_password: new FormControl('', [Validators.required]),
@@ -29,6 +31,7 @@ export class ResetPasswordComponent {
     }
     this.api.getUserByToken(token).subscribe((data:any) => {
       this.user = [data]
+      this.saveIdService.saveUserId(data._id)
     })
   }
 
