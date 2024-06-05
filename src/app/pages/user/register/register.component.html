@@ -44,7 +44,7 @@
             <div class="groupControl">
               <label for="confirmPassword">Confirm Password</label>
               <input type="password" formControlName="confirm_password" key="password" placeholder='Confirm Password' (change)="confirmPasswordField($event)"/>
-              <div *ngIf="registerForm.get('confirm_password')?.invalid && (registerForm.get('confirm_password')?.dirty || registerForm.get('confirm_password')?.touched)" class="err-msg">
+              <div *ngIf="confirmPasswordChecked && registerForm.get('confirm_password')?.invalid && (registerForm.get('confirm_password')?.dirty || registerForm.get('confirm_password')?.touched)" class="err-msg">
                 <div>Please enter your confirm password.</div>
               </div>
               <div *ngIf="confirmPasswordChecked == false" class="err-msg">The confirm password does not match the password.</div>

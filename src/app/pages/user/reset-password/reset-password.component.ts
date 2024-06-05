@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { API } from 'src/app/api/api.service';
 import { User } from 'src/app/models/User';
+import { TokenResetPasswordService } from 'src/app/services/token_reset_password.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -11,7 +12,7 @@ import { User } from 'src/app/models/User';
 })
 export class ResetPasswordComponent {
   resetPasswordForm!: FormGroup;
-  constructor(private api: API, private router: Router){
+  constructor(private api: API, private router: Router, private tokenResetPasswordService: TokenResetPasswordService){
     this.resetPasswordForm = new FormGroup({
       current_password: new FormControl('', [Validators.required]),
       new_password: new FormControl('', [Validators.required]),
@@ -23,6 +24,9 @@ export class ResetPasswordComponent {
   ngOnInit(){
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
+    if(token){
+      this.tokenResetPasswordService.setToken(token)
+    }
     this.api.getUserByToken(token).subscribe((data:any) => {
       this.user = [data]
     })

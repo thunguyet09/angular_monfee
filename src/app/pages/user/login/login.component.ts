@@ -12,9 +12,21 @@ export class LoginComponent {
   loginForm!: FormGroup;
   constructor(private api: API, private router: Router){
     this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, this.emailValidator]),
       password: new FormControl('', [Validators.required]),
     });
+  }
+
+  emailValidator(control: any) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(control.value)) {
+      return { email: true };
+    }
+    return null;
+  }
+
+  getEmailControl() {
+    return this.loginForm.get('email');
   }
 
   wrongPassword = false;

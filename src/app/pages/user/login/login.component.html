@@ -10,9 +10,7 @@
             <div class="groupControl">
               <label for="email">Email address</label>
               <input type="email" id="email" name="email" [formControlName]="'email'" placeholder='Email address' (change)="emailField($event)"/>
-              <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" class="err-msg">
-                <div>Please enter your email.</div>
-              </div>
+              <div class="err-msg" *ngIf="loginForm.get('email')?.errors?.['email'] && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">Email is not valid.</div>
               <span class="envelopeIcon">
                 <i class="fa-solid fa-envelope"></i>
               </span>
@@ -21,7 +19,7 @@
             <div class="groupControl">
               <label for="password">Password</label>
               <input type="password" id="password" name="password" [formControlName]="'password'" placeholder='Password' (change)="passwordField($event)"/>
-              <div *ngIf="!wrongPassword && loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="err-msg">
+              <div *ngIf="wrongPassword == false && loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="err-msg">
                 <div>Please enter your password.</div>
               </div>
               <div  class="err-msg" *ngIf="wrongPassword">The password you entered is incorrect.</div>
