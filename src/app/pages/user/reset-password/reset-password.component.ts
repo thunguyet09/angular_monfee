@@ -29,6 +29,7 @@ export class ResetPasswordComponent {
     if(token){
       this.tokenResetPasswordService.setToken(token)
     }
+
     this.api.getUserByToken(token).subscribe((data:any) => {
       this.user = [data]
       this.saveIdService.saveUserId(data._id)
@@ -85,7 +86,7 @@ export class ResetPasswordComponent {
     })
   }
 
-  confirmPasswordChecked = true;
+  confirmPasswordChecked = false;
   onRepeatPassword(event: Event){
     const newPassword = this.resetPasswordForm.get('new_password')?.value
     const target = event.target as HTMLInputElement
@@ -107,12 +108,22 @@ export class ResetPasswordComponent {
       password: newPassword
     }
     this.user.forEach((res:any) => {
-      if(res.token == token && this.confirmPasswordChecked){
-        this.api.newPassword(obj, res._id).subscribe((data:any) => {
-          if(data.message == 'Password is changed successfuly'){
-            this.api.removeToken(res._id).subscribe((res:any) => {
+      if(token){
+        this.tokenResetPasswordService.isAccessTokenExpired(token).subscribe((tokenExpired) => {
+          if(tokenExpired == true){
+            this.api.removeToken(res._id).subscribe((item:any) => {
               this.router.navigate(['/'])
             })
+          }else{
+            if(res.token == token && this.confirmPasswordChecked && this.matches){
+                this.api.newPassword(obj, res._id).subscribe((data:any) => {
+                  if(data.message == 'Password is changed successfuly'){
+                    this.api.removeToken(res._id).subscribe((res:any) => {
+                      this.router.navigate(['/'])
+                    })
+                  }
+                })
+              }
           }
         })
       }

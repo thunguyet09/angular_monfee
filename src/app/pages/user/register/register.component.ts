@@ -78,11 +78,11 @@ export class RegisterComponent {
     this.registerForm.patchValue({
       'createdDate': formatDate
     })
+    const dialog_content = document.getElementById('dialogContent') as HTMLElement
+    const dialogText = document.querySelector('.dialogText') as HTMLElement
+    const dialogIcon = document.querySelector('#dialogContent > span') as HTMLElement
     if(this.confirmPasswordChecked){
       this.api.postRegister(this.registerForm.value).subscribe((res:any) => {
-        const dialog_content = document.getElementById('dialogContent') as HTMLElement
-        const dialogText = document.querySelector('.dialogText') as HTMLElement
-        const dialogIcon = document.querySelector('#dialogContent > span') as HTMLElement
         dialog_content.style.display = 'flex'
         dialog_content.style.backgroundColor = '#6B8A47'
         dialogText.textContent = 'Registration successful'
@@ -90,7 +90,19 @@ export class RegisterComponent {
         setTimeout(() => {
           dialog_content.style.display = 'none'
         }, 2000)
-      })
+      },
+      (error:any) => {
+        if(error && error.status === 404){
+          dialog_content.style.display = 'flex'
+          dialog_content.style.backgroundColor = 'red'
+          dialogText.textContent = 'Email already exists.'
+          dialogIcon.innerHTML = `<span class="material-symbols-outlined">close</span>`
+          setTimeout(() => {
+            dialog_content.style.display = 'none'
+          }, 2000)
+        }
+      }
+      )
     }else{
       console.log('false')
     }

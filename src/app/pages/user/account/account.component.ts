@@ -84,27 +84,24 @@ export class AccountComponent {
     authenticateBtn_childText.style.margin = '0'
     accountBox.appendChild(authenticateBtn)
 
-    this.user.forEach((res) => {
-      authenticateBtn.addEventListener('click', async () => {
-        authenticateBtn.innerHTML = `
-        <span class="material-symbols-outlined">
-          check
-        </span>
-        <h4>Link Sent.</h4>
-        `
-        authenticateBtn.style.backgroundColor = '#72B42A'
-        authenticateBtn.style.color = 'white'
-        const authenticateBtn_text = authenticateBtn.childNodes[3] as HTMLElement
-        authenticateBtn_text.style.margin = '0'
-        this.user.forEach((res:any) => {
-          const info = {
-            email: res.email,
-            id: res._id
-          }
+    authenticateBtn.addEventListener('click', async () => {
+      this.user.forEach((res:any) => {
+        const info = {
+          email: res.email,
+          id: res._id
+        }
 
-          this.api.sendResetPasswordLink(info).subscribe((data:any) => {
-            return true;
-          })
+        this.api.sendResetPasswordLink(info).subscribe((data:any) => {
+          authenticateBtn.innerHTML = `
+            <span class="material-symbols-outlined">
+              check
+            </span>
+            <h4>Link Sent.</h4>
+          `
+          authenticateBtn.style.backgroundColor = '#72B42A'
+          authenticateBtn.style.color = 'white'
+          const authenticateBtn_text = authenticateBtn.childNodes[3] as HTMLElement
+          authenticateBtn_text.style.margin = '0'
         })
       })
     })
