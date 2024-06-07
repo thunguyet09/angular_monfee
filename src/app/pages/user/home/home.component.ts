@@ -4,6 +4,7 @@ import { New } from 'src/app/models/New';
 import { Product } from 'src/app/models/Product';
 import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
+import { TokenResetPasswordService } from 'src/app/services/token_reset_password.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -18,6 +19,7 @@ export class HomeComponent implements AfterViewInit {
 
   public currentUser: User | null = null;
   constructor(private api: API,
+    private tokenResetPasswordService: TokenResetPasswordService,
     private authService: AuthService) {
       this.authService.currentUser.subscribe((user:any) => {
         this.currentUser = user;
@@ -27,6 +29,11 @@ export class HomeComponent implements AfterViewInit {
   ngOnInit(): void {
     this.fetchData();
     this.handleDraggable();
+    this.tokenResetPasswordService.getToken().subscribe((accessToken) => {
+      this.tokenResetPasswordService.isAccessTokenExpired(accessToken).subscribe((tokenExpired) => {
+        console.log('tokenExpired', tokenExpired)
+      })
+    })
   }
 
   public data: Product[] = []

@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 
@@ -99,5 +99,12 @@ export class API{
 
   removeToken(id:string){
     return this.http.delete(this.url + `/users/remove-token/${id}`)
+  }
+
+  refreshToken(refresh_token:string){
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${refresh_token}`
+    });
+    return this.http.post(`${this.url}/users/refresh-token`, {}, { headers });
   }
 }

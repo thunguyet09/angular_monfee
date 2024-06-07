@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { API } from 'src/app/api/api.service';
+import { TokenResetPasswordService } from 'src/app/services/token_reset_password.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,8 @@ import { API } from 'src/app/api/api.service';
 })
 export class LoginComponent {
   loginForm!: FormGroup;
-  constructor(private api: API, private router: Router){
+  constructor(private api: API, private router: Router,
+    private tokenResetPaswordService: TokenResetPasswordService){
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, this.emailValidator]),
       password: new FormControl('', [Validators.required]),
@@ -33,15 +35,9 @@ export class LoginComponent {
   handleSubmit(){
     this.api.postLogin(this.loginForm.value).subscribe((data:any) => {
       localStorage.setItem('user', JSON.stringify(data))
-      const dialog_content = document.getElementById('dialogContent') as HTMLElement
-      const dialogText = document.querySelector('.dialogText') as HTMLElement
-      const dialogIcon = document.querySelector('#dialogContent > span') as HTMLElement
-      dialog_content.style.display = 'flex'
-      dialog_content.style.backgroundColor = '#6B8A47'
-      dialogText.textContent = 'Login successful'
-      dialogIcon.innerHTML = `<span class="material-symbols-outlined">check</span>`
+      this.tokenResetPaswordService.setToken(data.access_token)
+      this.tokenResetPaswordService.setRefreshToken(data.refresh_token)
       setTimeout(() => {
-        dialog_content.style.display = 'none'
         this.router.navigate(['/'])
       }, 2000)
     },

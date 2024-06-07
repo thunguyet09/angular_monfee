@@ -14,7 +14,6 @@ import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AccountComponent } from './account/account.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 @NgModule({
   declarations: [
     UserComponent,
