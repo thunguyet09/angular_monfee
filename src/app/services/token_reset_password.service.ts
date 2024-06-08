@@ -40,32 +40,4 @@ export class TokenResetPasswordService{
     return of(decodedToken.exp < currentTime);
   }
 
-  public async handleExpiredToken() {
-    try {
-      const userString = localStorage.getItem('user');
-      if(userString){
-        const user = JSON.parse(userString);
-        if (typeof user === 'object') {
-          const refreshToken = user.refresh_token
-          console.log(refreshToken)
-          this.api.refreshToken(refreshToken).subscribe((newAccessToken) => {
-            console.log(newAccessToken)
-            const accessTokenString = newAccessToken as string;
-            const userLocalStorage = {
-              'access_token': newAccessToken,
-              'refresh_token': refreshToken,
-              'role': user.role,
-              'user_id': user.user_id
-            }
-            this.setToken(accessTokenString)
-            localStorage.setItem('user', JSON.stringify(userLocalStorage));
-          })
-        }
-      }
-    } catch (error) {
-      console.error('Error refreshing token:', error);
-      throw error;
-    }
-  }
-
 }

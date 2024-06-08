@@ -4,6 +4,7 @@ import { New } from 'src/app/models/New';
 import { Product } from 'src/app/models/Product';
 import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
+import { TokenService } from 'src/app/services/token.service';
 import { TokenResetPasswordService } from 'src/app/services/token_reset_password.service';
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ export class HomeComponent implements AfterViewInit {
   public currentUser: User | null = null;
   constructor(private api: API,
     private tokenResetPasswordService: TokenResetPasswordService,
+    private tokenService: TokenService,
     private authService: AuthService) {
       this.authService.currentUser.subscribe((user:any) => {
         this.currentUser = user;
@@ -34,6 +36,15 @@ export class HomeComponent implements AfterViewInit {
         console.log('tokenExpired', tokenExpired)
       })
     })
+    this.getNewAccessToken()
+  }
+
+  async getNewAccessToken() {
+    try {
+      const newAccessToken = await this.tokenService.handleExpiredToken();
+    } catch (error) {
+      console.error('Error refreshing token:', error);
+    }
   }
 
   public data: Product[] = []
