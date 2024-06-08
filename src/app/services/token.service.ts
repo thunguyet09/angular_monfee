@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { User } from '../models/User';
+import { Observable, of } from 'rxjs';
 import { API } from '../api/api.service';
 import { TokenResetPasswordService } from './token_reset_password.service';
 

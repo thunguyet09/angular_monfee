@@ -1,17 +1,13 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs'; // Import 'of' here
-import { catchError, switchMap } from 'rxjs/operators';
-import { TokenResetPasswordService } from '../services/token_reset_password.service';
-import { API } from '../api/api.service';
+import { Observable, throwError } from 'rxjs'; // Import 'of' here
+import { catchError } from 'rxjs/operators';
 import { TokenService } from '../services/token.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(private tokenResetPasswordService: TokenResetPasswordService,
-    private tokenService: TokenService,
-    private api: API) { }
+  constructor(private tokenService: TokenService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const userString = localStorage.getItem('user');
