@@ -1,4 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Theme } from 'src/app/models/Theme';
 import { ThemeService } from 'src/app/services/theme.service';
 
@@ -9,7 +10,7 @@ import { ThemeService } from 'src/app/services/theme.service';
 })
 export class HeaderComponent implements AfterViewInit{
   public isToggled = false;
-  constructor(private themeService: ThemeService){}
+  constructor(private themeService: ThemeService, private router: Router){}
   public themes: Theme[] = []
   ngOnInit(){
     this.themeService.getTheme().subscribe((data) => {
@@ -117,6 +118,11 @@ export class HeaderComponent implements AfterViewInit{
     }else{
       target.innerHTML = `<span class="material-symbols-outlined">light_mode</span>`
     }
+  }
+
+  handleLogout(){
+    localStorage.clear()
+    this.router.navigate(['/'])
   }
 }
 

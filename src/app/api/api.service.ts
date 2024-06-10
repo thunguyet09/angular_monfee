@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
+import { TokenResetPasswordService } from "../services/token_reset_password.service";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,15 @@ import { BehaviorSubject, Observable } from "rxjs";
 export class API{
   url = 'http://localhost:3000'
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, private tokenResetPasswordService: TokenResetPasswordService){}
+
+  accessToken:string = '';
+  ngOnInit(){
+    this.tokenResetPasswordService.getToken().subscribe((token) => {
+      this.accessToken = token;
+    })
+  }
+
   getAllProducts(){
     return this.http.get(this.url + '/products')
   }
@@ -26,7 +35,13 @@ export class API{
   }
 
   getAllCategories(){
-    return this.http.get(this.url + '/categories')
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.accessToken}`
+    };
+    return this.http.get(this.url + '/categories', {
+       headers: headers
+    })
   }
 
   getCategoryPagination(page:any, limit:any){
