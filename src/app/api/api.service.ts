@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpRequest, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, Subscription, map, switchMap } from "rxjs";
 import { TokenResetPasswordService } from "../services/token_reset_password.service";
 
 @Injectable({
@@ -9,15 +9,9 @@ import { TokenResetPasswordService } from "../services/token_reset_password.serv
 export class API{
   url = 'http://localhost:3000'
 
-  constructor(private http: HttpClient, private tokenResetPasswordService: TokenResetPasswordService){}
+  constructor(private http: HttpClient){}
 
-  accessToken:string = '';
-  ngOnInit(){
-    this.tokenResetPasswordService.getToken().subscribe((token) => {
-      this.accessToken = token;
-    })
-  }
-
+  public token = localStorage.getItem('jwt')
   getAllProducts(){
     return this.http.get(this.url + '/products')
   }
@@ -34,18 +28,18 @@ export class API{
     return this.http.get(this.url + '/theme')
   }
 
-  getAllCategories(){
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.accessToken}`
-    };
-    return this.http.get(this.url + '/categories', {
-       headers: headers
-    })
+  getAllCategories(): Observable<any> {
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.token}`
+    });
+    return this.http.get(this.url + '/categories', { headers });
   }
 
-  getCategoryPagination(page:any, limit:any){
-    return this.http.get(this.url + '/categories/pagination/' + page + '/' + limit)
+  getCategoryPagination(page:any, limit:any): Observable<any>{
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this.http.get(this.url + '/categories/pagination/' + page + '/' + limit, {headers})
   }
 
   getCategoryDetail(id:number){

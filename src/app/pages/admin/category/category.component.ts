@@ -13,6 +13,9 @@ import { CategoryService } from 'src/app/services/category.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { AddComponent } from './add/add.component';
 import { SaveIdService } from 'src/app/services/saveId.service';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-category',
@@ -27,7 +30,8 @@ export class CategoryComponent implements AfterViewInit {
     private router: Router,
     private CategoryService: CategoryService,
     private ngZone: NgZone,
-    private saveIdService: SaveIdService
+    private saveIdService: SaveIdService,
+    private snackBar: MatSnackBar
   ) { }
   public themes: Theme[] = [];
   public bgColor: string = '';
@@ -37,6 +41,7 @@ export class CategoryComponent implements AfterViewInit {
   startIndex = 0;
   endIndex = 0;
   categoriesLength = 0
+  private apiSubscription: Subscription | undefined;
   ngOnInit() {
     this.themeService.getTheme().subscribe((data: any) => {
       this.themes = data;
@@ -47,12 +52,36 @@ export class CategoryComponent implements AfterViewInit {
       });
     });
 
-    this.api.getAllCategories().subscribe((data: any) => {
-      this.data = data
-    })
+    this.apiSubscription = this.api.getAllCategories().subscribe((data: any) => {
+        this.data = data;
+      },
+      (error) => {
+        if (error.status === 401) {
+          console.log('Unauthorized');
+          this.showSnackBar();
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 3000);
+        } else {
+          console.log(error);
+        }
+      });
 
+    this.getAPI('1')
+  }
 
-    this.getAPI('1');
+  ngOnDestroy(): void {
+    if (this.apiSubscription) {
+      this.apiSubscription.unsubscribe();
+    }
+  }
+
+  showSnackBar() {
+    this.snackBar.open('You are not authorized to access this resource', 'Close', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
   }
 
   getAPI(page: string) {

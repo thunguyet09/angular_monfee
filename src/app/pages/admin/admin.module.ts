@@ -15,6 +15,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { AddProductComponent } from './add-product/add-product.component';
 import { DeleteConfirmComponent } from './product/delete-confirm/delete-confirm.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
    AdminComponent,
@@ -35,7 +36,8 @@ import { EditProductComponent } from './edit-product/edit-product.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [],
 })

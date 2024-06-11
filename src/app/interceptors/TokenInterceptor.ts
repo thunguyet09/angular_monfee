@@ -1,13 +1,18 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs'; // Import 'of' here
-import { catchError } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 import { TokenService } from '../services/token.service';
+import { Router } from '@angular/router';
+import { TokenResetPasswordService } from '../services/token_reset_password.service';
+import { API } from '../api/api.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(private tokenService: TokenService) { }
+  constructor(private tokenService: TokenService,
+    private api: API,
+    private router: Router) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const userString = localStorage.getItem('user');
@@ -32,20 +37,30 @@ export class TokenInterceptor implements HttpInterceptor {
           'user_id': user.user_id
         };
         localStorage.setItem('user', JSON.stringify(userLocalStorage));
-        const authReq = request.clone({
-          setHeaders: { Authorization: `Bearer ${newAccessToken}` },
-        });
-        return next.handle(authReq);
+        if (newAccessToken) {
+          localStorage.setItem('jwt', newAccessToken)
+        }
+        return next.handle(request.clone({
+          setHeaders: {
+            Authorization: `Bearer ${newAccessToken}`
+          }
+        }));
 
       } else {
-        const authReq = request.clone({
-          setHeaders: { Authorization: `Bearer ${accessToken}` },
-        });
-        return next.handle(authReq);
+        localStorage.setItem('jwt', accessToken)
+        return next.handle(request.clone({
+          setHeaders: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        }));
       }
     })
     catchError((error) => {
-      console.error('Error checking token expiration:', error);
+      if (error.status === 401) {
+        this.router.navigate(['/login'])
+      } else {
+        console.error('Error in interceptor:', error);
+      }
       return throwError(error);
     })
 
